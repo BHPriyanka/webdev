@@ -1,0 +1,16 @@
+#gender{
+    height:25px;
+}
+
+#addNewField{
+    height:25px;
+}
+
+#glyphi{
+    font-size: 10px;
+    aria-hidden:"true";
+}
+
+#fmGrpClass{
+   float: right;
+}
