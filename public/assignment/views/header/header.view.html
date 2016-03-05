@@ -22,7 +22,7 @@
                     ng-if="currentUser.login">
                     <a href="#/profile"><span ng-bind="currentUser.userName"></span></a></li>
                 <li class="visible-xs" ng-if="currentUser.login"
-                    ng-class="{'active' : $location.url().indexOf('/forms') != -1}">
+                    ng-class="{'active' : $location.url().indexOf('forms') != -1}">
                     <a href="#/forms">Forms</a></li>
                 <li class="visible-xs" ng-if="isadmin && currentUser.login"><a href="#/admin">Admin</a></li>
                 <li ng-if="currentUser.login">
