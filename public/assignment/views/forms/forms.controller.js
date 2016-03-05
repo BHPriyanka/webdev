@@ -3,26 +3,33 @@
         .module("FormBuilderApp")
         .controller("FormController", FormController);
 
-    function FormController($scope, $location, FormService, $rootScope){
-        console.log("Hello from FormController");
+    function FormController($scope, $location, FormService, $rootScope) {
+
         $scope.message = null;
         $scope.addForm = addForm;
         $scope.updateForm = updateForm;
         $scope.deleteForm = deleteForm;
         $scope.selectForm = selectForm;
-        $scope.userForms = null;
+        $scope.index = 0;
 
-        FormService.findAllFormsForUser($scope.userId, function(response){
-            forms = response;
-            if(forms){
-                $scope.userForms = forms;
-            }});
+        if ($rootScope.currentUser == null) {
+            $location.url('/home');
+        }
+        else {
+            FormService.findAllFormsForUser($rootScope.currentUser._id, function (response) {
+                forms = response;
+                if (forms) {
+                    $scope.userForms = forms;
+                }
+            });
+        }
 
 
-
-        function setCurrentForm(form) {
-            $rootScope.title = null;
-            $scope.forms.push(form);
+        function setCurrentForm(new_form) {
+            console.log($scope.userForms);
+            console.log(new_form);
+            $rootScope.form = null;
+            $scope.userForms.push(new_form);
         }
 
         function addForm(form) {
@@ -32,56 +39,64 @@
                 $scope.message = "Please fill in the required fields";
                 return;
             }
-            if (!form.title) {
-                $scope.message = "Please provide a form name";
-                return;
-            }
 
-            var form1 = FormService.findFormByTitle(form.title);
+            var form1 = FormService.findFormByTitle(form);
             if (form1 != null) {
                 $scope.message = "Form already exists";
                 return;
             }
+            var new_form = {"_id": null, "title": form, "userId": null};
+            FormService.createFormForUser($rootScope.currentUser._id, new_form, setCurrentForm);
 
-            FormService.createFormForUser($rootScope.userId, form, setCurrentForm);
         }
 
-        function updateForm(form){
+        function updateForm(form) {
             var success = null;
-            if($scope.index != -1 && form != null){
-                var selected = $scope.forms[$scope.index];
+            console.log("Hello from updateForm");
+
+            if ($scope.index != -1 && form != null) {
+                var selected = $scope.userForms[$scope.index];
                 selected.title = form;
                 FormService.updateFormById(selected._id, selected, function (response) {
                     success = response;
                     if (success) {
-                        FormService.findAllFormsForUser($rootScope.user._id, function(response){
+                        FormService.findAllFormsForUser($rootScope.currentUser._id, function (response) {
                             forms = response;
-                            if(forms){
+                            if (forms) {
                                 $scope.userForms = forms;
                             }
-                    });
-                }});
+                        });
+                    }
+                });
+            }
+            else{
+                $scope.message = "Form Name cannot be empty";
             }
         }
-    }
 
-        function deleteForm(index){
-            FormService.deleteFormById($scope.forms[index]._id, function (response) {
+        function selectForm(index) {
+            console.log("Hello from selectForm");
+            $scope.index = index;
+            var selected = $scope.userForms[index];
+            console.log(selected);
+            $scope.form = selected.title;
+        }
+
+
+        function deleteForm(index) {
+            FormService.deleteFormById($scope.userForms[index]._id, function (response) {
                 success = response;
                 if (success) {
-                    FormService.findAllFormsForUser($rootScope.user._id,function(response){
+                    FormService.findAllFormsForUser($rootScope.currentUser._id, function (response) {
                         forms = response;
-                        if(forms){
+                        if (forms) {
                             $scope.userForms = forms;
                         }
                     });
 
-        }});
+                }
+            });
         }
 
-        function selectForm(index){
-            $scope.index = index;
-            var selected = $scope.forms[index];
-            $scope.title = selected.title;
-        }
+    }
 })();

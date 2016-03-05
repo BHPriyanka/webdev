@@ -15,7 +15,6 @@
             deleteFormById: deleteFormById,
             updateFormById: updateFormById,
             findFormByTitle: findFormByTitle
-
         };
 
         return model;
@@ -23,8 +22,10 @@
         function createFormForUser(userId, form, callback) {
             var new_form = {
                 _id: (new Date()).getTime(),
-                userId: userId
+                userId: userId,
+                title:form.title
             };
+            console.log("inside createofmr");
             model.forms.push(new_form);
             callback(new_form);
 
@@ -42,13 +43,13 @@
         }
 
         function findAllFormsForUser(userId, callback) {
-
+            var userForms =[];
             for (var f in model.forms) {
                 if (model.forms[f].userId === userId) {
-                    callback(model.forms[f]);
+                    userForms.push(model.forms[f]);
                 }
             }
-            callback(null);
+            callback(userForms);
         }
 
         function deleteFormById(formId, callback) {
