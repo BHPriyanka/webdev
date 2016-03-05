@@ -18,6 +18,17 @@
                 $scope.message = "Please provide a username";
                 return;
             }
+
+            if (!user.firstName) {
+                $scope.message = "Please provide Firstname";
+                return;
+            }
+
+            if (!user.lastName) {
+                $scope.message = "Please provide Lastname";
+                return;
+            }
+
             if (!user.password || !user.password2) {
                 $scope.message = "Please provide a password";
                 return;
@@ -39,6 +50,9 @@
             UserService.createUser($scope.user, function(response){
                 var newUser = response;
                 if(newUser) {
+                    $rootScope.currentUser = {"_id":newUser._id, "firstName":newUser.firstName, "lastName":newUser.lastName,
+                        "userName":newUser.userName, "password":newUser.password, "email": newUser.email, "roles": newUser.roles};
+
                     UserService.setCurrentUser(newUser);
 
                     $scope.message = " Registration Successful";

@@ -77,8 +77,12 @@
         function createUser (user, callback) {
             var user = {
                 _id: (new Date()).getTime(),
-                username: user.userName,
-                password: user.password
+                userName: user.userName,
+                password: user.password,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                roles: []
             };
             model.users.push(user);
             callback(user);
