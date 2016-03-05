@@ -61,7 +61,6 @@
 
             function updateForm(form) {
                 var success = null;
-                console.log($scope.index);
               //  var index = findIndexByTitle(form);
                 //$scope.index = index;
 
@@ -75,6 +74,7 @@
                                 forms = response;
                                 if (forms) {
                                     $scope.userForms = forms;
+                                    $rootScope.form = null;
                                 }
                             });
                         }
