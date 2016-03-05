@@ -1,77 +1,63 @@
 <div ng-controller="FormController">
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Forms </h1>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <ul class="nav nav-tabs">
-                <li class="active">
-                    <a href="forms.view.html">Forms</a>
-                </li>
-                <li><a href="fields.view.html">Fields</a></li>
-            </ul>
-            <div class="table-responsive">
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h1 class="page-header">Forms </h1>
+    </div>
+
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#/forms">Forms</a>
+            </li>
+            <li><a href="#/fields">Fields</a></li>
+        </ul>
+
+        <div class="table-responsive">
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
                     <th>
                         <button type="button" class="btn dropdown-toggle"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
-                        Form Name</th>
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span></button> Form Name </th>
                     <th>
                         <button type="button" class="btn dropdown-toggle"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
-                        Action</th>
-                </tr>
-                <tr>
-                    <th>
-                        <input type="text" id="userName" placeholder="Name">
-                    </th>
-                    <th>
-                        <a href="#">
-                            <scan class="glyphicon glyphicon-ok" id="glyphi"></scan>
-                        </a>
-                        <a href="#">
-                            <scan class="glyphicon glyphicon-plus" id="glyphi"></scan>
-                        </a>
-                    </th>
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span></button> Action </th>
                 </tr>
                 </thead>
+
                 <tbody>
                 <tr>
-                    <td>Registration Form</td>
                     <td>
-                        <a href="#">
-                            <scan class="glyphicon glyphicon-pencil" id="glyphi"></scan>
+                        <input ng-model="title" type="text" id="userName" placeholder="Name">
+                    </td>
+                    <td>
+                        <a ng-click="updateForm(title)" type="button" class="btn btn-default">
+                            <scan class="glyphicon glyphicon-ok" id="glyphi"></scan>
                         </a>
-                        <a href="#">
-                            <scan class="glyphicon glyphicon-remove" id="glyphi"></scan>
+
+                        <a ng-click="addForm(title)" type="button" class="btn btn-default">
+                            <scan class="glyphicon glyphicon-plus" id="glyphi"></scan>
                         </a>
                     </td>
                 </tr>
-                <tr>
-                    <td>Contact List</td>
+
+                <tr ng-repeat="form in forms">
+                    <td><a href="#/fields">
+                        {{form.title}}
+                    </a></td>
+
                     <td>
-                        <a href="#">
+                        <a ng-click="selectForm($index)" type="button" class="btn btn-default">
                             <scan class="glyphicon glyphicon-pencil" id="glyphi"></scan>
                         </a>
-                        <a href="#">
+                        <a ng-click="deleteForm($index)" type="button" class="btn btn-default">
                             <scan class="glyphicon glyphicon-remove" id="glyphi"></scan>
                         </a>
                     </td>
                 </tr>
                 </tbody>
-                <tr>
-                    <td>To Do List</td>
-                    <td>
-                        <a href="#">
-                            <scan class="glyphicon glyphicon-pencil" id="glyphi"></scan>
-                        </a>
-                        <a href="#">
-                            <scan class="glyphicon glyphicon-remove" id="glyphi"></scan>
-                        </a>
-                    </td>
-                </tr>
             </table>
-            </div>
         </div>
+    </div>
 </div>
