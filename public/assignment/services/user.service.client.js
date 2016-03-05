@@ -11,7 +11,7 @@
                     "_id": 123,
                     "firstName": "Alice",
                     "lastName": "Wonderland",
-                    "username": "alice",
+                    "userName": "alice",
                     "password": "alice",
                     "email": "alice@redff.com",
                     "roles": ["student"]
@@ -20,7 +20,7 @@
                     "_id": 234,
                     "firstName": "Bob",
                     "lastName": "Hope",
-                    "username": "bob",
+                    "userName": "bob",
                     "password": "bob",
                     "email": "bob@rediff.com",
                     "roles": ["admin"]
@@ -29,7 +29,7 @@
                     "_id": 345,
                     "firstName": "Charlie",
                     "lastName": "Brown",
-                    "username": "charlie",
+                    "userName": "charlie",
                     "password": "charlie",
                     "email": "charlie@rediff.com",
                     "roles": ["faculty"]
@@ -38,7 +38,7 @@
                     "_id": 456,
                     "firstName": "Dan",
                     "lastName": "Craig",
-                    "username": "dan",
+                    "userName": "dan",
                     "password": "dan",
                     "email": "dan@rediff.com",
                     "roles": ["faculty", "admin"]
@@ -47,7 +47,7 @@
                     "_id": 567,
                     "firstName": "Edward",
                     "lastName": "Norton",
-                    "username": "ed",
+                    "userName": "ed",
                     "password": "ed",
                     "email": "ed@rediff.com",
                     "roles": ["student"]
@@ -60,7 +60,8 @@
             updateUser: updateUser,
             findUserByUsername: findUserByUsername,
             setCurrentUser: setCurrentUser,
-            getCurrentUser: getCurrentUser
+            getCurrentUser: getCurrentUser,
+            findUserByUserId: findUserByUserId
         };
         return model;
 
@@ -76,7 +77,7 @@
         function createUser (user, callback) {
             var user = {
                 _id: (new Date()).getTime(),
-                username: user.username,
+                username: user.userName,
                 password: user.password
             };
             model.users.push(user);
@@ -86,10 +87,20 @@
         function findUserByUsername (username) {
             var user = null;
             for (var u in model.users) {
-                if (model.users[u].username == username) {
+                if (model.users[u].userName == username) {
                     user = model.users[u];
                     break;
+                }
+            }
+            return user;
+        }
 
+        function findUserByUserId(userId){
+            var user = null;
+            for (var u in model.users){
+                if(model.users[u]._id == userId){
+                    user = model.users[u];
+                    break;
                 }
             }
             return user;
@@ -98,9 +109,10 @@
         function findUserByCredentials(username, password, callback) {
             var user = null;
             for (var u in model.users) {
-                if (model.users[u].username === username &&
+                if (model.users[u].userName === username &&
                     model.users[u].password === password) {
                     user = model.users[u];
+                    console.log(user);
                     break;
                 }
             }
@@ -108,18 +120,24 @@
         }
 
         function updateUser (userId, currentUser, callback) {
-            var user = model.findUserByUsername (currentUser.username);
+            var user = model.findUserByUserId (userId);
+
             if (user != null) {
                 user.firstName = currentUser.firstName;
+                user.password =currentUser.password;
                 user.lastName = currentUser.lastName;
                 user.password = currentUser.password;
-                callback(user);
-            } else {
-                callback(null);
+                user.email = currentUser.email;
             }
+            callback(user);
         }
 
+
         function deleteUserById(userId, callback){
+            var user = model.findUserByUserId (userId);
+            if(user!=null){
+
+            }
                    }
 
         function findAllUsers(callback){

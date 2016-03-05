@@ -9,11 +9,12 @@
 
         function register(user) {
             $scope.message = null;
+
             if (user == null) {
                 $scope.message = "Please fill in the required fields";
                 return;
             }
-            if (!user.username) {
+            if (!user.userName) {
                 $scope.message = "Please provide a username";
                 return;
             }
@@ -25,15 +26,27 @@
                 $scope.message = "Passwords must match";
                 return;
             }
-            var user = UserService.findUserByUsername(user.username);
-            if (user != null) {
+
+            if(!user.email) {
+                $scope.message = "Please provide Email ID";
+            }
+            var user1 = UserService.findUserByUsername(user.userName);
+            if (user1 != null) {
                 $scope.message = "User already exists";
                 return;
             }
+
             UserService.createUser($scope.user, function(response){
                 var newUser = response;
-                UserService.setCurrentUser(newUser);
-                $location.url("/profile");
+                if(newUser) {
+                    UserService.setCurrentUser(newUser);
+
+                    $scope.message = " Registration Successful";
+                    $location.url('/profile');
+                }
+                else {
+                    $scope.message = "Registration Unsuccessful";
+                }
             });
 
         }

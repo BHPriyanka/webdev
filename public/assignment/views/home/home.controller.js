@@ -4,6 +4,6 @@
         .controller("HomeController", HomeController);
 
     function HomeController($scope, $location){
-        console.log("Hello from HomeController");
+        $scope.location = $location;
     }
 })();

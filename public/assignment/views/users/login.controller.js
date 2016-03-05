@@ -7,14 +7,13 @@
         $scope.login = login;
 
         function login (user) {
-            var user;
-            UserService.findUserByCredentials(user.username, user.password, function(response){
-                user = response;
-                console.log(user);
-                if(user){
-                   // $rootScope.currentUser = user;
-                    UserService.setCurrentUser(user);
-                    $location.url("/profile");
+            var user1;
+            UserService.findUserByCredentials(user.userName, user.password, function(response){
+                user1 = response;
+                if(user1){
+                    $rootScope.currentUser = {"_id":user1._id, "firstName":user1.firstName, "lastName":user1.lastName,
+                        "userName":user1.userName, "password":user1.password, "email": user1.email, "roles": user1.roles};
+                    $location.url('/profile');
                 }
                 else {
                     alert("User not present");
