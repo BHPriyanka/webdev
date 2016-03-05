@@ -10,7 +10,7 @@
         $scope.updateForm = updateForm;
         $scope.deleteForm = deleteForm;
         $scope.selectForm = selectForm;
-        $scope.index = 0;
+        $scope.index = -1;
 
         if ($rootScope.currentUser == null) {
             $location.url('/home');
@@ -26,8 +26,6 @@
 
 
         function setCurrentForm(new_form) {
-            console.log($scope.userForms);
-            console.log(new_form);
             $rootScope.form = null;
             $scope.userForms.push(new_form);
         }
@@ -50,9 +48,22 @@
 
         }
 
+        /*function findIndexByTitle(formTitle){
+            var index=0;
+            for (var i=0; i < $scope.userForms.length;i++) {
+                if ($scope.userForms[i].title == formTitle) {
+                    index=i;
+                    break;
+                }
+            }
+            return index;
+        }*/
+
         function updateForm(form) {
             var success = null;
-            console.log("Hello from updateForm");
+            console.log($scope.index);
+          //  var index = findIndexByTitle(form);
+            //$scope.index = index;
 
             if ($scope.index != -1 && form != null) {
                 var selected = $scope.userForms[$scope.index];
@@ -77,7 +88,7 @@
         function selectForm(index) {
             console.log("Hello from selectForm");
             $scope.index = index;
-            var selected = $scope.userForms[index];
+            var selected = $scope.userForms[$scope.index];
             console.log(selected);
             $scope.form = selected.title;
         }
