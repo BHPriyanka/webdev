@@ -1,3 +1,9 @@
-/**
- * Created by BHPriyanka on 3/4/2016.
- */
+(function(){
+    angular
+        .module("FormBuilderApp")
+        .controller("AdminController", AdminController);
+
+    function AdminController($scope, $location){
+        console.log("Hello from AdminController");
+    }
+})();
