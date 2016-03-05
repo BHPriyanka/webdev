@@ -1,11 +1,10 @@
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">Forms </h1>
+</div>
 
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <h1 class="page-header">Forms </h1>
-    </div>
-
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <div ng-controller="FormController">
-            <div ng-show="message" class="alert alert-danger" role="alert">{{message}}</div>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <div ng-controller="FormController">
+        <div ng-show="message" class="alert alert-danger" role="alert">{{message}}</div>
         <ul class="nav nav-tabs">
             <li class="active">
                 <a href="#/forms">Forms</a>
@@ -45,9 +44,9 @@
 
                 <tbody>
                 <tr ng-repeat="form in userForms">
-                    <td><a href="#/fields">
-                        {{form.title}}
-                    </a></td>
+                    <td>
+                        <a href="#/fields"> {{form.title}} </a>
+                    </td>
 
                     <td>
                         <button ng-click="selectForm($index)" type="button" class="btn btn-default">

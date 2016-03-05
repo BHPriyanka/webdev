@@ -50,19 +50,27 @@
             UserService.createUser($scope.user, function(response){
                 var newUser = response;
                 if(newUser) {
-                    $rootScope.currentUser = {"_id":newUser._id, "firstName":newUser.firstName, "lastName":newUser.lastName,
-                        "userName":newUser.userName, "password":newUser.password, "email": newUser.email, "roles": newUser.roles};
+                    $rootScope.currentUser =
+                    {
+                        "_id":newUser._id,
+                        "firstName":newUser.firstName,
+                        "lastName":newUser.lastName,
+                        "userName":newUser.userName,
+                        "password":newUser.password,
+                        "email": newUser.email,
+                        "roles": newUser.roles
+                };
 
                     UserService.setCurrentUser(newUser);
 
                     $scope.message = " Registration Successful";
                     $location.url('/profile');
                 }
+
                 else {
                     $scope.message = "Registration Unsuccessful";
                 }
             });
-
         }
     }
 })();

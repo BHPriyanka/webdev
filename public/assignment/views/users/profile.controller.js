@@ -16,16 +16,24 @@
         $scope.update = update;
 
         function update(user) {
-            // same validation as register
             $scope.error = null;
             $scope.message = null;
             var success = null;
+
             UserService.updateUser(user._id, user, function (response) {
                 success = response;
 
                 if (success) {
-                    $rootScope.currentUser = {"_id":success._id, "firstName":success.firstName, "lastName":success.lastName,
-                        "userName":success.userName, "password":success.password, "email": success.email, "roles": success.roles};
+                    $rootScope.currentUser =
+                    {
+                        "_id":success._id,
+                        "firstName":success.firstName,
+                        "lastName":success.lastName,
+                        "userName":success.userName,
+                        "password":success.password,
+                        "email": success.email,
+                        "roles": success.roles
+                    };
 
                     UserService.setCurrentUser(success);
 

@@ -12,9 +12,19 @@
             UserService.findUserByCredentials(user.userName, user.password, function(response){
                 user1 = response;
                 if(user1){
-                    $rootScope.currentUser = {"_id":user1._id, "firstName":user1.firstName, "lastName":user1.lastName,
-                        "userName":user1.userName, "password":user1.password, "email": user1.email, "roles": user1.roles};
+                    $rootScope.currentUser =
+                    {
+                        "_id":user1._id,
+                        "firstName":user1.firstName,
+                        "lastName":user1.lastName,
+                        "userName":user1.userName,
+                        "password":user1.password,
+                        "email": user1.email,
+                        "roles": user1.roles
+                    };
+
                     UserService.setCurrentUser(user1);
+
                     for(role in user1.roles) {
                         if (user1.roles[role] == "admin"){
                             $rootScope.isadmin = true;
@@ -24,6 +34,7 @@
                     }
                     $location.url('/profile');
                 }
+
                 else {
                     $rootScope.isadmin = false;
                     alert("User not present");
@@ -32,6 +43,4 @@
 
         }
     }
-
-
 })();
