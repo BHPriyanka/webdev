@@ -66,6 +66,7 @@
 
         function setCurrentUser (user) {
             $rootScope.currentUser = user;
+            $rootScope.currentUser.login = true;
         }
 
         function getCurrentUser () {
@@ -74,7 +75,7 @@
 
         function createUser (user, callback) {
             var user = {
-                _id: user._id,
+                _id: (new Date()).getTime(),
                 username: user.username,
                 password: user.password
             };
@@ -83,22 +84,27 @@
         }
 
         function findUserByUsername (username) {
+            var user = null;
             for (var u in model.users) {
-                if (model.users[u].username === username) {
-                    callback(model.users[u]);
+                if (model.users[u].username == username) {
+                    user = model.users[u];
+                    break;
+
                 }
             }
-            callback(null);
+            return user;
         }
 
-        function findUserByCredentials(username, password1, callback) {
+        function findUserByCredentials(username, password, callback) {
+            var user = null;
             for (var u in model.users) {
                 if (model.users[u].username === username &&
-                    model.users[u].password === password1) {
-                    callback(model.users[u]);
+                    model.users[u].password === password) {
+                    user = model.users[u];
+                    break;
                 }
             }
-            callback(null);
+            callback(user);
         }
 
         function updateUser (userId, currentUser, callback) {
@@ -114,13 +120,7 @@
         }
 
         function deleteUserById(userId, callback){
-            for (var u in model.users) {
-                if (model.users[u]._id === userId) {
-
-                }
-            }
-            callback(model.users);
-        }
+                   }
 
         function findAllUsers(callback){
             callback(model.users);

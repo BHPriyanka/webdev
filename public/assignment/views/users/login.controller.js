@@ -8,16 +8,19 @@
 
         function login (user) {
             var user;
-            var callback = function(response){
-                $rootScope.currentUser =
-            }
-            UserService.findUserByCredentials(user.username, user.password, callback);
+            UserService.findUserByCredentials(user.username, user.password, function(response){
+                user = response;
+                console.log(user);
+                if(user){
+                   // $rootScope.currentUser = user;
+                    UserService.setCurrentUser(user);
+                    $location.url("/profile");
+                }
+                else {
+                    alert("User not present");
+                }
+            });
 
-            if (user) {
-                $rootScope.currentUser = user;
-                UserService.setCurrentUser(user);
-                $location.url("/profile");
-            }
         }
     }
 

@@ -3,7 +3,7 @@
         .module("FormBuilderApp")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController($scope, $location, UserService){
+    function RegisterController($scope, $location, UserService, $rootScope){
         $scope.message = null;
         $scope.register = register;
 
@@ -30,9 +30,12 @@
                 $scope.message = "User already exists";
                 return;
             }
-            var newUser = UserService.createUser($scope.user);
-            UserService.setCurrentUser(newUser);
-            $location.url("/profile");
+            UserService.createUser($scope.user, function(response){
+                var newUser = response;
+                UserService.setCurrentUser(newUser);
+                $location.url("/profile");
+            });
+
         }
     }
 })();
