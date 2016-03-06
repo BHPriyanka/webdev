@@ -8,7 +8,7 @@
 
         function login (user) {
             var user1;
-            $rootScope.isadmin = false;
+
             UserService.findUserByCredentials(user.userName, user.password, function(response){
                 user1 = response;
                 if(user1){
@@ -27,7 +27,7 @@
 
                     for(role in user1.roles) {
                         if (user1.roles[role] == "admin"){
-                            $rootScope.isadmin = true;
+                            //$rootScope.isadmin = true;
                             console.log($rootScope.isadmin);
                             break;
                         }
@@ -36,7 +36,7 @@
                 }
 
                 else {
-                    $rootScope.isadmin = false;
+                    //$rootScope.isadmin = false;
                     alert("User not present");
                 }
             });

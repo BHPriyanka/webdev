@@ -67,7 +67,7 @@
 
         function setCurrentUser (user) {
             $rootScope.currentUser = user;
-            $rootScope.currentUser.login = true;
+            //$rootScope.currentUser.login = true;
         }
 
         function getCurrentUser () {
