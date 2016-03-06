@@ -23,7 +23,7 @@
             <li ng-hide="currentUser" ng-class="{'active': $location.url().indexOf('login') != -1}">
                 <a href="#/login"> Login </a>
             </li>
-            <li ng-class="{'active': $location.url().indexOf('profile') != -1}" ng-if="currentUser.login">
+            <li  ng-show="currentUser" ng-class="{'active': $location.url().indexOf('profile') != -1}">
                 <a href="#/profile">
                     <span ng-bind="currentUser.userName"></span>
                 </a>

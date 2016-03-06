@@ -27,7 +27,6 @@
 
                     for(role in user1.roles) {
                         if (user1.roles[role] == "admin"){
-                            //$rootScope.isadmin = true;
                             console.log($rootScope.isadmin);
                             break;
                         }
@@ -36,7 +35,6 @@
                 }
 
                 else {
-                    //$rootScope.isadmin = false;
                     alert("User not present");
                 }
             });
