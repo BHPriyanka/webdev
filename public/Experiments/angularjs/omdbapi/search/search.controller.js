@@ -7,10 +7,7 @@
         $scope.search = search;
         $scope.title = $routeParams.title;
 
-        //if(!$scope.title){
-        //    $scope.title = "Star Wars";
-        //}
-        if($scope.title){
+               if($scope.title){
             search($scope.title);
         }
 

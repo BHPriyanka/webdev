@@ -54,14 +54,14 @@
                 }],
 
             findUserByCredentials: findUserByCredentials,
-            findAllUsers: findAllUsers,
-            createUser: createUser,
-            deleteUserById: deleteUserById,
-            updateUser: updateUser,
-            findUserByUsername: findUserByUsername,
-            setCurrentUser: setCurrentUser,
-            getCurrentUser: getCurrentUser,
-            findUserByUserId: findUserByUserId
+           // findAllUsers: findAllUsers,
+            //createUser: createUser,
+            //deleteUserById: deleteUserById,
+            //updateUser: updateUser,
+            //findUserByUsername: findUserByUsername,
+            //setCurrentUser: setCurrentUser,
+            //getCurrentUser: getCurrentUser,
+            //findUserByUserId: findUserByUserId
         };
         return model;
 

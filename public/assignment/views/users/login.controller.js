@@ -28,6 +28,7 @@
                     for(role in user1.roles) {
                         if (user1.roles[role] == "admin"){
                             console.log($rootScope.isadmin);
+                            $location.url('/admin');
                             break;
                         }
                     }

@@ -17,11 +17,17 @@
    float: right;
 }
 
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color:#eea236;
+    background-color:black;
+}
 
+#data{
+    color: black;
+}
 
 <style>
  button.btn {color: black}
  span#glyphi { width: 10px;
                 height: 10px;}
  </style>
-
