@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="NetNewsApp">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.min.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet"/>
+
+    <script type="text/javascript" src="http://www.google.com/jsapi">
+    </script>
+
+    <script type="text/javascript">
+        google.load("feeds", "1") //Load Google Ajax Feed API (version 1)
+    </script>
+
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+    <script src="services/user.service.client.js"></script>
+    <script src="services/newsapi.service.js"></script>
+    <script src="services/sportsapi.service.client.js"></script>
+    <script src="services/entertain.service.client.js"></script>
+    <script src="services/travelapi.service.client.js"></script>
+    <script src="services/techapi.service.client.js"></script>
+
+    <script src="views/header/header.controller.js"></script>
+    <script src="views/home/home.controller.js"></script>
+    <script src="views/login/login.controller.js"></script>
+    <script src="views/profile/profile.controller.js"></script>
+    <script src="views/register/register.controller.js"></script>
+    <script src="views/search/search.controller.js"></script>
+    <script src="views/sports/sports.controller.js"></script>
+    <script src="views/entertainment/entertainment.controller.js"></script>
+    <script src="views/travel/travel.controller.js"></script>
+    <script src="views/technology/technology.controller.js"></script>
+    <script src="views/regional/regional.controller.js"></script>
+
+    <title>NetNews Project</title>
+</head>
+<body>
+<div class="container">
+    <div ng-include="'views/header/header.view.html'"></div>
+    <div ng-view></div>
+</div>
+</body>
+</html>

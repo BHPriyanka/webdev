@@ -1,0 +1,75 @@
+<nav ng-controller="HeaderController">
+    <!-- The justified navigation menu is meant for single line per list item.
+          Multiple lines will require custom code not provided by Bootstrap. -->
+    <div class="masthead">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">News Portal</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li ng-class="{'active': $location.url() == '/search'}">
+                            <a href="#/search">
+                                <scan class="glyphicon glyphicon-search" id="glyphi"></scan>
+                                Search</a>
+                        </li>
+                        <li ng-class="{'active': $location.url() == '/register'}"
+                            ng-hide="currentUser">
+                            <a href="#/register">Register</a>
+                        </li>
+                        <li ng-class="{'active': $location.url() == '/profile'}"
+                            ng-show="currentUser">
+                            <a href="#/profile">
+                                <scan class="glyphicon glyphicon-user" id="glyphi"></scan>
+                                Profile</a>
+                        </li>
+                        <li ng-show="currentUser.roles.indexOf('admin') >= 0">
+                            <a href="#/admin"> Admin </a>
+                        </li>
+                        <li ng-class="{'active': $location.url() == '/login'}"
+                            ng-hide="currentUser">
+                            <a href="#/login">Login</a>
+                        </li>
+                        <li ng-show="currentUser">
+                            <a ng-click="logout()">
+                                <scan class="glyphicon glyphicon-off" id="glyphi"></scan>
+                                Logout</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <img src="logo.png" width="100" height="100" class="img-responsive center-block">
+        <span id="spanDate" class="top-left"></span>
+        <h3 class="text-muted text-center"></h3>
+        <nav>
+            <ul class="nav nav-justified nav-pills">
+                <li role="presentation" ng-class="{'active': $location.url().indexOf('home') != -1}"  ng-click="home()" ng-controller="HomeController"><a href="#/home">Home</a></li>
+                <li role="presentation" ng-class="{'active': $location.url().indexOf('sports') != -1}" ng-click="sports()" ng-controller="SportsController"><a href="#/sports">Sports</a></li>
+                <li role="presentation" ng-class="{'active': $location.url().indexOf('entertainment') != -1}" ng-click="entertainment()" ng-controller="EntertainmentController"><a href="#/entertainment">Entertainment</a></li>
+                <li role="presentation" ng-class="{'active': $location.url().indexOf('travel') != -1}" ng-click="travel()" ng-controller="TravelController"><a href="#/travel">Travel</a></li>
+                <li role="presentation" ng-class="{'active': $location.url().indexOf('technology') != -1}" ng-click="technology()" ng-controller="TechController"><a href="#/technology">Technology</a></li>
+                <li class="dropdown" ng-controller="RegionalController" role="presentation" ng-class="{'active': $location.url().indexOf('regional') != -1}">
+                    <a href="#/regional" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Regional<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#/regional/uk">UK</a></li>
+                        <li><a href="#/regional/europe">Europe</a></li>
+                        <li><a href="#/regional/americas">Americas</a></li>
+                        <li><a href="#/regional/asia">Asia</a></li>
+                        <li><a href="#/regional/middleseast">Middle east</a></li>
+                        <li><a href="#/regional/africa">Africa</a></li>
+                        <li><a href="#/regional/australia">Australia</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</nav>

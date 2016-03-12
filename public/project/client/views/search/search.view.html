@@ -1,0 +1,18 @@
+<h2>Search</h2>
+
+<input ng-model="news.title" class="form-control"/>
+<button ng-click="search(news)"
+        class="btn btn-primary btn-block">
+    Search
+</button>
+<h3>Search Results</h3>
+
+
+<ul>
+    <li ng-repeat="entry in data.responseData.entries">
+        <div>
+        <a href="{{entry.link}}" target="_blank">
+        {{entry.title}}
+        </a></div>
+    </li>
+</ul>
