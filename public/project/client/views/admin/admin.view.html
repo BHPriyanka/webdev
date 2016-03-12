@@ -1,10 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div ng-controller="AdminController">
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h1 class="page-header">Admin</h1>
+        <h2>Users</h2>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>
+                        User Name
+                    </th>
+                    <th>
+                       Password
+                    </th>
+                    <th>
+                        Role
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
 
-</body>
-</html>
+                <tr>
+                    <td>
+                        <input ng-model="user.userName" type="text" id="userName" placeholder="username">
+                    </td>
+
+                    <td>
+                        <input ng-model="user.password" type="password" id="inputPassword" placeholder="password"></td>
+                    <td>
+                        <input ng-model="user.roles" type="text" id="roles" placeholder="role1, role2">
+                    </td>
+
+                    <td>
+                        <button ng-click="updateUser(user)" type="button" class="btn btn-default">
+                            <scan class="glyphicon glyphicon-ok" id="glyphi"></scan>
+                        </button>
+
+                    </td>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="user in users">
+                    <td>
+                    {{user.userName}}
+                    </td>
+                    <td></td>
+                    <td>{{user.roles}}</td>
+                    <td>
+                        <button ng-click="selectUser($index)" type="button" class="btn btn-default">
+                            <scan class="glyphicon glyphicon-pencil" id="glyphi"></scan>
+                        </button>
+                        <button ng-click="deleteUser($index)" type="button" class="btn btn-danger">
+                            <scan class="glyphicon glyphicon-remove" id="glyphi"></scan>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

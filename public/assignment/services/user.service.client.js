@@ -55,13 +55,13 @@
 
             findUserByCredentials: findUserByCredentials,
            // findAllUsers: findAllUsers,
-            //createUser: createUser,
+            createUser: createUser,
             //deleteUserById: deleteUserById,
-            //updateUser: updateUser,
-            //findUserByUsername: findUserByUsername,
-            //setCurrentUser: setCurrentUser,
-            //getCurrentUser: getCurrentUser,
-            //findUserByUserId: findUserByUserId
+            updateUser: updateUser,
+            findUserByUsername: findUserByUsername,
+            setCurrentUser: setCurrentUser,
+            getCurrentUser: getCurrentUser,
+            findUserByUserId: findUserByUserId
         };
         return model;
 

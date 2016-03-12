@@ -40,7 +40,9 @@
 
             if(!user.email) {
                 $scope.message = "Please provide Email ID";
+                return;
             }
+
             var user1 = UserService.findUserByUsername(user.userName);
             if (user1 != null) {
                 $scope.message = "User already exists";

@@ -4,7 +4,7 @@
         .module("NetNewsApp")
         .factory("UserService", UserService);
 
-    function UserService($rootScope){
+    function UserService($rootScope) {
         var model = {
             users: [
                 {
@@ -57,14 +57,17 @@
             getCurrentUser: getCurrentUser,
             findUserByCredentials: findUserByCredentials,
             updateUser: updateUser,
-            findUserByUserId:findUserByUserId,
-            findUserByUsername : findUserByUsername,
-            createUser: createUser
+            findUserByUserId: findUserByUserId,
+            findUserByUsername: findUserByUsername,
+            createUser: createUser,
+            updateUserById: updateUserById,
+            deleteUserById: deleteUserById,
+            findAllUsers: findAllUsers
 
         };
         return model;
 
-        function createUser (user, callback) {
+        function createUser(user, callback) {
             var user = {
                 _id: (new Date()).getTime(),
                 userName: user.userName,
@@ -78,11 +81,11 @@
             callback(user);
         }
 
-        function setCurrentUser (user) {
+        function setCurrentUser(user) {
             $rootScope.currentUser = user;
         }
 
-        function getCurrentUser () {
+        function getCurrentUser() {
             return $rootScope.currentUser;
         }
 
@@ -98,12 +101,13 @@
             }
             callback(user);
         }
-        function updateUser (userId, currentUser, callback) {
-            var user = model.findUserByUserId (userId);
+
+        function updateUser(userId, currentUser, callback) {
+            var user = model.findUserByUserId(userId);
 
             if (user != null) {
                 user.firstName = currentUser.firstName;
-                user.password =currentUser.password;
+                user.password = currentUser.password;
                 user.lastName = currentUser.lastName;
                 user.password = currentUser.password;
                 user.email = currentUser.email;
@@ -111,10 +115,10 @@
             callback(user);
         }
 
-        function findUserByUserId(userId){
+        function findUserByUserId(userId) {
             var user = null;
-            for (var u in model.users){
-                if(model.users[u]._id == userId){
+            for (var u in model.users) {
+                if (model.users[u]._id == userId) {
                     user = model.users[u];
                     break;
                 }
@@ -122,7 +126,7 @@
             return user;
         }
 
-        function findUserByUsername (username) {
+        function findUserByUsername(username) {
             var user = null;
             for (var u in model.users) {
                 if (model.users[u].userName == username) {
@@ -132,6 +136,32 @@
             }
             return user;
         }
-    }
 
+
+        function updateUserById(userId, newUser, callback) {
+            for (var u in model.users) {
+                if (model.users[u]._id == userId) {
+                    model.users[u].userName = newUser.userName;
+                    model.users[u].password = newUser.password;
+                    model.users[u].roles = newUser.roles;
+                    callback(model.users[u]);
+                    break;
+                }
+            }
+        }
+
+        function deleteUserById(userId, callback) {
+            for (var u in model.users) {
+                if (model.users[u]._id === userId) {
+                    model.users.splice(u, 1);
+                    break;
+                }
+            }
+            callback(model.users);
+        }
+
+        function findAllUsers(callback) {
+            callback(model.users);
+        }
+    }
 })();
