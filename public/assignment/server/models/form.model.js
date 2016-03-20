@@ -1,3 +1,6 @@
+/*jslint node: true */
+"use strict";
+
 var mock = require("./form.mock.json");
 module.exports = function(){
 

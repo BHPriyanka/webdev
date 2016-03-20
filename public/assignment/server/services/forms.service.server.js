@@ -1,3 +1,6 @@
+/*jslint node: true */
+"use strict";
+
 module.exports = function(app, userModel, formModel){
     app.get("/api/assignment/user/:userId/form", findAllForms);
     app.post("/api/assignment/user/:userId/form", createForm);

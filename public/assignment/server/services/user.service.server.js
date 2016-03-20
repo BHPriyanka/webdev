@@ -1,6 +1,7 @@
-//var userModel = require("../models/user.model.js")();
+/*jslint node: true */
+"use strict";
 
-module.exports = function(app, userModel){
+module.exports = function (app, userModel) {
     app.get("/api/assignment/user?username=username&password=password", findUserByCredentials);
     app.get("/api/assignment/user?username=username", findUserByUsername);
     app.post("/api/assignment/user", createUser);
@@ -116,3 +117,4 @@ module.exports = function(app, userModel){
         res.json(user);
     }
 }
+

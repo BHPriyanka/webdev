@@ -1,3 +1,6 @@
+/*jslint node: true */
+"use strict";
+
 var mock = require("./user.mock.json");
 module.exports = function() {
     var api = {
