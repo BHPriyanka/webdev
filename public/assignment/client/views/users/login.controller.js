@@ -6,7 +6,7 @@
         .module("FormBuilderApp")
         .controller("LoginController", LoginController);
 
-    function LoginController($scope, UserService, $location, $rootScope) {
+    function LoginController(UserService, $location) {
         var vm = this;
         vm.login = login;
 
@@ -29,8 +29,26 @@
                    user.password
                 )
                 .then(function (response) {
-                    if (response.data.username != null) {
-                        UserService.setCurrentUser(response.data);
+                    if (response.data.userName != null) {
+                        vm.currentUser = response.data;
+                        /*{
+                            "_id":response.data._id,
+                            "firstName":response.data.firstName,
+                            "lastName":response.data.lastName,
+                            "userName":res+ponse.data.userName,
+                            "password":response.data.password,
+                            "email": response.data.email,
+                            "roles": response.data.roles
+                        };*/
+                        console.log(vm.currentUser);
+                        UserService.setCurrentUser(vm.currentUser);
+                        for(var role in response.data.roles) {
+                            if (vm.currentUser.roles[role] == "admin"){
+                                console.log(vm.currentUser.roles[role]);
+                                $location.url('/admin');
+                                break;
+                            }
+                        }
                         $location.url('/profile');
                     }
                     else{
@@ -40,36 +58,3 @@
         }
     }
 })();
-                /*user1 = response;
-                if(user1){
-                    $rootScope.currentUser =
-                    {
-                        "_id":user1._id,
-                        "firstName":user1.firstName,
-                        "lastName":user1.lastName,
-                        "userName":user1.userName,
-                        "password":user1.password,
-                        "email": user1.email,
-                        "roles": user1.roles
-                    };
-
-                    UserService.setCurrentUser(user1);
-
-                    for(var role in user1.roles) {
-                        if (user1.roles[role] == "admin"){
-                            console.log($rootScope.isadmin);
-                            $location.url('/admin');
-                            break;
-                        }
-                    }
-                    $location.url('/profile');
-                }
-
-                else {
-                    alert("User not present");
-                }
-            });
-
-        }
-    }
-})();*/

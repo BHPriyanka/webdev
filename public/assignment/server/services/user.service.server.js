@@ -2,13 +2,14 @@
 "use strict";
 
 module.exports = function (app, userModel) {
-    app.get("/api/assignment/user?username=username&password=password", findUserByCredentials);
-    app.get("/api/assignment/user?username=username", findUserByUsername);
+    app.get("/api/assignment/user?username=username&password=password", findUser);
+    app.get("/api/assignment/user?username=username", findUser);
     app.post("/api/assignment/user", createUser);
-    app.get("/api/assignment/user", findAllUsers);
+    app.get("/api/assignment/user", findUser);
     app.get("/api/assignment/user/:id", findUserById);
     app.put("/api/assignment/user/:id", updateUser);
     app.delete("/api/assignment/user/:id", deleteUser);
+    app.post("/api/assignment/user/logout", logout);
 
     function createUser(req, res) {
         //var user = req.body;
@@ -29,59 +30,28 @@ module.exports = function (app, userModel) {
         res.json(user);
     }
 
-    function findUserByCredentials(req, res) {
+    function findUser(req, res) {
         console.log("Inside login server service");
-        var username = req.query.username;
-        var password = req.query.password;
-        var user = userModel.findUserByCredentials(username, password);
-            /*.then(
-                function (doc) {
-                    req.session.currentUser = doc;
-                    res.json(doc);
-                },
-                // send error if promise rejected
-                function ( err ) {
-                    res.status(400).send(err);
-                }
-            )*/
-        res.json(user);
+        if (req.query.username) {
+            if (req.query.password) {
+                var user = userModel.findUserByCredentials(req.query.username, req.query.password);
+                res.json(user);
+            }
+            else {
+                var user1 = userModel.findUserByUsername(req.query.username);
+                res.json(user1);
+            }
+        }
+        else {
+            var users = userModel.findAllUsers();
+            res.json(users);
+        }
     }
 
     function deleteUser(req, res) {
         var mock = userModel.deleteUser(req.params._id);
         res.json(mock);
 
-    }
-
-    function findUserByUsername(req, res){
-        var username = req.params.username;
-        var user = userModel.findUserByUsername(username);
-            /*.then(function ( doc ) {
-                    req.session.currentUser = doc;
-                    res.json(user);
-                },
-
-                // send error if promise rejected
-                function (err) {
-                    res.status(400).send(err);
-                }
-            )*/
-        res.json(user);
-    }
-
-    function findAllUsers(req, res){
-        var users = userModel.findAllUsers();
-            /*.then(function ( doc ) {
-                    req.session.currentUser = doc;
-                    res.json(users);
-                },
-
-                // send error if promise rejected
-                function (err) {
-                    res.status(400).send(err);
-                }
-            )*/
-        res.json(users);
     }
 
     function findUserById(req, res){
@@ -115,6 +85,12 @@ module.exports = function (app, userModel) {
                 }
             )*/
         res.json(user);
+    }
+
+    function logout(req, res) {
+        console.log("server service logout");
+        req.session.destroy();
+        res.send(200);
     }
 }
 

@@ -63,7 +63,12 @@
         }
 
         function getCurrentUser() {
-            return $http.get("/api/assignment/user?username=" + $rootScope.currentUser);
+            return $http.get("/api/assignment/user?username=" + $rootScope.currentUser.userName);
+        }
+
+
+        function logout() {
+            return $http.post("/api/assignment/user/logout");
         }
 
 

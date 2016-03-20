@@ -1,7 +1,12 @@
 [
-  {"_id": 123, "firstName": "Alice", "lastName": "Wonderland", "userName": "alice", "password": "alice"},
-  {"_id": 234, "firstName": "Bob", "lastName": "Hope", "userName": "bob", "password": "bob"},
-  {"_id": 345, "firstName": "Charlie","lastName": "Brown", "userName": "charlie", "password": "charlie"},
-  {"_id": 456, "firstName": "Dan", "lastName": "Craig", "userName": "dan", "password": "dan"},
-  {"_id": 567, "firstName": "Edward","lastName": "Norton", "userName": "ed", "password": "ed"}
+  {"_id": 123, "firstName": "Alice", "lastName": "Wonderland", "userName": "alice", "password": "alice",
+    "email": "alice@abc.com", "roles": ["user"]},
+  {"_id": 234, "firstName": "Bob", "lastName": "Hope", "userName": "bob", "password": "bob",
+    "email": "bob@abc.com", "roles": ["admin"]},
+  {"_id": 345, "firstName": "Charlie","lastName": "Brown", "userName": "charlie", "password": "charlie",
+    "email": "charlie@abc.com", "roles": ["user"]},
+  {"_id": 456, "firstName": "Dan", "lastName": "Craig", "userName": "dan", "password": "dan",
+    "email": "dan@abc.com", "roles": ["student", "user"]},
+  {"_id": 567, "firstName": "Edward","lastName": "Norton", "userName": "ed", "password": "ed",
+    "email": "ed@abc.com", "roles": ["user"]}
 ]
