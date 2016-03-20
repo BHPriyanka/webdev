@@ -28,14 +28,14 @@
 
                 <tr>
                     <td>
-                        <input ng-model="form" type="text" id="formName" placeholder="Name">
+                        <input ng-model="model.form" type="text" id="formName" placeholder="Name">
                     </td>
                     <td>
-                        <button ng-click="model.updateForm(form)" type="button" class="btn btn-default">
+                        <button ng-click="model.updateForm(model.form)" type="button" class="btn btn-default">
                             <scan class="glyphicon glyphicon-ok" id="glyphi"></scan>
                         </button>
 
-                        <button ng-click="model.addForm(form)" type="button" class="btn btn-default">
+                        <button ng-click="model.addForm(model.form)" type="button" class="btn btn-default">
                             <scan class="glyphicon glyphicon-plus" id="glyphi"></scan>
                         </button>
                     </td>

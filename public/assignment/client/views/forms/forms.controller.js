@@ -1,31 +1,31 @@
 "use strict";
 (function(){
-        angular
-            .module("FormBuilderApp")
-            .controller("FormController", FormController);
+    angular
+        .module("FormBuilderApp")
+        .controller("FormController", FormController);
 
-        function FormController($scope, $location, FormService, $rootScope) {
-            var vm = this;
-            vm.message = null;
-            vm.addForm = addForm;
-            vm.updateForm = updateForm;
-            vm.deleteForm = deleteForm;
-            vm.selectForm = selectForm;
-            vm.index = -1;
+    function FormController($scope, $location, FormService, $rootScope) {
+        var vm = this;
+        vm.message = null;
+        vm.addForm = addForm;
+        vm.updateForm = updateForm;
+        vm.deleteForm = deleteForm;
+        vm.selectForm = selectForm;
+        vm.index = -1;
 
-            if ($rootScope.currentUser == null) {
-                $location.url('/home');
-            }
-            else {
-                FormService.findAllFormsForUser($rootScope.currentUser._id)
-                    .then(function (response) {
-                        var forms = response.data;
-                        if (forms) {
-                            $scope.userForms = forms;
-                        }
-                    });
-            }
+        if ($rootScope.currentUser == null) {
+            $location.url('/home');
         }
+        else {
+            FormService.findAllFormsForUser($rootScope.currentUser._id)
+                .then(function (response) {
+                    var forms = response.data;
+                    if (forms) {
+                        $scope.userForms = forms;
+                    }
+                });
+        }
+    }
 
     function setCurrentForm(new_form) {
         $rootScope.form = null;
