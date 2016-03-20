@@ -6,10 +6,10 @@
         .module("FormBuilderApp")
         .controller("LoginController", LoginController);
 
-    function LoginController(UserService, $location) {
+    function LoginController(UserService, $location, $rootScope) {
         var vm = this;
         vm.login = login;
-
+        $rootScope.isadmin = false;
         function init() {
 
         }
@@ -29,26 +29,17 @@
                    user.password
                 )
                 .then(function (response) {
-                    if (response.data.userName != null) {
-                        vm.currentUser = response.data;
-                        /*{
-                            "_id":response.data._id,
-                            "firstName":response.data.firstName,
-                            "lastName":response.data.lastName,
-                            "userName":res+ponse.data.userName,
-                            "password":response.data.password,
-                            "email": response.data.email,
-                            "roles": response.data.roles
-                        };*/
-                        console.log(vm.currentUser);
-                        UserService.setCurrentUser(vm.currentUser);
+                    if (response.data != null) {
+                        var user = response.data;
+                        console.log(user);
                         for(var role in response.data.roles) {
-                            if (vm.currentUser.roles[role] == "admin"){
-                                console.log(vm.currentUser.roles[role]);
-                                $location.url('/admin');
+                            if (user.roles[role] == "admin"){
+                                console.log(user.roles[role]);
+                                $rootScope.isadmin = true;
                                 break;
                             }
                         }
+                        UserService.setCurrentUser(user);
                         $location.url('/profile');
                     }
                     else{

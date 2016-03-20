@@ -6,7 +6,7 @@
         .module("FormBuilderApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController(UserService, $location) {
+    function ProfileController(UserService, $location, $rootScope) {
         var vm = this;
 
         vm.error = null;
@@ -19,7 +19,14 @@
                 $location.url('/home');
             }
             else{
-                vm.currentUser = currentUser;
+                vm.currentUser = {
+                    _id: currentUser._id,
+                    firstName: currentUser.firstName,
+                    lastName: currentUser.lastName,
+                    email: currentUser.email,
+                    roles: currentUser.roles,
+                    password: currentUser.password
+                };
             }
         }
         init();
@@ -61,10 +68,10 @@
 
             UserService.updateUser(user._id, user)
                 .then(function (response) {
-                   // success = response;
+                    success = response.data;
 
-                    if (response.data) {
-                        /*$rootScope.currentUser =
+                    if (success) {
+                        $rootScope.currentUser =
                         {
                             "_id":success._id,
                             "firstName":success.firstName,
@@ -73,9 +80,9 @@
                             "password":success.password,
                             "email": success.email,
                             "roles": success.roles
-                        };*/
+                        };
 
-                        UserService.setCurrentUser(response.data);
+                        UserService.setCurrentUser(success);
 
                         vm.message = "User updated successfully";
                         $location.url('/profile');

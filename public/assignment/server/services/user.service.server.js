@@ -12,21 +12,7 @@ module.exports = function (app, userModel) {
     app.post("/api/assignment/user/logout", logout);
 
     function createUser(req, res) {
-        //var user = req.body;
-
         var user = userModel.createUser(req.query.user);
-            // handle model promise
-            /*.then(
-                // login user if promise resolved
-                function ( doc ) {
-                    req.session.currentUser = doc;
-                    res.json(user);
-                },
-                // send error if promise rejected
-                function ( err ) {
-                    res.status(400).send(err);
-                }
-            );*/
         res.json(user);
     }
 
@@ -57,17 +43,6 @@ module.exports = function (app, userModel) {
     function findUserById(req, res){
         var userId = req.params.userId;
         var user = userModel.findUserById(userId);
-            /*.then(
-                function ( doc ) {
-                    req.session.currentUser = doc;
-                    res.json(user);
-                },
-
-                // send error if promise rejected
-                function (err) {
-                    res.status(400).send(err);
-                }
-            )*/
         res.json(user);
     }
 
@@ -75,15 +50,6 @@ module.exports = function (app, userModel) {
         var userId = req.params.userId;
         var user = req.params.userName;
         userModel.updateUser(userId, user);
-            /*.then(function(doc) {
-                req.session.currentUser = doc;
-                res.json(user);
-            },
-                // send error if promise rejected
-                function (err) {
-                    res.status(400).send(err);
-                }
-            )*/
         res.json(user);
     }
 
