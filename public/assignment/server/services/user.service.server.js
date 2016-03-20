@@ -3,13 +3,7 @@
 
 module.exports = function(app, userModel){
     app.get("/api/assignment/user?username=username&password=password", findUserByCredentials);
-    //app.get("/api/assignment/user/loggedin", loggedin);
-    //app.post("/api/assignment/user/logout", logout);
-    //app.post("/api/assignment/user/register", register);
-    //app.get("/api/assignment/user/profile/:userId", profile);
-
-    //app.get("/api/assignment/user?username=username&password=password", findUserByCredentials);
-    app.get("/api/assignment/user?username=username", loggedin);
+    app.get("/api/assignment/user?username=username", findUserByUsername);
     app.post("/api/assignment/user", createUser);
     app.get("/api/assignment/user", findAllUsers);
     app.get("/api/assignment/user/:id", findUserById);
@@ -59,7 +53,7 @@ module.exports = function(app, userModel){
 
     }
 
-    function loggedin(req, res){
+    function findUserByUsername(req, res){
         var username = req.params.username;
         var user = userModel.findUserByUsername(username);
             /*.then(function ( doc ) {

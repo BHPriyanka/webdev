@@ -13,6 +13,12 @@ module.exports = function(app){
 
     //take instance object, add to collection and return the collection
     function CreateForm(){
+        var new_form = {
+            _id: (new Date()).getTime(),
+            userId: userId,
+            title:form.title
+        };
+        mock.push(new_form);
 
     }
 

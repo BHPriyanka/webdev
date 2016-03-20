@@ -16,16 +16,7 @@
         return api;
 
         function createFormForUser(userId, form) {
-            /*  var new_form = {
-             _id: (new Date()).getTime(),
-             userId: userId,
-             title:form.title
-             };
-             console.log("inside createofmr");
-             model.forms.push(new_form);
-             callback(new_form);*/
             return $http.post("/api/assignment/user/" + userId + "/form");
-
         }
 
         function findAllFormsForUser(userId) {
