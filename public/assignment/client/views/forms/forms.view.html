@@ -1,0 +1,64 @@
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">Forms </h1>
+</div>
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <div ng-controller="FormController as model">
+        <div ng-show="message" class="alert alert-danger" role="alert">{{message}}</div>
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#/forms">Forms</a>
+            </li>
+            <li><a href="#/fields">Fields</a></li>
+        </ul>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>
+                        <button type="button" class="btn dropdown-toggle"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span></button> Form Name </th>
+                    <th>
+                        <button type="button" class="btn dropdown-toggle"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span></button> Action </th>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input ng-model="form" type="text" id="formName" placeholder="Name">
+                    </td>
+                    <td>
+                        <button ng-click="model.updateForm(form)" type="button" class="btn btn-default">
+                            <scan class="glyphicon glyphicon-ok" id="glyphi"></scan>
+                        </button>
+
+                        <button ng-click="model.addForm(form)" type="button" class="btn btn-default">
+                            <scan class="glyphicon glyphicon-plus" id="glyphi"></scan>
+                        </button>
+                    </td>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="form in userForms">
+                    <td>
+                        <a href="#/fields"> {{form.title}} </a>
+                    </td>
+
+                    <td>
+                        <button ng-click="model.selectForm($index)" type="button" class="btn btn-default">
+                            <scan class="glyphicon glyphicon-pencil" id="glyphi"></scan>
+                        </button>
+                        <button ng-click="model.deleteForm($index)" type="button" class="btn btn-danger">
+                            <scan class="glyphicon glyphicon-remove" id="glyphi"></scan>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
