@@ -1,4 +1,3 @@
-/*global describe:true*/
 //var userModel = require("../models/user.model.js")();
 
 module.exports = function(app, userModel){
