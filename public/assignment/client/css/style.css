@@ -1,0 +1,29 @@
+#gender{
+    height:25px;
+}
+
+#addNewField{
+    height:25px;
+}
+
+#glyphi{
+    font-size: 20px;
+    padding: 5px;
+    aria-hidden:"true";
+    color: #ec971f;
+}
+
+#fmGrpClass{
+   float: right;
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color:#eea236;
+    background-color:black;
+}
+
+#data{
+    color: black;
+}
+
+
