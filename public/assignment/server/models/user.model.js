@@ -6,7 +6,7 @@ module.exports = function() {
     var api = {
         createUser: createUser,
         findAllUsers: findAllUsers,
-        findUserById: findUserById,
+        findIndex: findIndex,
         updateUser: updateUser,
         deleteUser: deleteUser,
         findUserByUsername: findUserByUsername,
@@ -16,20 +16,17 @@ module.exports = function() {
 
     //take instance object, add to collection and return the collection
     function createUser(user) {
-        user._id = "ID_" + (new Date()).getTime();
-        mock.push(user);
-        return mock;
-        /*var user = {
+         user = {
          _id: (new Date()).getTime(),
          userName: user.userName,
          password: user.password,
          firstName: user.firstName,
          lastName: user.lastName,
          email: user.email,
-         roles: []
+         roles: ['student']
          };
-         mock.push(user);
-         return user;*/
+        mock.push(user);
+        return user;
     }
 
     //return the corresponding collection
@@ -38,10 +35,11 @@ module.exports = function() {
     }
 
     //take ID as an argument, find the instance object whose ID matches the given id, return the instance otherwise return null
-    function findUserById(userId) {
+    function findIndex(username) {
         var user = null;
-        for (var u in mock) {
-             if (mock[u]._id == userId) {
+        var u;
+        for (u in mock) {
+             if (mock[u].userName == username) {
                 user = mock[u];
             }
          }
@@ -50,12 +48,12 @@ module.exports = function() {
 
     //take ID and object instance,find object instance in collection wwith ID match, update the object instance values
     function updateUser(userId, currentUser) {
-        var user = findUserById (userId);
-        if (user != null) {
+        var user = findIndex(currentUser.username);
+        if (user) {
             user.firstName = currentUser.firstName;
-            user.password =currentUser.password;
-            user.lastName = currentUser.lastName;
             user.password = currentUser.password;
+            user.lastName = currentUser.lastName;
+            user.password = currentUser.userName;
             user.email = currentUser.email;
          }
         return user;
@@ -86,13 +84,11 @@ module.exports = function() {
 
     //credentials has username and password,returns user whose credentials match, null otherwise
     function findUserByCredentials(username, password) {
-        console.log("inside user model");
         var user = null;
         for (var u in mock) {
             if (mock[u].userName === username &&
                 mock[u].password === password) {
                 user = mock[u];
-                console.log(user);
             }
         }
         return user;

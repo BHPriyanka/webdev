@@ -17,8 +17,6 @@
         init();
 
         function login(user) {
-            console.log("inside login controller");
-            console.log(user);
             if(!user) {
                 return;
             }
@@ -31,10 +29,8 @@
                 .then(function (response) {
                     if (response.data != null) {
                         var user = response.data;
-                        console.log(user);
                         for(var role in response.data.roles) {
                             if (user.roles[role] == "admin"){
-                                console.log(user.roles[role]);
                                 $rootScope.isadmin = true;
                                 break;
                             }

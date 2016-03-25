@@ -4,9 +4,15 @@
 (function(){
     angular
         .module("FormBuilderApp")
-        .controller("FieldsController", FieldsController);
+        .controller("FieldController", FieldController);
 
-    function FieldsController($scope, $location){
+    function FieldController($scope, $location){
         console.log("Hello from FieldsController");
+        var vm = this;
+        vm.addField = addField;
+
+        function addField(fieldType){
+
+        }
     }
 })();

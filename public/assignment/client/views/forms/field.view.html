@@ -5,7 +5,7 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ul class="nav nav-tabs">
             <li><a href="#/forms">Forms</a></li>
-            <li class="active"><a href="#/fields">Fields</a></li>
+            <li class="active"><a href="#/field">Fields</a></li>
         </ul>
         <form>
             <form class="form-group">
@@ -168,13 +168,14 @@
                     <label for="addNewField">Add New Field: </label>
                     <div class="form-group">
                         <div class="form-inline">
-                            <select ng-model="model.fieldType" class="col-sm-6 col-xs-6.5 col-md-6" id="addNewField">
-                                <option value="" selected>Single Line Text Field</option>
+                            <select ng-repeat="field in model.fields" ng-model="model.fieldType" class="col-sm-6 col-xs-6.5 col-md-6" id="addNewField">
+                                <!--option value="" selected>Single Line Text Field</option>
                                 <option value="">Multi Line Text Field</option>
                                 <option value="">Date Field</option>
                                 <option value="">Dropdown Field</option>
                                 <option value="">Checkboxes field</option>
-                                <option value="">Radio Buttons field</option>
+                                <option value="">Radio Buttons field</option-->
+                                <option value="">{{field}}</option>
                             </select>
                             <div class="form-group form-horizontal" id="fmGrpClass">
                                 <a href="#">

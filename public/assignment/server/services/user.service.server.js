@@ -2,25 +2,25 @@
 "use strict";
 
 module.exports = function (app, userModel) {
-    app.get("/api/assignment/user?username=username&password=password", findUser);
-    app.get("/api/assignment/user?username=username", findUser);
     app.post("/api/assignment/user", createUser);
     app.get("/api/assignment/user", findUser);
     app.get("/api/assignment/user/:id", findUserById);
     app.put("/api/assignment/user/:id", updateUser);
     app.delete("/api/assignment/user/:id", deleteUser);
-    app.post("/api/assignment/user/logout", logout);
+    app.post("/api/assignment/logout", logout);
+    app.get("/api/assignment/loggedin", loggedin);
 
     function createUser(req, res) {
-        var user = userModel.createUser(req.query.user);
+        var user = userModel.createUser(req.body);
+        req.session.currentUser = user;
         res.json(user);
     }
 
     function findUser(req, res) {
-        console.log("Inside login server service");
         if (req.query.username) {
             if (req.query.password) {
                 var user = userModel.findUserByCredentials(req.query.username, req.query.password);
+                 req.session.currentUser = user;
                 res.json(user);
             }
             else {
@@ -47,16 +47,18 @@ module.exports = function (app, userModel) {
     }
 
     function updateUser(req, res){
-        var userId = req.params.userId;
-        var user = req.params.userName;
+        var userId = req.params.id;
+        var user = req.body;
         userModel.updateUser(userId, user);
         res.json(user);
     }
 
     function logout(req, res) {
-        console.log("server service logout");
-        req.session.destroy();
         res.send(200);
+    }
+
+    function loggedin(req, res) {
+        res.json(req.session.currentUser);
     }
 }
 

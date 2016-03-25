@@ -23,8 +23,8 @@ module.exports = function(){
     function createForm(userID, form){
         var new_form = {
             _id: (new Date()).getTime(),
-            userId: userId,
-            title:form.title
+            userId: userID,
+            title: form.title
         };
         mock.push(new_form);
         return mock;
@@ -32,9 +32,9 @@ module.exports = function(){
 
     //return the corresponding collection
     function findAllForms(userID){
-        var userForms =[];
+        var userForms = [];
         for (var f in mock) {
-            if (mock[f].userId === userId) {
+            if (mock[f].userId == userID) {
                 userForms.push(mock[f]);
             }
          }
@@ -59,18 +59,16 @@ module.exports = function(){
          if (mock[f]._id == formId) {
             mock[f].title = newForm.title;
             mock[f].userId = newForm.userId;
-            break;
          }
         }
-        return mock;
+        return mock[f];
     }
 
     //accept ID, and remove based on ID
     function deleteForm(formId){
         for (var f in mock) {
-         if (mock[f]._id === formId) {
+         if (mock[f]._id == formId) {
              mock.splice(f, 1);
-             break;
          }
         }
         return mock;

@@ -1,16 +1,16 @@
 <div ng-controller="SidebarController as model">
 <div class="col-sm-3 col-md-2 sidebar">
     <ul class="nav nav-sidebar">
-        <li ng-class="{'active' : model.isActive('/home') }">
+        <li ng-class="{'active' : isActive('/home') }">
             <a href="#/home"> Home </a>
         </li>
-        <li ng-show="currentUser" ng-class="{'active' : model.isActive('/profile')}">
+        <li ng-show="currentUser" ng-class="{'active' : isActive('/profile')}">
             <a href="#/profile"> Profile </a>
         </li>
-        <li ng-show="currentUser.roles.indexOf('admin') >= 0" ng-class="{'active' : model.isActive('/admin')}" >
+        <li ng-show="currentUser.roles.indexOf('admin') >= 0" ng-class="{'active' : isActive('/admin')}" >
             <a href="#/admin"> Admin </a>
         </li>
-        <li ng-show="currentUser" ng-class="{'active' : model.isActive('/forms')}">
+        <li ng-show="currentUser" ng-class="{'active' : isActive('/forms')}">
             <a href="#/forms"> Forms </a>
         </li>
     </ul>

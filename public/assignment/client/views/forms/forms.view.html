@@ -4,12 +4,12 @@
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <div ng-controller="FormController as model">
-        <div ng-show="message" class="alert alert-danger" role="alert">{{message}}</div>
+        <div ng-show="model.message" class="alert alert-danger" role="alert">{{model.message}}</div>
         <ul class="nav nav-tabs">
             <li class="active">
                 <a href="#/forms">Forms</a>
             </li>
-            <li><a href="#/fields">Fields</a></li>
+            <li><a href="#/field">Fields</a></li>
         </ul>
 
         <div class="table-responsive">
@@ -28,14 +28,14 @@
 
                 <tr>
                     <td>
-                        <input ng-model="model.form" type="text" id="formName" placeholder="Name">
+                        <input ng-model="model.selected.title" type="text" id="formName" placeholder="Name">
                     </td>
                     <td>
-                        <button ng-click="model.updateForm(model.form)" type="button" class="btn btn-default">
+                        <button ng-click="model.updateForm(model.selected)" type="button" class="btn btn-default">
                             <scan class="glyphicon glyphicon-ok" id="glyphi"></scan>
                         </button>
 
-                        <button ng-click="model.addForm(model.form)" type="button" class="btn btn-default">
+                        <button ng-click="model.addForm(model.selected)" type="button" class="btn btn-default">
                             <scan class="glyphicon glyphicon-plus" id="glyphi"></scan>
                         </button>
                     </td>
@@ -43,10 +43,8 @@
                 </thead>
 
                 <tbody>
-                <tr ng-repeat="form in userForms">
-                    <td>
-                        <a href="#/fields"> {{form.title}} </a>
-                    </td>
+                <tr ng-repeat="form in model.userForms">
+                    <td ng-model="form.title"><a href="#/fields">{{form.title}}</a></td>
 
                     <td>
                         <button ng-click="model.selectForm($index)" type="button" class="btn btn-default">

@@ -46,11 +46,11 @@
             })
             .when("/field",{
                 templateUrl: "views/forms/field.view.html",
-                controller: "FieldsController",
+                controller: "FieldController",
                 controllerAs: "model"
             })
             .otherwise({
-                redirectTo: "/home"
+                redirectTo: "views/forms/home.view.html"
             });
     }
 

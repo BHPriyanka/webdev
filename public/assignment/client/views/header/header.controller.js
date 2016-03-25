@@ -13,8 +13,7 @@
         vm.logout = logout;
 
         function init(){
-
-
+            vm.$location = $location;
         }
         init();
 
@@ -24,6 +23,7 @@
                 .logout()
                 .then(function(){
                     //UserService.logout();
+                    UserService.setCurrentUser(null);
                     $location.url("/home");
                 });
         }

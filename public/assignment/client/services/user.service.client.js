@@ -19,11 +19,11 @@
             getCurrentUser: getCurrentUser,
             logout: logout,
             findUserByUserId: findUserByUserId
-        };
+                    };
         return api;
 
         function logout() {
-            return $http.post("/api/project/logout");
+            return $http.post("/api/assignment/logout");
         }
 
 
@@ -32,7 +32,6 @@
         }
 
         function findUserByCredentials(username, password) {
-            console.log("inside user client service");
             return $http.get("/api/assignment/user?username=" + username + "&password=" + password);
         }
 
@@ -41,34 +40,30 @@
         }
 
         function createUser(user) {
-            return $http.post("/api/assignment/register", user);
+            return $http.post("/api/assignment/user", user);
         }
 
 
         function deleteUserById(userId) {
-            /*var user = model.findUserByUserId (userId);
-             if(user!=null){
-
-             }*/
             return $http.delete("/api/assignment/user/" + userId);
         }
 
 
         function updateUser(userId, currentUser) {
-            return $http.put("/api/assignment/user" + userId);
+            return $http.put("/api/assignment/user/" + userId);
         }
 
         function setCurrentUser(user) {
             $rootScope.currentUser = user;
         }
 
-        function getCurrentUser() {
-            return $http.get("/api/assignment/user?username=" + $rootScope.currentUser.userName);
+        function getCurrentUser(){
+            return $http.get("/api/assignment/loggedin");
         }
 
 
         function logout() {
-            return $http.post("/api/assignment/user/logout");
+            return $http.post("/api/assignment/logout");
         }
 
 
