@@ -2,24 +2,37 @@
 "use strict";
 
 module.exports = function(app, userModel, formModel){
-    app.get("/api/assignment/form/:formId/field", findFieldsByFormId);
-    app.get("/api/assignment/form/:formId/field/:fieldId", findFieldByFieldIdFormId);
+    app.get("/api/assignment/form/:formId/field", findFields);
+    //app.get("/api/assignment/form/:formId/field/:fieldId", findFieldByFieldIdFormId);
     app.delete("/api/assignment/form/:formId/field/:fieldId", deleteFieldByFieldIdFormId);
     app.post("/api/assignment/form/:formId/field", createFieldByFormId);
     app.put("/api/assignment/form/:formId/field/:fieldId", updateFieldByFormIdFieldId);
 
-    function findFieldsByFormId(req, res){
-        var formId = req.params.formId;
-        var form = formModel.findFieldsByFormId(formId);
-        res.json(form);
+    function findFields(req, res) {
+        if (req.params.formId) {
+            if (req.params.fieldId) {
+                console.log("Server service - findFieldByFormIdFieldid");
+                var fieldID = req.params.fieldId;
+                var formId = req.params.formId;
+                var field = formModel.findFieldByFieldIdFormId(formId, fieldId);
+                res.json(field);
+            }
+            else {
+                console.log("Server service - findFieldByFormId");
+                var formId = req.params.formId;
+                console.log(formId);
+                var form = formModel.findFieldsByFormId(formId);
+                res.json(form);
+            }
+        }
     }
 
-    function findFieldByFieldIdFormId(req, res){
+    /*function findFieldByFieldIdFormId(req, res){
         var fieldID = req.params.fieldId;
         var formId = req.params.formId;
         var field = formModel.findFieldByFieldIdFormId(formId,fieldId);
         res.json(field);
-    }
+    }*/
 
     function deleteFieldByFieldIdFormId(req, res){
         var fieldID = req.params.fieldId;
@@ -29,7 +42,8 @@ module.exports = function(app, userModel, formModel){
     }
 
     function createFieldByFormId(req, res){
-        var formId = req.params.formId;
+        var formId = req.query.formId;
+        console.log("createFieldByFormId " + formId);
         var forms = formModel.createFieldByFormId(formId);
         res.json(forms);
     }
