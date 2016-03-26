@@ -23,11 +23,11 @@
             "Dropdown Field",
             "Checkboxes Field",
             "Radio Buttons Field"
-        ]
+        ];
 
         vm.selection = vm.options[0];
         vm.fieldOptions = null;
-        var formId ;
+        var formId;
         if ($routeParams.formId) {
             formId = $routeParams.formId;
         }
@@ -42,7 +42,8 @@
                 {key: "Radio Buttons Field", value: "RADIOS"}
             ];
 
-        function render(response) {
+        function show(response) {
+            console.log("SHOW" + response.data);
             vm.display = response.data;
             vm.fields = response.data;
         }
@@ -50,7 +51,7 @@
         function init() {
             FieldsService
                 .getFieldsForForm(formId)
-                .then(render);
+                .then(show);
             FormService
                 .findFormbyId(formId)
                 .then(function (response)

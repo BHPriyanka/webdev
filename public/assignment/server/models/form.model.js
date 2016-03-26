@@ -129,15 +129,17 @@ module.exports = function(){
         var new_field = {
             _id: (new Date()).getTime(),
             label: field.label,
-            placeholder:field.placeholder
+            placeholder:field.placeholder,
+            type:field.type
         };
+        console.log("MODEL- createFieldByFormId");
         for (var f in mock) {
             if (mock[f]._id == formId) {
                 mock[f].fields.push(new_field);
+                console.log(mock[f]);
                 break;
             }
         }
-        return mock;
     }
 
     function updateFieldByFormIdFieldId(formId, fieldId, newField) {
