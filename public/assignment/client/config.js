@@ -50,7 +50,7 @@
                 controllerAs: "model"
             })
             .otherwise({
-                redirectTo: "views/forms/home.view.html"
+                redirectTo: "/home"
             });
     }
 
