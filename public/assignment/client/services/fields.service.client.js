@@ -11,7 +11,7 @@
             createFieldForForm: createFieldForForm,
             getFieldsForForm: getFieldsForForm,
             getFieldForForm: getFieldForForm,
-            deleteFieldFromForm: deleteFieldFromForm,
+            removeFieldFromForm: removeFieldFromForm,
             updateField: updateField
         };
 
@@ -30,7 +30,8 @@
             return $http.get("/api/assignemnt/form/" + formId + "/field/" + fieldId);
         }
 
-        function deleteFieldFromForm(formId, fieldId){
+        function removeFieldFromForm(formId, fieldId){
+            console.log("Client service - removeFieldFromForm");
             return $http.delete("/api/assignment/form/" + formId + "/field/" + fieldId);
         }
 

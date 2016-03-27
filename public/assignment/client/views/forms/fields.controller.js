@@ -6,13 +6,14 @@
         .module("FormBuilderApp")
         .controller("FieldsController", FieldsController);
 
-    function FieldsController(FieldsService, FormService, $routeParams, $route) {
+    function FieldsController(FieldsService, FormService, $routeParams, $route, $location) {
         var vm = this;
         vm.cField = null;
         vm.eField = null;
+        vm.fields = null;
         vm.editField = editField;
         vm.commitEdit = commitEdit;
-        vm.deleteField = deleteField;
+        vm.removeField = removeField;
         vm.addField = addField;
         vm.reorder = reorder;
 
@@ -49,15 +50,9 @@
         }
 
         function init() {
-            FieldsService
+           FieldsService
                 .getFieldsForForm(formId)
                 .then(show);
-            FormService
-                .findFormbyId(formId)
-                .then(function (response)
-                {
-                    vm.form = response.data;
-                })
         }
         init();
 
@@ -76,10 +71,11 @@
 
         }
 
-        function deleteField(field) {
+        function removeField(field) {
+            console.log("CONTROLLER- removeField");
             vm.cField = null;
             FieldsService
-                .deleteField(formId, field._id)
+                .removeFieldFromForm(formId, field._id)
                 .then(init);
         }
 
@@ -93,7 +89,15 @@
         }
 
         function addField(fieldType) {
-            var field = {"label": "", "type": translateFieldType(fieldType), "placeholder": "", "options": null};
+            var placeholder;
+            if(fieldType == "TEXT" || fieldType == "TEXTAREA")
+            {
+                placeholder = "New Field";
+            }
+            else{
+                placeholder = "";
+            }
+            var field = {"label": "New " + fieldType, "type": translateFieldType(fieldType), "placeholder": placeholder, "options": null};
             console.log(field);
             FieldsService
                 .createFieldForForm(formId, field)
@@ -103,14 +107,18 @@
 
         function editField(field) {
             vm.eField = field;
-
-            var isOption = !(vm.eField.type === 'TEXT' || vm.eField.type === 'TEXTAREA');
+            console.log(field);
+            console.log(vm.eField);
+            console.log(vm.eField.type);
+            console.log(vm.eField.options);
+            var isOption = !(vm.eField.type == 'TEXT' || vm.eField.type == 'TEXTAREA');
+            console.log(isOption);
 
             if (isOption) {
                 var optionList = [];
                 var ol = vm.eField.options;
                 for (var o in ol) {
-                    optionList.push(ol[o].label + ":" + ol[o].value)
+                    optionList.push(ol[o].label + ":" + ol[o].value);
                 }
                 console.log(optionList);
                 vm.optionText = optionList.join("\n");

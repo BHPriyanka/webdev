@@ -49,9 +49,9 @@
                 templateUrl: "views/technology/technology.view.html",
                 controller: "TechController"
             })
-            .when("/regional",{
-                templateUrl: "views/regional/regional.view.html",
-                controller: "RegionalController"
+            .when("/regional/uk",{
+                templateUrl: "views/regional/uk/uk.view.html",
+                controller: "UKController"
             })
             .otherwise({
                 redirectTo: "/home"

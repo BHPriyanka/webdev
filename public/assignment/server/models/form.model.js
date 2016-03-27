@@ -13,7 +13,7 @@ module.exports = function(){
         findFormByTitle: findFormByTitle,
         findFieldsByFormId: findFieldsByFormId,
         findFieldByFieldIdFormId: findFieldByFieldIdFormId,
-        deleteFieldByFieldIdFormId: deleteFieldByFieldIdFormId,
+        removeFieldByFieldIdFormId: removeFieldByFieldIdFormId,
         createFieldByFormId: createFieldByFormId,
         updateFieldByFormIdFieldId: updateFieldByFormIdFieldId
     };
@@ -90,10 +90,10 @@ module.exports = function(){
         var fields = [];
         for(var f in mock){
             if(mock[f]._id == formId){
-                fields.push(mock[f].fields);
+                return (mock[f].fields);
             }
         }
-        return fields;
+        return null;
     }
 
     function findFieldByFieldIdFormId(formId, fieldId) {
@@ -111,18 +111,17 @@ module.exports = function(){
         return field;
     }
 
-    function deleteFieldByFieldIdFormId(formId, fieldId) {
+    function removeFieldByFieldIdFormId(formId, fieldId) {
         for(var f in mock) {
             if (mock[f]._id == formId) {
                 for (var d in mock[f].fields) {
                     if (mock[f].fields[d]._id == fieldId) {
                         mock[f].fields.splice(d, 1);
-                        break;
                     }
                 }
             }
-            return mock;
         }
+        return mock;
     }
 
     function createFieldByFormId(formId, field){
@@ -136,7 +135,6 @@ module.exports = function(){
         for (var f in mock) {
             if (mock[f]._id == formId) {
                 mock[f].fields.push(new_field);
-                console.log(mock[f]);
                 break;
             }
         }
