@@ -1,14 +1,23 @@
 <div ng-controller="EntertainmentController">
-
+    <br>
+    <br>
     <div ng-repeat="entry in data.response.results" class="text-center">
-        <div>
-
-            <img src="{{entry.fields.thumbnail}}"/>
-            <h4><a href="{{entry.webUrl}}" target="_blank"> {{entry.fields.headline}}</a></h4>
-            {{entry.fields.trailText}}
-
+        <div class="container">
+            <div class="row">
+                <div class="col col-md-2 col-lg-offset-2">
+                    <img src="{{entry.fields.thumbnail}}" width="200px" height="200px"/>
+                </div>
+                <div class="col col-md-1"></div>
+                <div class="col col-md-7">
+                    <h4 style="font-size: medium">
+                        <p> <a href="{{entry.webUrl}}" target="_blank">{{entry.fields.headline}}</a></p>
+                    </h4>
+                    <p style="column-width: 100">
+                        {{entry.fields.trailText}}
+                    </p>
+                </div>
+            </div>
         </div>
-        </br>
+        <br>
     </div>
-
 </div>
