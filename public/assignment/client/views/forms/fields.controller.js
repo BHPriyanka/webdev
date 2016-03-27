@@ -38,7 +38,7 @@
                 {key: "Single Line Text Field", value: "TEXT"},
                 {key: "Multi Line Text Field", value: "TEXTAREA"},
                 {key: "Date Field", value: "DATE"},
-                {key: "Dropdown Field", value: "OPTIONS"},
+                {key: "Dropdown Field", value: "DROPDOWN"},
                 {key: "Checkboxes Field", value: "CHECKBOXES"},
                 {key: "Radio Buttons Field", value: "RADIOS"}
             ];
@@ -72,7 +72,6 @@
         }
 
         function removeField(field) {
-            console.log("CONTROLLER- removeField");
             vm.ok_field = null;
             FieldsService
                 .removeFieldFromForm(formId, field._id)
@@ -81,7 +80,6 @@
 
         function translateFieldType(fieldType) {
             for (var k in optionMap) {
-                console.log(optionMap[k].key + " " + optionMap[k].value);
                 if (optionMap[k].key == fieldType){
                     return optionMap[k].value;
                 }
@@ -90,15 +88,39 @@
 
         function addField(fieldType) {
             var placeholder;
-            if(fieldType == "TEXT" || fieldType == "TEXTAREA")
-            {
-                placeholder = "New Field";
-            }
-            else{
+            var ops;
+
+            if(translateFieldType(fieldType) === "CHECKBOXES"){
+                ops = [
+                    {"label": "Option A", "value": "OPTION_A"},
+                    {"label": "Option B", "value": "OPTION_B"},
+                    {"label": "Option C", "value": "OPTION_C"}
+                ];
                 placeholder = "";
             }
-            var field = {"label": "New " + fieldType, "type": translateFieldType(fieldType), "placeholder": placeholder, "options": null};
-            console.log(field);
+            else if(translateFieldType(fieldType) === "RADIOS"){
+                ops = [
+                    {"label": "Option X", "value": "OPTION_X"},
+                    {"label": "Option Y", "value": "OPTION_Y"},
+                    {"label": "Option Z", "value": "OPTION_Z"}
+                ];
+                placeholder = "";
+            }
+            else if(translateFieldType(fieldType) === "DROPDOWN"){
+                ops = [
+                    {"label": "Option 1", "value": "OPTION_1"},
+                    {"label": "Option 2", "value": "OPTION_2"},
+                    {"label": "Option 3", "value": "OPTION_3"}
+                ];
+                placeholder = "";
+            }
+            else{
+                ops=[];
+                placeholder = "New Field";
+            }
+
+            var field = {"label": "New " + fieldType, "type": translateFieldType(fieldType),
+                "placeholder": placeholder, "options": ops};
             FieldsService
                 .createFieldForForm(formId, field)
                 .then(init);
@@ -107,10 +129,6 @@
 
         function editField(field) {
             vm.edit_field = field;
-            console.log(field);
-            console.log(vm.edit_field);
-            console.log(vm.edit_field.type);
-            console.log(vm.edit_field.options);
             var isOption;
             if(vm.edit_field.type == 'TEXT' || vm.edit_field.type == 'TEXTAREA'){
                 isOption = true;
@@ -118,17 +136,14 @@
             else{
                 isOption = false;
             }
-            console.log(isOption);
 
             if (!isOption) {
-                var optionList = [];
+                var opList = [];
                 var list = vm.edit_field.options;
                 for (var o in list) {
-                    optionList.push(list[o].label + ":" + list[o].value);
+                    opList.push(list[o].label + ":" + list[o].value);
                 }
-                console.log(optionList);
-                vm.optionText = optionList.join("\n");
-                console.log(vm.optionText);
+                vm.opText = opList.join("\n");
             }
         }
 
@@ -142,12 +157,10 @@
             else{
                 isOption = false;
             }
-            console.log(isOption);
 
             var optionArray = [];
             if (!isOption) {
-                console.log(vm.optionText);
-                var op = vm.optionText;
+                var op = vm.opText;
                 for (var o in op) {
                     var a = op[o].split(":");
                     optionArray.push({
@@ -156,11 +169,8 @@
                     });
                 }
                 vm.edit_field.options = optionArray;
+            }
 
-            }
-            else {
-            }
-            console.log(vm.edit_field._id);
             FieldsService
                 .updateField(formId, vm.edit_field._id, vm.edit_field)
                 .then(init);

@@ -24,7 +24,8 @@ module.exports = function(){
         var new_form = {
             _id: (new Date()).getTime(),
             userId: userID,
-            title: form.title
+            title: form.title,
+            fields:[]
         };
         mock.push(new_form);
         return mock;
@@ -129,15 +130,11 @@ module.exports = function(){
             _id: (new Date()).getTime(),
             label: field.label,
             placeholder:field.placeholder,
-            type:field.type
+            type:field.type,
+            options: field.options
         };
-        console.log("MODEL- createFieldByFormId");
-        for (var f in mock) {
-            if (mock[f]._id == formId) {
-                mock[f].fields.push(new_field);
-                break;
-            }
-        }
+        var form = findFormById(formId);
+        form.fields.push(new_field);
     }
 
     function updateFieldByFormIdFieldId(formId, fieldId, newField) {
@@ -148,6 +145,7 @@ module.exports = function(){
                         mock[f].fields[d].label = newField.label;
                         mock[f].fields[d].type = newField.type;
                         mock[f].fields[d].placeholder = newField.placeholder;
+                        mock[f].fields[d].options = newField.options;
                     }
                 }
             }

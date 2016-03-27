@@ -10,7 +10,6 @@ module.exports = function(app, userModel, formModel){
     function findFields(req, res) {
         if (req.params.formId) {
             if (req.params.fieldId) {
-                console.log("Server service - findFieldByFormIdFieldid");
                 var fieldID = req.params.fieldId;
                 var formId = req.params.formId;
                 var field = formModel.findFieldByFieldIdFormId(formId, fieldId);
@@ -25,7 +24,6 @@ module.exports = function(app, userModel, formModel){
     }
 
     function removeFieldByFieldIdFormId(req, res){
-        console.log("Server service - removeFieldByFielIdFormId " + req.params.fieldId + " " + req.params.formId);
         var fieldId = req.params.fieldId;
         var formId = req.params.formId;
         var fields = formModel.removeFieldByFieldIdFormId(formId,fieldId);
@@ -34,13 +32,11 @@ module.exports = function(app, userModel, formModel){
 
     function createFieldByFormId(req, res){
         var formId = req.params.formId;
-        console.log("createFieldByFormId " + formId + " " + req.body);
         var forms = formModel.createFieldByFormId(formId, req.body);
         res.json(forms);
     }
 
     function updateFieldByFormIdFieldId(req, res){
-        console.log("Server service - updateFieldByFormId" + req.params.formId + " " + req.params.fieldId);
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
         var forms = formModel.updateFieldByFormIdFieldId(formId, fieldId, req.body);

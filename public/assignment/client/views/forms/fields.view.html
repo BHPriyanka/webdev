@@ -5,7 +5,7 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ul class="nav nav-tabs">
             <li><a href="#/forms">Forms</a></li>
-            <li class="active"><a href="#/fields">Fields</a></li>
+            <li class="active"><a href="#">Fields</a></li>
         </ul>
         <div class="form-group">
             <div ng-model="model.fields" ui-sortable="model.fields">
@@ -23,26 +23,27 @@
                                 <a ng-click="model.removeField(field)" type="button"class="btn btn-default" >
                                     <span class="glyphicon glyphicon-remove hover"></span>
                                 </a>
-                                <a type="button" ng-click="model.reorder()" class="btn btn-default" >
+                                <a type="button" class="btn btn-default" >
                                     <span class="glyphicon glyphicon-align-justify hover"></span>
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <div ng-switch-when="OPTIONS">
+                    <div ng-switch-when="DROPDOWN">
                         <label>{{field.label}}</label>
                         <div class="input-group">
                             <select class="form-control">
                                 <option ng-repeat="op in field.options">{{op.label}}</option>
                             </select>
                             <div class="input-group-btn">
-                                <a ng-click="model.editField(field)" type="button" data-toggle="modal" class="btn btn-default" data-target="#editField">
+                                <a ng-click="model.editField(field)" type="button"
+                                   data-toggle="modal" class="btn btn-default" data-target="#editField">
                                     <span class="glyphicon glyphicon-pencil hover"></span>
                                 </a>
                                 <a ng-click="model.removeField(field)" type="button"class="btn btn-default" >
                                     <span class="glyphicon glyphicon-remove hover"></span>
                                 </a>
-                                <a type="button" ng-click="model.reorder()" class="btn btn-default" >
+                                <a type="button" class="btn btn-default" >
                                     <span class="glyphicon glyphicon-align-justify hover"></span>
                                 </a>
                             </div>
@@ -59,7 +60,7 @@
                                 <a ng-click="model.removeField(field)" type="button"class="btn btn-default" >
                                     <span class="glyphicon glyphicon-remove hover"></span>
                                 </a>
-                                <a type="button" ng-click="model.reorder()" class="btn btn-default" >
+                                <a type="button" class="btn btn-default" >
                                     <span class="glyphicon glyphicon-align-justify hover"></span>
                                 </a>
                             </div>
@@ -83,7 +84,7 @@
                                 <a ng-click="model.removeField(field)" type="button"class="btn btn-default" >
                                     <span class="glyphicon glyphicon-remove hover"></span>
                                 </a>
-                                <a type="button" ng-click="model.reorder()" class="btn btn-default" >
+                                <a type="button" class="btn btn-default" >
                                     <span class="glyphicon glyphicon-align-justify hover"></span>
                                 </a>
                             </div>
@@ -102,13 +103,14 @@
                             </div>
                             </div>
                             <div class="input-group-btn">
-                                <a ng-click="model.editField(field)" type="button" data-toggle="modal" class="btn btn-default" data-target="#editField">
+                                <a ng-click="model.editField(field)" type="button" data-toggle="modal"
+                                   class="btn btn-default" data-target="#editField">
                                     <span class="glyphicon glyphicon-pencil hover"></span>
                                 </a>
                                 <a ng-click="model.removeField(field)" type="button"class="btn btn-default" >
                                     <span class="glyphicon glyphicon-remove hover"></span>
                                 </a>
-                                <a type="button" ng-click="model.reorder()" class="btn btn-default" >
+                                <a type="button" class="btn btn-default" >
                                     <span class="glyphicon glyphicon-align-justify hover"></span>
                                 </a>
                             </div>
@@ -128,7 +130,7 @@
                                         <a ng-click="model.removeField(field)" type="button"class="btn btn-default" >
                                             <span class="glyphicon glyphicon-remove hover"></span>
                                         </a>
-                                        <a type="button" ng-click="model.reorder()" class="btn btn-default" >
+                                        <a type="button" class="btn btn-default" >
                                             <span class="glyphicon glyphicon-align-justify hover"></span>
                                         </a>
                                     </div>
@@ -210,7 +212,7 @@
                                       placeholder="Edit Placeholder"></textarea>
                                 </form>
                             </div>
-                            <div ng-switch-when="OPTIONS">
+                            <div ng-switch-when="DROPDOWN">
                                 <h3>Dropdown Field</h3>
                                 <form>
                                     <label>Label</label>
@@ -218,8 +220,9 @@
                                            placeholder="Edit Dropdown Label">
                                     <br>
                                     <label>Options</label>
-                            <textarea ng-model="model.optionText" class="form-control"
-                                      placeholder="Edit Dropdown Options" ng-list="&#10;" ng-trim="false"></textarea>
+                                    <textarea ng-model="model.opText" class="form-control"
+                                      placeholder="Edit Options" ng-list="&#10;" ng-trim="false">
+                                    </textarea>
                                 </form>
                             </div>
                             <div ng-switch-when="DATE">
@@ -238,7 +241,7 @@
                                            placeholder="Edit Radio Label">
                                     <br>
                                     <label>Options</label>
-                            <textarea ng-model="model.optionText" class="form-control" placeholder="Edit Radio Options"
+                            <textarea ng-model="model.opText" class="form-control" placeholder="Edit Radio Options"
                                       ng-list="&#10;" ng-trim="false"></textarea>
                                 </form>
                             </div>
@@ -250,7 +253,7 @@
                                            placeholder="Edit Checkbox label">
                                     <br>
                                     <label>Options</label>
-                            <textarea ng-model="model.optionText" class="form-control"
+                            <textarea ng-model="model.opText" class="form-control"
                                       placeholder="Edit Checkbox options" ng-list="&#10;" ng-trim="false"></textarea>
                                 </form>
                             </div>

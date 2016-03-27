@@ -22,7 +22,6 @@
         }
 
         function getFieldsForForm(formId){
-            console.log("getFieldForForm " + formId);
             return $http.get("/api/assignment/form/" + formId + "/field");
         }
 
@@ -31,7 +30,6 @@
         }
 
         function removeFieldFromForm(formId, fieldId){
-            console.log("Client service - removeFieldFromForm");
             return $http.delete("/api/assignment/form/" + formId + "/field/" + fieldId);
         }
 

@@ -71,7 +71,7 @@
                 .then(function (response) {
                     if (response.data) {
                         var currentUser = response.data;
-                            UserService.setCurrentUser(currentUser);
+                        UserService.setCurrentUser(currentUser);
 
                         vm.message = "User updated successfully";
                         $location.url('/profile');
@@ -79,7 +79,7 @@
                     else {
                         vm.message = "Unable to update the user";
                     }
-            });
+                });
         }
     }
 })();
