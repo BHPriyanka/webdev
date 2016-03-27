@@ -8,11 +8,11 @@
 
     function FieldsController(FieldsService, FormService, $routeParams, $route, $location) {
         var vm = this;
-        vm.cField = null;
-        vm.eField = null;
+        vm.ok_field = null;
+        vm.edit_field = null;
         vm.fields = null;
         vm.editField = editField;
-        vm.commitEdit = commitEdit;
+        vm.okEdit = okEdit;
         vm.removeField = removeField;
         vm.addField = addField;
         vm.reorder = reorder;
@@ -57,7 +57,7 @@
         init();
 
         function sendEdit(field) {
-            vm.cField = null;
+            vm.ok_field = null;
             FieldsService
                 .updateField(formId, field._id, field)
                 .then(init);
@@ -73,7 +73,7 @@
 
         function removeField(field) {
             console.log("CONTROLLER- removeField");
-            vm.cField = null;
+            vm.ok_field = null;
             FieldsService
                 .removeFieldFromForm(formId, field._id)
                 .then(init);
@@ -106,19 +106,25 @@
 
 
         function editField(field) {
-            vm.eField = field;
+            vm.edit_field = field;
             console.log(field);
-            console.log(vm.eField);
-            console.log(vm.eField.type);
-            console.log(vm.eField.options);
-            var isOption = !(vm.eField.type == 'TEXT' || vm.eField.type == 'TEXTAREA');
+            console.log(vm.edit_field);
+            console.log(vm.edit_field.type);
+            console.log(vm.edit_field.options);
+            var isOption;
+            if(vm.edit_field.type == 'TEXT' || vm.edit_field.type == 'TEXTAREA'){
+                isOption = true;
+            }
+            else{
+                isOption = false;
+            }
             console.log(isOption);
 
-            if (isOption) {
+            if (!isOption) {
                 var optionList = [];
-                var ol = vm.eField.options;
-                for (var o in ol) {
-                    optionList.push(ol[o].label + ":" + ol[o].value);
+                var list = vm.edit_field.options;
+                for (var o in list) {
+                    optionList.push(list[o].label + ":" + list[o].value);
                 }
                 console.log(optionList);
                 vm.optionText = optionList.join("\n");
@@ -126,32 +132,39 @@
             }
         }
 
-        function commitEdit(field) {
-            vm.eField = field;
+        function okEdit(field) {
+            vm.edit_field = field;
 
-            var isOption = !(field.type == 'TEXT' || field.type == 'TEXTAREA');
+            var isOption;
+            if(vm.edit_field.type == 'TEXT' || vm.edit_field.type == 'TEXTAREA'){
+                isOption = true;
+            }
+            else{
+                isOption = false;
+            }
+            console.log(isOption);
 
             var optionArray = [];
-            if (isOption) {
+            if (!isOption) {
                 console.log(vm.optionText);
-                var oa = vm.optionText;
-                for (var o in oa) {
-                    var a = oa[o].split(":");
+                var op = vm.optionText;
+                for (var o in op) {
+                    var a = op[o].split(":");
                     optionArray.push({
                         label: a[0],
                         value: a[1]
                     });
                 }
-                vm.eField.options = optionArray;
+                vm.edit_field.options = optionArray;
 
             }
             else {
             }
-            console.log(vm.eField._id);
+            console.log(vm.edit_field._id);
             FieldsService
-                .updateField(formId, vm.eField._id, vm.eField)
+                .updateField(formId, vm.edit_field._id, vm.edit_field)
                 .then(init);
-            vm.eField = null;
+            vm.edit_field = null;
         }
 
     }

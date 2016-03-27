@@ -40,9 +40,10 @@ module.exports = function(app, userModel, formModel){
     }
 
     function updateFieldByFormIdFieldId(req, res){
+        console.log("Server service - updateFieldByFormId" + req.params.formId + " " + req.params.fieldId);
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        var forms = formModel.updateFieldByFormIdFieldId(formId, fieldId);
+        var forms = formModel.updateFieldByFormIdFieldId(formId, fieldId, req.body);
         res.json(forms);
     }
 }
