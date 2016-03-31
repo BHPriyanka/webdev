@@ -43,7 +43,6 @@ module.exports = function (app, userModel) {
 
     function findUserById(req, res){
         var userId = req.params.id;
-        console.log("findUserByid insider server service" + userId);
         var user = userModel.findUserById(userId);
         res.json(user);
     }
@@ -51,7 +50,6 @@ module.exports = function (app, userModel) {
     function updateUser(req, res){
         var userId = req.params.id;
         var user = req.body;
-        console.log(user);
         userModel.updateUser(userId, user);
         res.json(200);
     }
