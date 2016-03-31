@@ -49,7 +49,6 @@ module.exports = function() {
 
     //take ID and object instance,find object instance in collection with ID match, update the object instance values
     function updateUser(userId, user) {
-        console.log("MODEL");
         console.log(user);
         for (var i in mock) {
             if(mock[i]._id == userId) {
@@ -91,7 +90,6 @@ module.exports = function() {
                 user=mock[u];
             }
         }
-        console.log(user);
         return user;
     }
 

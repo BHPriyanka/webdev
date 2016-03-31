@@ -19,11 +19,6 @@
         vm.update = update;
         UserService.getCurrentUser()
             .then(function (response) {
-                console.log(response.data.firstName);
-                console.log(response.data.lastName);
-                console.log(response.data.userName);
-                console.log(response.data.password);
-                console.log(response.data.roles);
                 vm.currentUser = {
                     firstName: response.data.firstName,
                     lastName: response.data.lastName,
@@ -72,12 +67,11 @@
                 return;
             }
 
-            UserService.updateUser(user._id, user)
+            UserService.updateUser($rootScope.currentUser._id, user)
                 .then(function (response) {
                     if (response) {
-                        //console.log("response" + response);
-                        UserService.findUserByUserId(user._id).then (function (updatedUser) {
-                            console.log("response " + updatedUser.data.userName);
+                        UserService.findUserByUserId($rootScope.currentUser._id).then (function (updatedUser) {
+                            console.log(updatedUser.data);
                             vm.currentUser.password = updatedUser.data.password;
                             vm.currentUser.userName = updatedUser.data.userName;
                             vm.currentUser.firstName = updatedUser.data.firstName;
