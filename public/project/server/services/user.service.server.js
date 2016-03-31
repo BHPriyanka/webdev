@@ -1,26 +1,23 @@
-/*jslint node: true */
-"use strict";
+"use strict"
 
-module.exports = function (app, userModel) {
-    app.post("/api/assignment/user", createUser);
-    app.get("/api/assignment/user", findUser);
-    app.get("/api/assignment/user/:id", findUserById);
-    app.put("/api/assignment/user/:id", updateUser);
-    app.delete("/api/assignment/user/:id", deleteUser);
-    app.post("/api/assignment/logout", logout);
-    app.get("/api/assignment/loggedin", loggedin);
+module.exports = function(app, userModel){
+    app.post("/api/project/user", createUser);
+    app.get("/api/project/user", findUser);
+    app.get("/api/project/user/:id", findUserById);
+    app.put("/api/project/user/:id", updateUser);
+    app.delete("/api/project/user/:id", deleteUser);
+    app.post("/api/project/logout", logout);
+    app.get("/api/project/loggedin", loggedin);
 
-    function createUser(req, res) {
-        var user = userModel.createUser(req.body);
-        req.session.currentUser = user;
-        res.json(user);
-    }
-
-    function findUser(req, res) {
-        if (req.query.username) {
-            if (req.query.password) {
+    function findUser(req, res){
+        console.log(req.query.username);
+        console.log(req.query.password);
+        if(req.query.username){
+            if(req.query.password){
+                console.log("finduserbycredentials");
                 var user = userModel.findUserByCredentials(req.query.username, req.query.password);
-                 req.session.currentUser = user;
+                console.log(user);
+                req.session.currentUser = user;
                 res.json(user);
             }
             else {
@@ -33,6 +30,12 @@ module.exports = function (app, userModel) {
             var users = userModel.findAllUsers();
             res.json(users);
         }
+    }
+
+    function createUser(req, res) {
+        var user = userModel.createUser(req.body);
+        req.session.currentUser = user;
+        res.json(user);
     }
 
     function deleteUser(req, res) {
@@ -60,6 +63,7 @@ module.exports = function (app, userModel) {
     }
 
     function loggedin(req, res) {
+        console.log("loggedin " + req.session.currentUser);
         res.json(req.session.currentUser);
     }
 }
