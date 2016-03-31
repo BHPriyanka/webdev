@@ -17,21 +17,23 @@
         vm.error = null;
         vm.message = null;
         vm.update = update;
-        UserService.getCurrentUser()
-            .then(function (response) {
-                vm.currentUser = {
-                    firstName: response.data.firstName,
-                    lastName: response.data.lastName,
-                    userName: response.data.userName,
-                    password: response.data.password,
-                    roles: response.data.roles,
-                    email: response.data.email,
-                    _id: response.data._id
-                };
-                if (!vm.currentUser) {
-                    $location.url("/home");
-                }
-            });
+        /*UserService.getCurrentUser()
+         .then(function (response) {*/
+        function init(){
+            vm.currentUser = {
+            firstName: $rootScope.currentUser.firstName,
+            lastName: $rootScope.currentUser.lastName,
+            userName: $rootScope.currentUser.userName,
+            password: $rootScope.currentUser.password,
+            roles: $rootScope.currentUser.roles,
+            email: $rootScope.currentUser.email,
+            _id: $rootScope.currentUser._id
+        };
+        if (!vm.currentUser) {
+            $location.url("/home");
+        }
+    }
+        init();
 
         function update(user) {
             vm.error = null;
