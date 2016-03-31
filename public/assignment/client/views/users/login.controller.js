@@ -9,7 +9,7 @@
     function LoginController(UserService, $location, $rootScope) {
         var vm = this;
         vm.login = login;
-        $rootScope.isadmin = false;
+        vm.isadmin = false;
         function init() {
 
         }

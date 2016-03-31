@@ -1,4 +1,4 @@
-<nav ng-controller="HeaderController">
+<nav ng-controller="HeaderController as model">
     <!-- The justified navigation menu is meant for single line per list item.
           Multiple lines will require custom code not provided by Bootstrap. -->
     <div class="masthead">
@@ -15,30 +15,31 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li ng-class="{'active': $location.url() == '/search'}">
+                        <li ng-class="{'active': model.$location.url() == '/search'}">
                             <a href="#/search">
                                 <scan class="glyphicon glyphicon-search" id="glyphi"></scan>
                                 Search</a>
                         </li>
-                        <li ng-class="{'active': $location.url() == '/register'}"
+                        <li ng-class="{'active': model.$location.url() == '/register'}"
                             ng-hide="currentUser">
                             <a href="#/register">Register</a>
                         </li>
-                        <li ng-class="{'active': $location.url() == '/profile'}"
+                        <li ng-class="{'active': model.$location.url() == '/profile'}"
                             ng-show="currentUser">
                             <a href="#/profile">
                                 <scan class="glyphicon glyphicon-user" id="glyphi"></scan>
-                                Profile</a>
+                                <span ng-bind="currentUser.userName"></span>
+                            </a>
                         </li>
                         <li ng-show="currentUser.roles.indexOf('admin') >= 0">
                             <a href="#/admin"> Admin </a>
                         </li>
-                        <li ng-class="{'active': $location.url() == '/login'}"
+                        <li ng-class="{'active': model.$location.url() == '/login'}"
                             ng-hide="currentUser">
                             <a href="#/login">Login</a>
                         </li>
                         <li ng-show="currentUser">
-                            <a ng-click="logout()">
+                            <a ng-click="model.logout()">
                                 <scan class="glyphicon glyphicon-off" id="glyphi"></scan>
                                 Logout</a>
                         </li>
@@ -52,12 +53,12 @@
         <h3 class="text-muted text-center"></h3>
         <nav>
             <ul class="nav nav-justified nav-pills">
-                <li role="presentation" ng-class="{'active': $location.url().indexOf('home') != -1}"  ng-click="home()" ng-controller="HomeController"><a href="#/home">Home</a></li>
-                <li role="presentation" ng-class="{'active': $location.url().indexOf('sports') != -1}" ng-click="sports()" ng-controller="SportsController"><a href="#/sports">Sports</a></li>
-                <li role="presentation" ng-class="{'active': $location.url().indexOf('entertainment') != -1}" ng-click="entertainment()" ng-controller="EntertainmentController"><a href="#/entertainment">Entertainment</a></li>
-                <li role="presentation" ng-class="{'active': $location.url().indexOf('travel') != -1}" ng-click="travel()" ng-controller="TravelController"><a href="#/travel">Travel</a></li>
-                <li role="presentation" ng-class="{'active': $location.url().indexOf('technology') != -1}" ng-click="technology()" ng-controller="TechController"><a href="#/technology">Technology</a></li>
-                <li class="dropdown" ng-controller="UKController" role="presentation" ng-class="{'active': $location.url().indexOf('regional/uk') != -1}">
+                <li role="presentation" ng-class="{'active': model.$location.url().indexOf('home') != -1}"  ng-click="model.home()" ng-controller="HomeController as model"><a href="#/home">Home</a></li>
+                <li role="presentation" ng-class="{'active': model.$location.url().indexOf('sports') != -1}" ng-click="model.sports()" ng-controller="SportsController as model"><a href="#/sports">Sports</a></li>
+                <li role="presentation" ng-class="{'active': model.$location.url().indexOf('entertainment') != -1}" ng-click="model.entertainment()" ng-controller="EntertainmentController as model"><a href="#/entertainment">Entertainment</a></li>
+                <li role="presentation" ng-class="{'active': model.$location.url().indexOf('travel') != -1}" ng-click="model.travel()" ng-controller="TravelController as model"><a href="#/travel">Travel</a></li>
+                <li role="presentation" ng-class="{'active': model.$location.url().indexOf('technology') != -1}" ng-click="model.technology()" ng-controller="TechController as model"><a href="#/technology">Technology</a></li>
+                <li class="dropdown" ng-controller="UKController as model" role="presentation" ng-class="{'active': model.$location.url().indexOf('regional/uk') != -1}">
                     <a href="#/regional" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Regional<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#/regional/uk" ng-click="uk()">UK</a></li>

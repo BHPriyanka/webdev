@@ -3,9 +3,10 @@
         .module("NetNewsApp")
         .controller("EntertainmentController", entertainmentController);
 
-    function entertainmentController($scope, $location, $routeParams, EntertainmentService, $rootScope) {
+    function entertainmentController($location, $routeParams, EntertainmentService, $rootScope) {
+        var vm =this;
         console.log("Inside entertainment controller");
-        $scope.entertainment = entertainment;
+        vm.entertainment = entertainment;
 
         function init() {
 

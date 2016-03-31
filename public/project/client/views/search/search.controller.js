@@ -3,18 +3,19 @@
         .module("NetNewsApp")
         .controller("SearchController", searchController);
 
-        function searchController($scope, $location, $routeParams, NewsService, $rootScope){
-            $scope.location = $location;
-            $scope.search = search;
-            $scope.title = $routeParams.title;
+        function searchController($location, $routeParams, NewsService, $rootScope){
+            var vm = this;
 
             function init(){
-
+                vm.location = $location;
             }
             init();
+            vm.search = search;
+            vm.title = $routeParams.title;
 
-            if($scope.title){
-                search($scope.title);
+
+            if(vm.title){
+                search(vm.title);
             }
 
             function search(news){

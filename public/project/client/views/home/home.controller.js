@@ -3,8 +3,9 @@
         .module("NetNewsApp")
         .controller("HomeController", homeController);
 
-    function homeController($scope, $location, $routeParams, NewsService, $rootScope) {
-        $scope.home = home;
+    function homeController($location, $routeParams, NewsService, $rootScope) {
+        var vm = this;
+        vm.home = home;
 
         function init() {
 

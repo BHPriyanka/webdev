@@ -3,9 +3,14 @@
         .module("NetNewsApp")
         .controller("HeaderController", headerController);
 
-    function headerController($location, $scope, UserService, $rootScope, SportsService) {
-        $scope.$location = $location;
-        $scope.logout = logout;
+    function headerController($location, UserService, $rootScope, SportsService) {
+        var vm = this;
+        vm.logout = logout;
+
+        function init(){
+            vm.$location = $location;
+        }
+        init();
 
         function logout() {
             $rootScope.currentUser = null;

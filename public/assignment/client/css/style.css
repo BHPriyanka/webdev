@@ -13,6 +13,11 @@
     color: #ec971f;
 }
 
+.ui-sortable-helper {
+    cursor: move;
+}
+
+
 #fmGrpClass{
    float: right;
 }

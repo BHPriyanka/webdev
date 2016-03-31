@@ -2,7 +2,7 @@
 <p ng-if="currentUser">
     Welcome {{currentUser.username}}
 </p>
-<div ng-controller="HomeController">
+<div ng-controller="HomeController as model">
     <br>
     <br>
     <div ng-repeat="entry in data.response.results" class="text-center">

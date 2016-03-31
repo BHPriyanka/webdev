@@ -3,12 +3,12 @@
         .module("NetNewsApp")
         .controller("TechController", techController);
 
-    function techController($scope, $location, $routeParams, TechService, $rootScope) {
-        $scope.location = $location;
-        $scope.technology = technology;
+    function techController($location, $routeParams, TechService, $rootScope) {
+        var vm = this;
+        vm.technology = technology;
 
         function init() {
-
+            vm.location = $location;
         }
 
         init();

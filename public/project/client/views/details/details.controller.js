@@ -1,9 +1,13 @@
 (function(){
     angular
-        .module("NetNewsApp"),
+        .module("NetNewsApp")
         .controller("DetailsController",detailsController);
 
-    function detailsController(#scope, $location){
-        $scope.location = $location;
+    function detailsController($location){
+        var vm = this;
+        function init() {
+            vm.location = $location;
+        }
+        init();
     }
 })();

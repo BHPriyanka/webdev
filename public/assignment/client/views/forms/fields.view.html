@@ -8,7 +8,7 @@
             <li class="active"><a href="#">Fields</a></li>
         </ul>
         <div class="form-group">
-            <div ng-model="model.fields" ui-sortable="model.fields">
+            <div ng-model="model.fields" field-sortable field-axis="y">
                 <div ng-repeat="field in model.fields">
                     <div ng-switch on="field.type">
                         <br>

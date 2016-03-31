@@ -3,12 +3,12 @@
         .module("NetNewsApp")
         .controller("TravelController", travelController);
 
-    function travelController($scope, $location, $routeParams, TravelService, $rootScope) {
-        $scope.location = $location;
-        $scope.travel = travel;
+    function travelController($location, $routeParams, TravelService, $rootScope) {
+        var vm =this;
+        vm.travel = travel;
 
         function init() {
-
+            vm.location = $location;
         }
 
         init();

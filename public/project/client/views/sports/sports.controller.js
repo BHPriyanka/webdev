@@ -3,12 +3,12 @@
         .module("NetNewsApp")
         .controller("SportsController", sportsController);
 
-    function sportsController($scope, $location, $routeParams, SportsService, $rootScope) {
-        $scope.location = $location;
-        $scope.sports = sports;
+    function sportsController($location, $routeParams, SportsService, $rootScope) {
+        var vm = this;
+        vm.sports = sports;
 
         function init() {
-
+            vm.location = $location;
         }
 
         init();

@@ -3,42 +3,42 @@
         .module("NetNewsApp")
         .controller("LoginController", loginController);
 
-    function loginController($scope, UserService, $location, $rootScope) {
-        $scope.login = login;
+    function loginController(UserService, $location, $rootScope) {
+        var vm = this;
+        vm.login = login;
+        vm.isadmin = false;
+
+        function init(){
+
+        }
+        init();
 
         function login (user) {
-            var user1;
+            if(!user) {
+                return;
+            }
 
-            UserService.findUserByCredentials(user.userName, user.password, function(response){
-                user1 = response;
-                if(user1){
-                    $rootScope.currentUser =
-                    {
-                            "_id":user1._id,
-                            "firstName":user1.firstName,
-                            "lastName":user1.lastName,
-                            "userName":user1.userName,
-                            "password":user1.password,
-                            "email": user1.email,
-                            "roles": user1.roles
-                        };
-
-                        UserService.setCurrentUser(user1);
-
-                        for(role in user1.roles) {
-                            if (user1.roles[role] == "admin"){
-                                console.log($rootScope.isadmin);
+            UserService
+                .findUserByCredentials(
+                    user.userName,
+                    user.password
+                )
+                .then(function (response) {
+                    if (response.data != null) {
+                        var user = response.data;
+                        for(var role in response.data.roles) {
+                            if (user.roles[role] == "admin"){
+                                $rootScope.isadmin = true;
                                 break;
                             }
                         }
+                        UserService.setCurrentUser(user);
                         $location.url('/profile');
                     }
-
-                    else {
-                        alert("User not present");
+                    else{
+                        $location.url('/login');
                     }
                 });
-
-            }
         }
-    })();
+    }
+})();

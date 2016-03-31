@@ -16,7 +16,7 @@ module.exports = function() {
 
     //take instance object, add to collection and return the collection
     function createUser(user) {
-         user = {
+         var user = {
          _id: (new Date()).getTime(),
          userName: user.userName,
          password: user.password,
@@ -46,17 +46,20 @@ module.exports = function() {
          return user;
     }
 
-    //take ID and object instance,find object instance in collection wwith ID match, update the object instance values
-    function updateUser(userId, currentUser) {
-        var user = findIndex(currentUser.username);
-        if (user) {
-            user.firstName = currentUser.firstName;
-            user.password = currentUser.password;
-            user.lastName = currentUser.lastName;
-            user.password = currentUser.userName;
-            user.email = currentUser.email;
-         }
-        return user;
+    //take ID and object instance,find object instance in collection with ID match, update the object instance values
+    function updateUser(userId, user) {
+        console.log("MODEL");
+        console.log(userId);
+        console.log(user);
+        for (var i in mock) {
+            console.log(mock[i]._id);
+            if(mock[i]._id == userId) {
+
+                mock[i] = user;
+                break;
+            }
+        }
+        return mock;
     }
 
     //accept ID, and remove based on ID

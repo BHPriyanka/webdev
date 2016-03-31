@@ -5,6 +5,11 @@
 
     function MainController($scope, $location)
     {
-        $scope.location = $location;
+        var vm = this;
+        function init() {
+            vm.location = $location;
+        }
+        init();
+
     }
 })();
