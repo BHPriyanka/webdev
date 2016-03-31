@@ -10,7 +10,8 @@ module.exports = function() {
         updateUser: updateUser,
         deleteUser: deleteUser,
         findUserByUsername: findUserByUsername,
-        findUserByCredentials: findUserByCredentials
+        findUserByCredentials: findUserByCredentials,
+        findUserById: findUserById
     };
     return api;
 
@@ -49,10 +50,8 @@ module.exports = function() {
     //take ID and object instance,find object instance in collection with ID match, update the object instance values
     function updateUser(userId, user) {
         console.log("MODEL");
-        console.log(userId);
         console.log(user);
         for (var i in mock) {
-            console.log(mock[i]._id);
             if(mock[i]._id == userId) {
 
                 mock[i] = user;
@@ -83,6 +82,17 @@ module.exports = function() {
          }
          return user;
 
+    }
+
+    function findUserById(userId){
+        var user = null;
+        for( var u in mock){
+            if(mock[u]._id == userId){
+                user=mock[u];
+            }
+        }
+        console.log(user);
+        return user;
     }
 
     //credentials has username and password,returns user whose credentials match, null otherwise

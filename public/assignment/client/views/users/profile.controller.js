@@ -17,29 +17,26 @@
         vm.error = null;
         vm.message = null;
         vm.update = update;
-        function init() {
-            UserService.getCurrentUser()
-                .then(function (response) {
-                    console.log(response.data.firstName);
-                    console.log(response.data.lastName);
-                    console.log(response.data.userName);
-                    console.log(response.data.password);
-                    console.log(response.data.roles);
-                    vm.currentUser = {
-                        firstName: response.data.firstName,
-                        lastName: response.data.lastName,
-                        userName: response.data.userName,
-                        password: response.data.password,
-                        roles: response.data.roles,
-                        email: response.data.email,
-                        _id: response.data._id
-                    };
-                    if (!vm.currentUser) {
-                        $location.url("/home");
-                    }
-                })
-        }
-        init();
+        UserService.getCurrentUser()
+            .then(function (response) {
+                console.log(response.data.firstName);
+                console.log(response.data.lastName);
+                console.log(response.data.userName);
+                console.log(response.data.password);
+                console.log(response.data.roles);
+                vm.currentUser = {
+                    firstName: response.data.firstName,
+                    lastName: response.data.lastName,
+                    userName: response.data.userName,
+                    password: response.data.password,
+                    roles: response.data.roles,
+                    email: response.data.email,
+                    _id: response.data._id
+                };
+                if (!vm.currentUser) {
+                    $location.url("/home");
+                }
+            });
 
         function update(user) {
             vm.error = null;
@@ -77,11 +74,21 @@
 
             UserService.updateUser(user._id, user)
                 .then(function (response) {
-                    if (response.data) {
-                        UserService.setCurrentUser(response.data);
+                    if (response) {
+                        //console.log("response" + response);
+                        UserService.findUserByUserId(user._id).then (function (updatedUser) {
+                            console.log("response " + updatedUser.data.userName);
+                            vm.currentUser.password = updatedUser.data.password;
+                            vm.currentUser.userName = updatedUser.data.userName;
+                            vm.currentUser.firstName = updatedUser.data.firstName;
+                            vm.currentUser.lastName = updatedUser.data.lastName;
+                            vm.currentUser.email = updatedUser.data.email;
+
+                            UserService.setCurrentUser(updatedUser.data);
 
                         vm.message = "User updated successfully";
                         $location.url('/profile');
+                        });
                     }
                     else {
                         vm.message = "Unable to update the user";
