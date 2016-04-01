@@ -6,7 +6,7 @@
         .module("FormBuilderApp")
         .controller("FieldsController", FieldsController);
 
-    function FieldsController(FieldsService, FormService, $routeParams, $route, $location) {
+    function FieldsController(FieldsService, FormService, $routeParams, $route, $location, $scope) {
         var vm = this;
         vm.ok_field = null;
         vm.edit_field = null;
@@ -16,6 +16,13 @@
         vm.removeField = removeField;
         vm.addField = addField;
         vm.reorder = reorder;
+
+        $scope.users = [
+            {first: "Alice", last: "Wonderland"},
+            {first: "Bob", last: "Hope"},
+            {first: "Charlie", last: "Brown"}
+        ];
+
 
         vm.options = [
             "Single Line Text Field",

@@ -5,14 +5,29 @@
         class="btn btn-primary btn-block">
     Search
 </button>
-<h3>Search Results</h3>
 
-
-<ul>
-    <li ng-repeat="entry in data.responseData.entries">
-        <div>
-        <a href="{{entry.link}}" target="_blank">
-        {{entry.title}}
-        </a></div>
-    </li>
-</ul>
+<div ng-controller="SearchController as model">
+    <br>
+    <br>
+    <div ng-repeat="entry in data.response.results" class="text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col col-md-2 col-lg-offset-2">
+                    <img src="{{entry.fields.thumbnail}}" width="200px" height="200px"/>
+                </div>
+                <div class="col col-md-1"></div>
+                <div class="col col-md-7">
+                    <h4 style="font-size: medium">
+                        <p> <a href="{{entry.webUrl}}" target="_blank">{{entry.webTitle}}</a></p>
+                        <a href="#/details/{{entry.id}}">#/details/{{entry.id}} -- {{entry.webTitle}}</a>
+                    </h4>
+                    <p style="column-width: 100">
+                        {{entry.fields.trailText}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+</div>

@@ -3,7 +3,7 @@
 
 (function(){
     angular
-        .module("FormBuilderApp", ["ngRoute"])
+        .module("FormBuilderApp", ["ngRoute","fieldSortable"])
         .config(configuration);
 
     function configuration($routeProvider){
@@ -30,7 +30,7 @@
                 templateUrl: "views/users/profile.view.html",
                 controller: "ProfileController",
                 controllerAs: "model"
-               /* resolve: {
+                /*resolve: {
                            checkLoggedIn: checkLoggedIn
                 }*/
             })
@@ -66,10 +66,10 @@
             });
 
         return deferred.promise;
-    }
+    }*/
 
 
-    function checkLoggedIn(UserService, $q, $location) {
+    /*function checkLoggedIn(UserService, $q, $location) {
 
         var deferred = $q.defer();
 

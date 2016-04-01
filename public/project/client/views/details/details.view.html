@@ -1,1 +1,12 @@
-{{entry.title}}
+<h3>Details</h3>
+<div ng-controller="DetailsController as model">
+    {{model.data}}
+
+<br/>
+<br/>
+
+<button class="btn btn-primary" ng-click="model.favorite(model.data.newsId)">
+    <span class="glyphicon glyphicon-star-empty"></span>
+</button>
+
+</div>

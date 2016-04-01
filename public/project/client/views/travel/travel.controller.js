@@ -15,7 +15,8 @@
 
         function travel() {
             $location.url("/travel/");
-            TravelService.findTravelNews("travel", function (response) {
+            TravelService.findTravelNews("travel")
+                .then(function (response) {
                 $rootScope.data = response;
                 console.log($rootScope.data);
                 if ($rootScope.data != null) {

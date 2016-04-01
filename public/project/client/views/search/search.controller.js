@@ -19,9 +19,7 @@
             }
 
             function search(news){
-                console.log("Inside search method");
-                $location.url("/search/"+ news.title);
-                console.log(news.title);
+                $location.url("/search/");
                 NewsService.findNewsByTitle(news.title, function(response){
                         $rootScope.data = response;
                         console.log($rootScope.data);

@@ -8,15 +8,10 @@
 
     function ProfileController(UserService, $location, $rootScope) {
         var vm = this;
-
         vm.error = null;
         vm.message = null;
         vm.update = update;
 
-        var vm = this;
-        vm.error = null;
-        vm.message = null;
-        vm.update = update;
         /*UserService.getCurrentUser()
          .then(function (response) {*/
         function init(){

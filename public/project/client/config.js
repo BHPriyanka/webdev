@@ -35,10 +35,13 @@
                 controller: "SearchController",
                 controllerAs: "model"
             })
-            .when("/details",{
+            .when("/details/:id",{
                 templateUrl: "views/details/details.view.html",
                 controller: "DetailsController",
                 controllerAs: "model"
+                //resolve: {
+                    //getLoggedIn: getLoggedIn
+                //}
             })
             .when("/sports",{
                 templateUrl: "views/sports/sports.view.html",
@@ -69,4 +72,16 @@
                 redirectTo: "/home"
             });
     }
+
+    function getLoggedIn(UserService, $q) {
+        var deferred = $q.defer();
+
+        UserService.getCurrentUser()
+            .then(function(response){
+                var currentUser = response.data;
+                UserService.setCurrentUser(currentUser);
+                deferred.resolve();
+            });
+        return deferred.promise;
+     }
 })();

@@ -61,7 +61,6 @@
             return $http.get("/api/assignment/loggedin");
         }
 
-
         function logout() {
             return $http.post("/api/assignment/logout");
         }
