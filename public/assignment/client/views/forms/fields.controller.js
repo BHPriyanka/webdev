@@ -17,13 +17,6 @@
         vm.addField = addField;
         vm.reorder = reorder;
 
-        $scope.users = [
-            {first: "Alice", last: "Wonderland"},
-            {first: "Bob", last: "Hope"},
-            {first: "Charlie", last: "Brown"}
-        ];
-
-
         vm.options = [
             "Single Line Text Field",
             "Multi Line Text Field",
