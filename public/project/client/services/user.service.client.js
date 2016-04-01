@@ -32,7 +32,6 @@
         }
 
         function findUserByCredentials(username, password) {
-            console.log("client service-credentials");
             return $http.get("/api/project/user?username=" + username + "&password=" + password);
         }
 

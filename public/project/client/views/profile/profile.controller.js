@@ -8,26 +8,22 @@
         vm.error = null;
         vm.message = null;
         vm.update = update;
-        UserService.getCurrentUser()
-            .then(function (response) {
-                console.log(response.data.firstName);
-                console.log(response.data.lastName);
-                console.log(response.data.userName);
-                console.log(response.data.password);
-                console.log(response.data.roles);
-                vm.currentUser = {
-                    firstName: response.data.firstName,
-                    lastName: response.data.lastName,
-                    userName: response.data.userName,
-                    password: response.data.password,
-                    roles: response.data.roles,
-                    email: response.data.email,
-                    _id: response.data._id
-                };
-                if (!vm.currentUser) {
-                    $location.url("/home");
-                }
-            });
+
+        function init() {
+            vm.currentUser = {
+                firstName: $rootScope.currentUser.firstName,
+                lastName: $rootScope.currentUser.lastName,
+                userName: $rootScope.currentUser.userName,
+                password: $rootScope.currentUser.password,
+                roles: $rootScope.currentUser.roles,
+                email: $rootScope.currentUser.email,
+                _id: $rootScope.currentUser._id
+            };
+            if (!vm.currentUser) {
+                $location.url("/home");
+            }
+        }
+        init();
 
         function update(user) {
             vm.error = null;
@@ -63,13 +59,20 @@
                 return;
             }
 
-            UserService.updateUser(user._id, user)
+            UserService.updateUser($rootScope.currentUser._id, user)
                 .then(function (response) {
-                    if (response.data) {
-                        UserService.setCurrentUser(response.data);
+                    if (response) {
+                        UserService.findUserByUserId($rootScope.currentUser._id)
+                            .then(function(updatedUser){
+                                vm.currentUser.userName = updatedUser.data.userName;
+                                vm.currentUser.firstName = updatedUser.data.firstName;
+                                vm.currentUser.lastName = updatedUser.data.lastName;
+                                vm.currentUser.email = updatedUser.data.email;
+                                UserService.setCurrentUser(updatedUser.data);
 
-                        vm.message = "User updated successfully";
-                        $location.url('/profile');
+                                vm.message = "User updated successfully";
+                                $location.url('/profile');
+                            });
                     }
                     else {
                         vm.message = "Unable to update the user";

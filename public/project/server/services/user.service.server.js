@@ -45,7 +45,7 @@ module.exports = function(app, userModel){
     }
 
     function findUserById(req, res){
-        var userId = req.params.userId;
+        var userId = req.params.id;
         var user = userModel.findUserById(userId);
         res.json(user);
     }
@@ -53,8 +53,7 @@ module.exports = function(app, userModel){
     function updateUser(req, res){
         var userId = req.params.id;
         var user = req.body;
-        console.log(user);
-        user = userModel.updateUser(userId, user);
+        userModel.updateUser(userId, user);
         res.json(200);
     }
 
@@ -63,7 +62,6 @@ module.exports = function(app, userModel){
     }
 
     function loggedin(req, res) {
-        console.log("loggedin " + req.session.currentUser);
         res.json(req.session.currentUser);
     }
 }

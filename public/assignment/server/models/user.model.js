@@ -52,7 +52,6 @@ module.exports = function() {
         console.log(user);
         for (var i in mock) {
             if(mock[i]._id == userId) {
-
                 mock[i] = user;
                 break;
             }

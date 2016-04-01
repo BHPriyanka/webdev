@@ -13,8 +13,12 @@
         init();
 
         function logout() {
-            $rootScope.currentUser = null;
-            $location.url('/home');
+            UserService
+                .logout()
+                .then(function(){
+                    UserService.setCurrentUser(null);
+                    $location.url("/login");
+                });
         }
 
         var months = ['January','February','March','April','May','June','July',

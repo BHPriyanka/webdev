@@ -9,7 +9,8 @@ module.exports = function() {
         updateUser: updateUser,
         deleteUserById: deleteUserById,
         findUserByUsername: findUserByUsername,
-        findUserByCredentials: findUserByCredentials
+        findUserByCredentials: findUserByCredentials,
+        findUserById : findUserById
     };
     return api;
 
@@ -28,27 +29,19 @@ module.exports = function() {
     }
 
     function findUserByCredentials(username, password) {
-        console.log("mOdEl-credentials");
         var user = null;
         for (var u in mock) {
             if (mock[u].userName == username &&
                 mock[u].password == password) {
                 user = mock[u];
-                console.log(user);
             }
         }
-        console.log(user);
         return user;
     }
 
     function updateUser(userId, user) {
-        console.log("MODEL");
-        console.log(userId);
-        console.log(user);
         for (var i in mock) {
-            console.log(mock[i]._id);
             if(mock[i]._id == userId) {
-
                 mock[i] = user;
                 break;
             }
@@ -66,6 +59,15 @@ module.exports = function() {
         return user;
     }
 
+    function findUserById(userId){
+        var user = null;
+        for(var u in mock){
+            if(mock[u]._id == userId){
+                user = mock[u];
+            }
+        }
+        return user;
+    }
 
     function deleteUserById(userId) {
         for(var u in mock){
