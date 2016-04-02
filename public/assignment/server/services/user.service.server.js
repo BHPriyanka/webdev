@@ -33,7 +33,6 @@ module.exports = function (app, userModel) {
     function findUser(req, res) {
         if (req.query.username) {
             if (req.query.password) {
-                console.log("inside login");
                 var user = userModel.findUserByCredentials(req.query.username, req.query.password)
                     .then(
                         function (doc) {
@@ -94,7 +93,6 @@ module.exports = function (app, userModel) {
     }
 
     function updateUser(req, res){
-        console.log("inside updateuser");
         var userId = req.params.id;
         var user = req.body;
         userModel.updateUser(userId, user)

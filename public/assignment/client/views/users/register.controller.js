@@ -49,10 +49,15 @@
                 return;
             }
 
-            /*if (!user.email) {
+            if (!user.emails) {
                 vm.message = "Please provide Email ID";
                 return;
-            }*/
+            }
+
+            if(!user.phones){
+                vm.message = "Please provide phone";
+                return;
+            }
 
             UserService.findUserByUsername(user.userName).then(
                 function (response) {
@@ -62,6 +67,7 @@
                     }
                     else {
                         user.emails = user.emails.trim().split(",");
+                        user.phones = user.phones.trim().split(",");
                         UserService.createUser(user)
                             .then(function (response) {
                                 var currentUser = response.data;

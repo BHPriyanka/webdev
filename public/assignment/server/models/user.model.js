@@ -89,7 +89,6 @@ module.exports = function(db, mongoose) {
             }
         }
         return mock;*/
-        console.log("MOdel-update");
         var deferred = q.defer();
         UserModel.findByIdAndUpdate(userId, user,
             function (err, doc)
