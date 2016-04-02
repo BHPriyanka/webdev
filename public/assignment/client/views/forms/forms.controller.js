@@ -71,7 +71,14 @@
             vm.index = 0;
             if (vm.selected) {
                 if (form) {
-                    FormService.updateFormById(vm.selected._id, form)
+                    var form_without_id = {
+                        userId : form.userId,
+                        title: form.title,
+                        fields: form.fields,
+                        created: form.created,
+                        updated: form.updated
+                    };
+                    FormService.updateFormById(vm.selected._id, form_without_id)
                         .then(function (response) {
                             vm.selected = null;
                             vm.userForms = findAll();
