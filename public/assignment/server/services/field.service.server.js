@@ -1,7 +1,7 @@
 /*jslint node: true */
 "use strict";
 
-module.exports = function(app, userModel, formModel){
+module.exports = function(app, userModel, fieldModel, formModel){
     app.get("/api/assignment/form/:formId/field", findFields);
     app.delete("/api/assignment/form/:formId/field/:fieldId", removeFieldByFieldIdFormId);
     app.post("/api/assignment/form/:formId/field", createFieldByFormId);
@@ -12,13 +12,27 @@ module.exports = function(app, userModel, formModel){
             if (req.params.fieldId) {
                 var fieldID = req.params.fieldId;
                 var formId = req.params.formId;
-                var field = formModel.findFieldByFieldIdFormId(formId, fieldId);
-                res.json(field);
+                var field = fieldModel.findFieldByFieldIdFormId(fieldId)
+                    .then(
+                        function(doc){
+                            res.json(doc);
+                        },
+                        function(err){
+                            res.status(400).send(err);
+                        }
+                    );
             }
             else {
                 var formId = req.params.formId;
-                var form = formModel.findFieldsByFormId(formId);
-                res.json(form);
+                var form = fieldModel.findFieldsByFormId()
+                    .then(
+                        function(doc){
+                            res.json(doc);
+                        },
+                        function(err){
+                            res.status(400).send(err);
+                        }
+                    );
             }
         }
     }
@@ -26,20 +40,41 @@ module.exports = function(app, userModel, formModel){
     function removeFieldByFieldIdFormId(req, res){
         var fieldId = req.params.fieldId;
         var formId = req.params.formId;
-        var fields = formModel.removeFieldByFieldIdFormId(formId,fieldId);
-        res.json(fields);
+        var fields = fieldModel.removeFieldByFieldIdFormId(fieldId)
+            .then(
+                function(doc){
+                    res.json(doc);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function createFieldByFormId(req, res){
         var formId = req.params.formId;
-        var forms = formModel.createFieldByFormId(formId, req.body);
-        res.json(forms);
+        var forms = fieldModel.createFieldByFormId(req.body)
+            .then(
+                function(doc){
+                    res.json(doc);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function updateFieldByFormIdFieldId(req, res){
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        var forms = formModel.updateFieldByFormIdFieldId(formId, fieldId, req.body);
-        res.json(forms);
+        var forms = fieldModel.updateFieldByFormIdFieldId(fieldId, req.body)
+            .then(
+                function(doc){
+                    res.json(doc);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
     }
 }

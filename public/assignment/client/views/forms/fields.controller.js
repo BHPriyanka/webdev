@@ -38,13 +38,12 @@
                 {key: "Single Line Text Field", value: "TEXT"},
                 {key: "Multi Line Text Field", value: "TEXTAREA"},
                 {key: "Date Field", value: "DATE"},
-                {key: "Dropdown Field", value: "DROPDOWN"},
+                {key: "Dropdown Field", value: "OPTIONS"},
                 {key: "Checkboxes Field", value: "CHECKBOXES"},
                 {key: "Radio Buttons Field", value: "RADIOS"}
             ];
 
         function show(response) {
-            console.log("SHOW" + response.data);
             vm.display = response.data;
             vm.fields = response.data;
         }
@@ -106,7 +105,7 @@
                 ];
                 placeholder = "";
             }
-            else if(translateFieldType(fieldType) === "DROPDOWN"){
+            else if(translateFieldType(fieldType) === "OPTIONS"){
                 ops = [
                     {"label": "Option 1", "value": "OPTION_1"},
                     {"label": "Option 2", "value": "OPTION_2"},

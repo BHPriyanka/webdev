@@ -5,9 +5,9 @@
 var q = require("q");
 
 module.exports = function(db, mongoose){
-    var FormSchema = require("./form.schema.server.js")(mongoose);
+    var formSchema = require("./form.schema.server.js")(mongoose);
 
-    var FormModel = mongoose.model('Form', FormSchema);
+    var formModel = mongoose.model('Form', formSchema);
 
     var api = {
         createForm: createForm,
@@ -29,7 +29,7 @@ module.exports = function(db, mongoose){
         mock.push(new_form);
         return mock;*/
         var deferred = q.defer();
-        FormModel.create(
+        formModel.create(
             form, function(err, doc){
             if(err){
                 //reject promise if error
@@ -52,7 +52,7 @@ module.exports = function(db, mongoose){
          }
         return userForms;*/
         var deferred = q.defer();
-        FormModel.find(
+        formModel.find(
             {
                 userId: userID
             },
@@ -77,7 +77,7 @@ module.exports = function(db, mongoose){
         }
         return form;*/
         var deferred = q.defer();
-        FormModel.findById(formId, function(err,doc){
+        formModel.findById(formId, function(err,doc){
             if(err){
                 deferred.reject(err);
             } else {
@@ -97,7 +97,7 @@ module.exports = function(db, mongoose){
         }
         return mock[f];*/
         var deferred = q.defer();
-        FormModel.findByIdAndUpdate(formId, newForm, function(err, doc){
+        formModel.findByIdAndUpdate(formId, newForm, function(err, doc){
                 if(err){
                     deferred.reject(err);
                 } else {
@@ -116,7 +116,7 @@ module.exports = function(db, mongoose){
         }
         return mock;*/
         var deferred = q.defer();
-        FormModel.findByIdAndRemove(formId, function(err, doc){
+        formModel.findByIdAndRemove(formId, function(err, doc){
             if(err){
                 deferred.reject(err);
             } else {
@@ -137,7 +137,7 @@ module.exports = function(db, mongoose){
         }
         return form;*/
         var deferred = q.defer();
-        FormModel.findOne(
+        formModel.findOne(
             {
                 title: formTitle
             },
