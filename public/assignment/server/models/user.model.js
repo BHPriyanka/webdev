@@ -14,7 +14,6 @@ module.exports = function(db, mongoose) {
     var api = {
         createUser: createUser,
         findAllUsers: findAllUsers,
-        //findIndex: findIndex,
         updateUser: updateUser,
         deleteUser: deleteUser,
         findUserByUsername: findUserByUsername,
@@ -25,18 +24,6 @@ module.exports = function(db, mongoose) {
 
     //take instance object, add to collection and return the collection
     function createUser(user) {
-         /*var user = {
-         _id: (new Date()).getTime(),
-         userName: user.userName,
-         password: user.password,
-         firstName: user.firstName,
-         lastName: user.lastName,
-         email: user.email,
-         roles: ['student']
-         };
-        mock.push(user);
-        return user;*/
-
         // use q to defer the response
         var deferred = q.defer();
 
@@ -67,28 +54,8 @@ module.exports = function(db, mongoose) {
         return deferred.promise;
     }
 
-    //take ID as an argument, find the instance object whose ID matches the given id, return the instance otherwise return null
-    /*function findIndex(username) {
-        var user = null;
-        var u;
-        for (u in mock) {
-             if (mock[u].userName == username) {
-                user = mock[u];
-            }
-         }
-         return user;
-    }*/
-
     //take ID and object instance,find object instance in collection with ID match, update the object instance values
     function updateUser(userId, user) {
-        /*console.log(user);
-        for (var i in mock) {
-            if(mock[i]._id == userId) {
-                mock[i] = user;
-                break;
-            }
-        }
-        return mock;*/
         var deferred = q.defer();
         userModel.findByIdAndUpdate(userId, user,
             function (err, doc)
@@ -104,13 +71,6 @@ module.exports = function(db, mongoose) {
 
     //accept ID, and remove based on ID
     function deleteUser(userId) {
-        /*for(var u in mock){
-            if(mock[u]._id == userId){
-                mock.splice(u,1);
-                break;
-            }
-        }
-        return mock;*/
         var deferred = q.defer();
         userModel.findByIdAndRemove(userId,
             function(err, doc)
@@ -126,13 +86,6 @@ module.exports = function(db, mongoose) {
 
     //returns single user whose username matches,otherwise null
     function findUserByUsername(username) {
-        /*var user = null;
-         for (var u in mock) {
-            if (mock[u].userName == username) {
-                user = mock[u];
-            }
-         }
-         return user;*/
         var deferred = q.defer();
         userModel.findOne(
             {
@@ -151,13 +104,6 @@ module.exports = function(db, mongoose) {
     }
 
     function findUserById(userId){
-        /*var user = null;
-        for( var u in mock){
-            if(mock[u]._id == userId){
-                user=mock[u];
-            }
-        }
-        return user;*/
         // use q to defer the response
         var deferred = q.defer();
 
@@ -176,14 +122,6 @@ module.exports = function(db, mongoose) {
 
     //credentials has username and password,returns user whose credentials match, null otherwise
     function findUserByCredentials(username, password) {
-        /*var user = null;
-        for (var u in mock) {
-            if (mock[u].userName === username &&
-                mock[u].password === password) {
-                user = mock[u];
-            }
-        }
-        return user;*/
         var deferred = q.defer();
 
         userModel.findOne(

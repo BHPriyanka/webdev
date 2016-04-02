@@ -11,9 +11,6 @@ module.exports = function (app, userModel) {
     app.get("/api/assignment/loggedin", loggedin);
 
     function createUser(req, res) {
-        /*var user = userModel.createUser(req.body);
-        req.session.currentUser = user;
-        res.json(user);*/
         var user = req.body;
         user = userModel.createUser(user)
             .then(
