@@ -64,7 +64,14 @@
                 return;
             }
 
-            UserService.updateUser($rootScope.currentUser._id, user)
+            var user_without_id = {
+                userName: user.userName,
+                lastName: user.lastName,
+                firstName: user.firstName,
+                password:  user.password,
+                emails: user.emails
+            }
+            UserService.updateUser($rootScope.currentUser._id, user_without_id)
                 .then(function (response) {
                     if (response) {
                         UserService.findUserByUserId($rootScope.currentUser._id)
@@ -75,8 +82,6 @@
                                 vm.currentUser.firstName = updatedUser.data.firstName;
                                 vm.currentUser.lastName = updatedUser.data.lastName;
                                 vm.currentUser.emails = updatedUser.data.emails.join(",");
-
-                                //vm.currentUser.email = updatedUser.data.email;
 
                                 UserService.setCurrentUser(updatedUser.data);
 
