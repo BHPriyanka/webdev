@@ -1,7 +1,7 @@
 /*jslint node: true */
 "use strict";
 
-module.exports = function(app, userModel, fieldModel, formModel){
+module.exports = function(app, formModel, fieldModel){
     app.get("/api/assignment/form/:formId/field", findFields);
     app.delete("/api/assignment/form/:formId/field/:fieldId", removeFieldByFieldIdFormId);
     app.post("/api/assignment/form/:formId/field", createFieldByFormId);
@@ -12,7 +12,7 @@ module.exports = function(app, userModel, fieldModel, formModel){
             if (req.params.fieldId) {
                 var fieldID = req.params.fieldId;
                 var formId = req.params.formId;
-                var field = fieldModel.findFieldByFieldIdFormId(fieldId)
+                var field = fieldModel.findFieldByFieldIdFormId(formId, fieldId)
                     .then(
                         function(doc){
                             res.json(doc);
@@ -24,7 +24,7 @@ module.exports = function(app, userModel, fieldModel, formModel){
             }
             else {
                 var formId = req.params.formId;
-                var form = fieldModel.findFieldsByFormId()
+                var form = fieldModel.findFieldsByFormId(formId)
                     .then(
                         function(doc){
                             res.json(doc);
@@ -40,7 +40,7 @@ module.exports = function(app, userModel, fieldModel, formModel){
     function removeFieldByFieldIdFormId(req, res){
         var fieldId = req.params.fieldId;
         var formId = req.params.formId;
-        var fields = fieldModel.removeFieldByFieldIdFormId(fieldId)
+        var fields = fieldModel.removeFieldByFieldIdFormId(formId, fieldId)
             .then(
                 function(doc){
                     res.json(doc);
@@ -53,7 +53,7 @@ module.exports = function(app, userModel, fieldModel, formModel){
 
     function createFieldByFormId(req, res){
         var formId = req.params.formId;
-        var forms = fieldModel.createFieldByFormId(req.body)
+        var forms = fieldModel.createFieldByFormId(formId, req.body)
             .then(
                 function(doc){
                     res.json(doc);
@@ -67,7 +67,7 @@ module.exports = function(app, userModel, fieldModel, formModel){
     function updateFieldByFormIdFieldId(req, res){
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        var forms = fieldModel.updateFieldByFormIdFieldId(fieldId, req.body)
+        var forms = fieldModel.updateFieldByFormIdFieldId(formId, fieldId, req.body)
             .then(
                 function(doc){
                     res.json(doc);

@@ -150,4 +150,5 @@ module.exports = function(db, mongoose){
             });
         return deferred.promise;
     }
+
 }
