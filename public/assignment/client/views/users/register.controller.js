@@ -49,10 +49,10 @@
                 return;
             }
 
-            if (!user.email) {
+            /*if (!user.email) {
                 vm.message = "Please provide Email ID";
                 return;
-            }
+            }*/
 
             UserService.findUserByUsername(user.userName).then(
                 function (response) {
@@ -61,6 +61,7 @@
                         return;
                     }
                     else {
+                        user.emails = user.emails.trim().split(",");
                         UserService.createUser(user)
                             .then(function (response) {
                                 var currentUser = response.data;

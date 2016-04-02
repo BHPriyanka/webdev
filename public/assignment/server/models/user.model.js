@@ -89,8 +89,9 @@ module.exports = function(db, mongoose) {
             }
         }
         return mock;*/
+        console.log("MOdel-update");
         var deferred = q.defer();
-        UserModel.findOneAndUpdate(userId, user,
+        UserModel.findByIdAndUpdate(userId, user,
             function (err, doc)
             {
                 if(err){
@@ -188,7 +189,7 @@ module.exports = function(db, mongoose) {
 
         UserModel.findOne(
             {
-                username: username,
+                userName: username,
                 password: password
             },
             function(err, doc){

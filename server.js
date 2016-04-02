@@ -11,8 +11,9 @@ var cookieParser  = require('cookie-parser');
 var session       = require('express-session');
 var mongoose      = require('mongoose');
 
-// connect to loca mongo database
-var connectionString = 'mongodb://127.0.0.1/27017/cs5610assignmentforms';
+// connect to local mongo database
+var connectionString = 'mongodb://127.0.0.1:27017/cs5610assignmentforms';
+
 // use remote connection string
 // if running in remote server
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {

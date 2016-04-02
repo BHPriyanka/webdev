@@ -21,7 +21,7 @@
             userName: $rootScope.currentUser.userName,
             password: $rootScope.currentUser.password,
             roles: $rootScope.currentUser.roles,
-            email: $rootScope.currentUser.email,
+            emails: $rootScope.currentUser.emails.join(","),
             _id: $rootScope.currentUser._id
         };
         if (!vm.currentUser) {
@@ -59,7 +59,7 @@
                 return;
             }
 
-            if(!user.email) {
+            if(!user.emails) {
                 vm.message = "Please provide Email ID";
                 return;
             }
@@ -67,19 +67,22 @@
             UserService.updateUser($rootScope.currentUser._id, user)
                 .then(function (response) {
                     if (response) {
-                        UserService.findUserByUserId($rootScope.currentUser._id).then (function (updatedUser) {
-                            console.log(updatedUser.data);
-                            vm.currentUser.password = updatedUser.data.password;
-                            vm.currentUser.userName = updatedUser.data.userName;
-                            vm.currentUser.firstName = updatedUser.data.firstName;
-                            vm.currentUser.lastName = updatedUser.data.lastName;
-                            vm.currentUser.email = updatedUser.data.email;
+                        UserService.findUserByUserId($rootScope.currentUser._id)
+                            .then (function (updatedUser) {
+                                console.log(updatedUser.data);
+                                vm.currentUser.password = updatedUser.data.password;
+                                vm.currentUser.userName = updatedUser.data.userName;
+                                vm.currentUser.firstName = updatedUser.data.firstName;
+                                vm.currentUser.lastName = updatedUser.data.lastName;
+                                vm.currentUser.emails = updatedUser.data.emails.join(",");
 
-                            UserService.setCurrentUser(updatedUser.data);
+                                //vm.currentUser.email = updatedUser.data.email;
 
-                        vm.message = "User updated successfully";
-                        $location.url('/profile');
-                        });
+                                UserService.setCurrentUser(updatedUser.data);
+
+                                vm.message = "User updated successfully";
+                                $location.url('/profile');
+                            });
                     }
                     else {
                         vm.message = "Unable to update the user";

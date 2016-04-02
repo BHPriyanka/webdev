@@ -20,7 +20,8 @@ module.exports = function (app, userModel) {
                 //login if user promise resolved
                 function( doc){
                     req.session.currentUser = doc;
-                    res.json(user);
+                    console.log(doc);
+                    res.json(doc);
                 },
                 //send error if promise rejected
                 function( err){
@@ -32,6 +33,7 @@ module.exports = function (app, userModel) {
     function findUser(req, res) {
         if (req.query.username) {
             if (req.query.password) {
+                console.log("inside login");
                 var user = userModel.findUserByCredentials(req.query.username, req.query.password)
                     .then(
                         function (doc) {
@@ -92,6 +94,7 @@ module.exports = function (app, userModel) {
     }
 
     function updateUser(req, res){
+        console.log("inside updateuser");
         var userId = req.params.id;
         var user = req.body;
         userModel.updateUser(userId, user)
