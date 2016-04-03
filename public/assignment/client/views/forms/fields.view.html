@@ -121,7 +121,7 @@
                             <form>
                                 <label>Date</label>
                                 <div class="input-group">
-                                    <input ng-model="model.edit_field.label" class="form-control" type="text"
+                                    <input ng-model="model.edit_field.label" class="form-control" type="date"
                                            placeholder="{{field.label}}">
                                     <div class="input-group-btn">
                                         <a ng-click="model.editField(field)" type="button" data-toggle="modal"
@@ -141,7 +141,7 @@
                         <div ng-switch-when="EMAIL">
                             <label>{{field.label}}</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="{{field.placeholder}}">
+                                <input type="email" class="form-control" placeholder="{{field.placeholder}}">
                                 <div class="input-group-btn">
                                     <a ng-click="model.editField(field)" type="button" data-toggle="modal" class="btn btn-default" data-target="#editField">
                                         <span class="glyphicon glyphicon-pencil hover"></span>
@@ -169,6 +169,7 @@
                     <option>Dropdown Field</option>
                     <option>Checkboxes Field</option>
                     <option>Radio Buttons Field</option>
+                    <option>Multi Line Text Field</option>
                     <option>Multi Line Text Field</option>
                 </select>
             </div>
@@ -227,7 +228,7 @@
                                 <h3>Date Field</h3>
                                 <form>
                                     <label>Label</label>
-                                    <input ng-model="model.edit_field.label" class="form-control" type="text">
+                                    <input ng-model="model.edit_field.label" class="form-control" type="date">
                                     <br>
                                 </form>
                             </div>
