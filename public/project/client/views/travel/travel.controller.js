@@ -14,13 +14,13 @@
         init();
 
         function travel() {
-            $location.url("/travel/");
+            //$location.url("/travel/");
             TravelService.findTravelNews("travel")
                 .then(function (response) {
-                $rootScope.data = response;
-                console.log($rootScope.data);
+                $rootScope.data = response.data;
+                    console.log($rootScope.data);
                 if ($rootScope.data != null) {
-                    $location.url('/travel/');
+                    $location.url('/travel');
                 }
             });
         }

@@ -19,7 +19,7 @@
                 <div class="col col-md-7">
                     <h4 style="font-size: medium">
                         <p> <a href="{{entry.webUrl}}" target="_blank">{{entry.webTitle}}</a></p>
-                        <a href="#/details/{{entry.id}}">#/details/{{indexOf(entry)}} -- {{entry.webTitle}}</a>
+                        <a href="#/details/{{entry.id.replace(/&#47/g, '%2F')}}" target="_blank">{{entry.id.replace(/&#47/g, '%2F')}}</a>
                     </h4>
                     <p style="column-width: 100">
                         {{entry.fields.trailText}}

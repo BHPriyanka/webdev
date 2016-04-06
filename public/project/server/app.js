@@ -1,7 +1,6 @@
 module.exports = function(app) {
     var userModel = require("./models/user.model.js")(app);
     var newsModel = require("./models/news.model.js")(app);
-   // var formModel = require("./models/form.model.js")(app);
     var user_service = require("./services/user.service.server.js")(app, userModel);
     /*var entertain_service = require("./services/entertain.service.server.js")(app, userModel);
     var news_service = require("./services/newsapi.service.server.js")(app, userModel);
