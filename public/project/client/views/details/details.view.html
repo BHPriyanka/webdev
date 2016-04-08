@@ -1,12 +1,18 @@
-<h3>Details</h3>
-<div ng-controller="DetailsController">
-    {{model.data}}
-
+<div ng-controller="DetailsController as model">
 <br/>
-<br/>
-
-<button class="btn btn-primary" ng-click="model.favorite(model.data.newsId)">
-    <span class="glyphicon glyphicon-star-empty"></span>
-</button>
-
+    <h2 align="center">{{model.data.response.content.fields.headline}}</h2>
+    <h4 align="center">{{model.data.response.content.fields.standfirst}}</h4>
+    <br/>
+    <button class="btn btn-primary pull-right" ng-click="model.favorite(model.data.newsId)">
+        <span class="glyphicon glyphicon-star-empty"></span>
+    </button>
 </div>
+<form>
+    <div align="center">
+        <img ng-src="{{model.data.response.content.fields.thumbnail}}"/>
+    </div>
+    <br/>
+    <div class="container" ng-bind-html="{{model.data.response.content.fields.body}}">
+        {{model.data.response.content.fields.body}}
+    </div>
+</form>

@@ -9,11 +9,9 @@
         vm.favourite = favourite;
         var currentUser = $rootScope.currentUser;
 
-        console.log(id);
-
         function init() {
             vm.location = $location;
-            console.log("Details Controller");
+            id = id.replace(/_/g,'/');
             NewsService.findNewsById(id)
                 .then(function(response){
                     console.log(response.data);
