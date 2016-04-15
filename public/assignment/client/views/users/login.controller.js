@@ -22,10 +22,10 @@
             }
 
             UserService
-                .findUserByCredentials(
-                   user.userName,
-                   user.password
-                )
+                .login({
+                    userName: user.userName,
+                    password: user.password
+        })
                 .then(function (response) {
                     if (response.data != null) {
                         var user = response.data;

@@ -68,7 +68,6 @@
         }
 
           function updateForm(form) {
-            vm.index = 0;
             if (vm.selected) {
                 if (form) {
                     var form_without_id = {

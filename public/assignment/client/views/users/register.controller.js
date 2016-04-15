@@ -18,7 +18,6 @@
         init();
 
         function register(user) {
-            console.log(user.userName);
             vm.message = null;
 
             if (user == null) {
@@ -54,29 +53,30 @@
                 return;
             }
 
-            if(!user.phones){
+            if (!user.phones) {
                 vm.message = "Please provide phone";
                 return;
             }
 
-            UserService.findUserByUsername(user.userName).then(
-                function (response) {
-                    if (response.data !== null) {
-                        vm.message = "User already exists";
-                        return;
+            user.emails = user.emails.trim().split(",");
+            user.phones = user.phones.trim().split(",");
+            UserService.register(user)
+                .then(function (response) {
+                    var currentUser = response.data;
+                    if(currentUser!=null) {
+                        UserService.setCurrentUser(currentUser);
+                        $location.url('/profile');
                     }
-                    else {
-                        user.emails = user.emails.trim().split(",");
-                        user.phones = user.phones.trim().split(",");
-                        UserService.createUser(user)
-                            .then(function (response) {
-                                var currentUser = response.data;
-                                UserService.setCurrentUser(currentUser);
-                                $location.url('/profile');
-                            });
-
+                    else{
+                        vm.message = "User Alreadyexists";
+                        vm.currentUser = null;
+                        $location.url('/register');
                     }
-                });
+                },
+                    function(err){
+                        vm.error=err;
+                    }
+                );
         }
     }
 })();

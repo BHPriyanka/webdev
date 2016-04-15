@@ -83,7 +83,6 @@
                     if (response) {
                         UserService.findUserByUserId($rootScope.currentUser._id)
                             .then (function (updatedUser) {
-                                console.log(updatedUser.data);
                                 vm.currentUser.password = updatedUser.data.password;
                                 vm.currentUser.userName = updatedUser.data.userName;
                                 vm.currentUser.firstName = updatedUser.data.firstName;

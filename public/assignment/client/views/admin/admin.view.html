@@ -5,79 +5,38 @@
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <div class="table-responsive">
-            <table class="table table-bordered table-striped">
+            <table id="myTable" class="table table-bordered table-striped tablesorter">
                 <thead>
                 <tr>
-                    <th>
-                        <button type="button" class="btn dropdown-toggle"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="caret"></span></button> User Name</th>
-                    <th>
-                        <button type="button" class="btn dropdown-toggle"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="caret"></span></button> Password</th>
-                    <th>
-                        <button type="button" class="btn dropdown-toggle"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="caret"></span></button>  Role</th>
-                    <th>Action</th>
+                    <th>User Name</th>
+                    <th>Password</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Roles</th>
+                    <th>Actions</th>
+                    <th>&nbsp;</th>
                 </tr>
 
                 <tr>
-                    <th><input type="text" id="userName" placeholder="username"></th>
-                    <th><input type="password" id="inputPassword" placeholder="password"></th>
-                    <th><input type="text" id="role" placeholder="role1, role2"></th>
-                    <th>
-                        <a href="#">
-                            <scan class="glyphicon glyphicon-ok" id="glyphi"></scan>
-                        </a>
-                        <a href="#">
-                            <scan class="glyphicon glyphicon-plus" id="glyphi"></scan>
-                        </a>
-                    </th>
+                    <td><input ng-model="model.selected.userName" type="text" id="userName" placeholder="username"></td>
+                    <td><input ng-model="model.selected.password" type="password" id="inputPassword" placeholder="password"></td>
+                    <td><input ng-model="model.selected.firstName" type="text" id="firstName" placeholder="firstname"></td>
+                    <td><input ng-model="model.selected.lastName" type="text" id="lastName" placeholder="lastname"></td>
+                    <td><input ng-model="model.selected.roles" type="text" id="role" placeholder="role1, role2"></td>
+                    <td><button ng-click="model.update(model.selected)" class="btn btn-primary">&check;</button></td>
+                    <td><button ng-click="model.add(model.selected)" class="btn btn-success">&plus;</button></td>
                 </tr>
                 </thead>
 
                 <tbody>
-                <tr>
-                    <td>Alice</td>
+                <tr ng-repeat="user in model.users">
+                    <td>{{user.userName}}</td>
                     <td></td>
-                    <td>student</td>
-                    <td>
-                        <a href="#">
-                            <scan class="glyphicon glyphicon-pencil" id="glyphi"></scan>
-                        </a>
-                        <a href="#">
-                            <scan class="glyphicon glyphicon-remove" id="glyphi"></scan>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Bob</td>
-                    <td></td>
-                    <td>faculty | admin</td>
-                    <td>
-                        <a href="#">
-                            <scan class="glyphicon glyphicon-pencil" id="glyphi"></scan>
-                        </a>
-                        <a href="#">
-                            <scan class="glyphicon glyphicon-remove" id="glyphi"></scan>
-                        </a>
-                    </td>
-                </tr>
-                </tbody>
-                <tr>
-                    <td>Charlie</td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <a href="#">
-                            <scan class="glyphicon glyphicon-pencil" id="glyphi"></scan>
-                        </a>
-                        <a href="#">
-                            <scan class="glyphicon glyphicon-remove" id="glyphi"></scan>
-                        </a>
-                    </td>
+                    <td>{{user.firstName}}</td>
+                    <td>{{user.lastName}}</td>
+                    <td>{{user.roles}}</td>
+                    <td><button ng-click="model.select($index)" class="btn btn-success">...</button></td>
+                    <td><button ng-click="model.remove($index)" class="btn btn-danger">X</button></td>
                 </tr>
             </table>
         </div>

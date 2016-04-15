@@ -43,7 +43,7 @@ module.exports = function(db, mongoose) {
     //return the corresponding collection
     function findAllUsers() {
         //return mock;
-        var deferred = q.refer();
+        var deferred = q.defer();
         userModel.find(function (err, doc){
             if(err){
                 deferred.reject(err);
@@ -57,7 +57,7 @@ module.exports = function(db, mongoose) {
     //take ID and object instance,find object instance in collection with ID match, update the object instance values
     function updateUser(userId, user) {
         var deferred = q.defer();
-        userModel.findByIdAndUpdate(userId, user,
+        userModel.update({_id: userId}, {$set :user},
             function (err, doc)
             {
                 if(err){
@@ -72,15 +72,13 @@ module.exports = function(db, mongoose) {
     //accept ID, and remove based on ID
     function deleteUser(userId) {
         var deferred = q.defer();
-        userModel.findByIdAndRemove(userId,
-            function(err, doc)
-            {
-                if(err){
-                    deferred.reject(err);
-                } else {
-                    deferred.resolve(doc);
-                }
-            });
+        userModel.remove({_id : userId}, function(err, doc){
+            if(err){
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
+        });
         return deferred.promise;
     }
 
@@ -89,7 +87,7 @@ module.exports = function(db, mongoose) {
         var deferred = q.defer();
         userModel.findOne(
             {
-                username: username
+                userName: username
             },
             function(err, doc){
                 if(err){

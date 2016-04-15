@@ -1,84 +1,163 @@
 /*jslint node: true */
 "use strict";
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 module.exports = function (app, userModel) {
-    app.post("/api/assignment/user", createUser);
-    app.get("/api/assignment/user", findUser);
-    app.get("/api/assignment/user/:id", findUserById);
-    app.put("/api/assignment/user/:id", updateUser);
-    app.delete("/api/assignment/user/:id", deleteUser);
+    var auth = authorized;
+
+    app.post("/api/assignment/admin/user", auth, createUser);
+    app.post("/api/assignment/register", register);
+    app.get("/api/assignment/user", auth, findUserByUsername);
+    app.get("/api/assignment/admin/user", auth, findUsers);
+    app.get("/api/assignment/user/:userId", auth, findUserById);
+    app.put("/api/assignment/admin/user/:userId", auth, updateUser);
+    app.delete("/api/assignment/admin/user/:userId", auth, deleteUser);
     app.post("/api/assignment/logout", logout);
     app.get("/api/assignment/loggedin", loggedin);
+    app.get("/api/assignment/login", passport.authenticate('local'), login);
 
-    function createUser(req, res) {
-        var user = req.body;
-        user = userModel.createUser(user)
+    passport.use(new LocalStrategy(localStrategy));
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+
+    function authorized (req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else {
+            next();
+        }
+    };
+
+    function localStrategy(userName, password, done){
+        userModel.findUserByCredentials(userName, password)
             .then(
-                //login if user promise resolved
-                function( doc){
-                    req.session.currentUser = doc;
-                    console.log(doc);
-                    res.json(doc);
+                function (user) {
+                    if(!user){
+                        return done(null, false);
+                    }
+                    return done(null, user);
                 },
-                //send error if promise rejected
-                function( err){
+                function (err) {
+                    return done(err);
+                }
+            );
+    }
+
+    function login(req, res){
+        var user = req.user;
+        res.json(user);
+    }
+
+    function serializeUser(user, done) {
+        done(null, user);
+    }
+
+    function deserializeUser(user, done) {
+        userModel
+            .findUserById(user._id)
+            .then(
+                function(user){
+                    done(null, user);
+                },
+                function(err){
+                    done(err, null);
+                }
+            );
+    }
+
+    function register(req, res) {
+        var newUser = req.body;
+        newUser.roles = ['student'];
+        userModel
+            .findUserByUsername(newUser.userName)
+            .then(
+                function(user){
+                    if(user) {
+                        res.json(null);
+                    } else {
+                        return userModel.createUser(newUser);
+                    }
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(user){
+                    if(user){
+                        req.login(user, function(err) {
+                            if(err) {
+                                res.status(400).send(err);
+                            } else {
+                                res.json(user);
+                            }
+                        });
+                    }
+                },
+                function(err){
                     res.status(400).send(err);
                 }
             );
     }
 
-    function findUser(req, res) {
+
+    function findUserByUsername(req, res) {
         if (req.query.username) {
-            if (req.query.password) {
-                var user = userModel.findUserByCredentials(req.query.username, req.query.password)
-                    .then(
-                        function (doc) {
-                            req.session.currentUser = doc;
-                            res.json(doc);
-                        },
-                        function (err) {
-                            res.status(400).send(err);
-                        }
-                    );
-            }
-            else {
-                var user1 = userModel.findUserByUsername(req.query.username)
-                    .then(
-                        function (doc) {
-                            req.session.currentUser = doc;
-                            res.json(doc);
-                        },
-                        function (err) {
-                            res.status(400).send(err);
-                        });
-            }
-        }
-        else {
-            var users = userModel.findAllUsers()
+            var user1 = userModel.findUserByUsername(req.query.username)
                 .then(
                     function (doc) {
+                        req.session.currentUser = doc;
                         res.json(doc);
                     },
-                    function (err){
+                    function (err) {
                         res.status(400).send(err);
                     });
         }
     }
 
+     function findUsers(req, res){
+         if(isAdmin(req.user)){
+             userModel.findAllUsers()
+                 .then(
+                     function (users) {
+                         res.json(users);
+                     },
+                     function (err){
+                         res.status(400).send(err);
+                     });
+         } else {
+             res.status(403);
+         }
+     }
+
+
     function deleteUser(req, res) {
-        var mock = userModel.deleteUser(req.params._id)
-            .then(
-                function (doc) {
-                    res.json(doc);
-                },
-                function (err) {
-                    res.status(400).send(err);
-                }
-            );
+        if(isAdmin(req.user)){
+            userModel.deleteUser(req.params.userId)
+                .then(
+                    function (user) {
+                        return userModel.findAllUsers();
+                    },
+                    function(err){
+                        res.status(400).send(err);
+                    }
+                )
+                .then(
+                    function(users){
+                        res.json(users);
+                    },
+                    function(err){
+                        res.status(400).send(err);
+                    }
+                );
+        } else {
+            res.status(403);
+        }
     }
 
     function findUserById(req, res){
-        var userId = req.params.id;
+        var userId = req.params.userId;
         var user = userModel.findUserById(userId)
             .then(
                 function (doc){
@@ -90,25 +169,94 @@ module.exports = function (app, userModel) {
     }
 
     function updateUser(req, res){
-        var userId = req.params.id;
-        var user = req.body;
-        userModel.updateUser(userId, user)
+        var userId = req.params.userId;
+        var newUser = req.body;
+        if(!isAdmin(req.user)) {
+            delete newUser.roles;
+        }
+        if(typeof newUser.roles == "string") {
+            newUser.roles = newUser.roles.split(",");
+        }
+
+        userModel.updateUser(userId, newUser)
             .then(
-                function (doc) {
-                    res.json(200);
+                function (user) {
+                    return userModel.findAllUsers();
                 },
                 function(err) {
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(users){
+                    res.json(users);
+                },
+                function(err){
                     res.status(400).send(err);
                 }
             );
     }
 
     function logout(req, res) {
+        req.logOut();
         res.send(200);
     }
 
     function loggedin(req, res) {
-        res.json(req.session.currentUser);
+        res.send(req.isAuthenticated() ? req.user : '0');
+    }
+
+    function createUser(req, res){
+        if(isAdmin(req.user)) {
+            var newUser = req.body;
+        }
+        if (newUser.roles && newUser.roles.length > 1) {
+            newUser.roles = newUser.roles.split(",");
+        } else {
+            newUser.roles = ["student"];
+        }
+        // first check if a user already exists with the username
+        userModel
+            .findUserByUsername(newUser.username)
+            .then(
+                function(user){
+                    // if the user does not already exist
+                    if(user == null) {
+                        // create a new user
+                        return userModel.createUser(newUser)
+                            .then(
+                                // fetch all the users
+                                function(){
+                                    return userModel.findAllUsers();
+                                },
+                                function(err){
+                                    res.status(400).send(err);
+                                }
+                            );
+                        // if the user already exists, then just fetch all the users
+                    } else {
+                        return userModel.findAllUsers();
+                    }
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(users){
+                    res.json(users);
+                },
+                function(){
+                    res.status(400).send(err);
+                }
+            )
+    }
+
+    function isAdmin(user) {
+        if(user.roles.indexOf("admin") != -1) {
+            return true
+        }
+        return false;
     }
 }
 
