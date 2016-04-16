@@ -19,10 +19,7 @@
                         <button type="button" class="btn dropdown-toggle"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="caret"></span></button> Form Name </th>
-                    <th>
-                        <button type="button" class="btn dropdown-toggle"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="caret"></span></button> Action </th>
+                    <th>Action</th>
                 </tr>
 
                 <tr>
@@ -30,13 +27,8 @@
                         <input ng-model="model.selected.title" type="text" id="formName" placeholder="Name">
                     </td>
                     <td>
-                        <button ng-click="model.updateForm(model.selected)" type="button" class="btn btn-default">
-                            <scan class="glyphicon glyphicon-ok" id="glyphi"></scan>
-                        </button>
-
-                        <button ng-click="model.addForm(model.selected)" type="button" class="btn btn-default">
-                            <scan class="glyphicon glyphicon-plus" id="glyphi"></scan>
-                        </button>
+                        <button ng-click="model.updateForm(model.selected)" class="btn btn-warning">&check;</button>
+                        <button ng-click="model.addForm(model.selected)" class="btn btn-success">&plus;</button>
                     </td>
                 </tr>
                 </thead>
@@ -46,12 +38,8 @@
                     <td ng-model="form.title"><a href="#/form/{{form._id}}/fields">{{form.title}}</a></td>
 
                     <td>
-                        <button ng-click="model.selectForm($index)" type="button" class="btn btn-default">
-                            <scan class="glyphicon glyphicon-pencil" id="glyphi"></scan>
-                        </button>
-                        <button ng-click="model.deleteForm($index)" type="button" class="btn btn-danger">
-                            <scan class="glyphicon glyphicon-remove" id="glyphi"></scan>
-                        </button>
+                        <button ng-click="model.selectForm($index)" class="btn btn-warning">...</button>
+                        <button ng-click="model.deleteForm($index)" class="btn btn-danger">X</button>
                     </td>
                 </tr>
                 </tbody>
