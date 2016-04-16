@@ -146,7 +146,6 @@
         }
 
         function okEdit(field) {
-            console.log(field);
             vm.edit_field = field;
 
             var isOption;
