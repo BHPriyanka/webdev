@@ -16,6 +16,7 @@
         vm.removeField = removeField;
         vm.addField = addField;
         vm.reorder = reorder;
+        vm.opText = null;
 
         vm.options = [
             "Single Line Text Field",
@@ -48,26 +49,24 @@
             vm.fields = response.data;
         }
 
-        function init() {
+        function init(){
            FieldsService
                 .getFieldsForForm(formId)
                 .then(show);
+            FormService
+                .findFormById(formId)
+                .then(function (response)
+                {
+                    vm.form = response.data;
+                })
         }
         init();
-
-        function sendEdit(field) {
-            vm.ok_field = null;
-            FieldsService
-                .updateField(formId, field._id, field)
-                .then(init);
-        }
 
         function reorder() {
             vm.form.fields = vm.fields;
             FormService
                 .updateFormById(formId, vm.form)
                 .then(init);
-
         }
 
         function removeField(field) {
@@ -130,13 +129,13 @@
             vm.edit_field = field;
             var isOption;
             if(vm.edit_field.type == 'TEXT' || vm.edit_field.type == 'TEXTAREA'){
-                isOption = true;
-            }
-            else{
                 isOption = false;
             }
+            else{
+                isOption = true;
+            }
 
-            if (!isOption) {
+            if (isOption) {
                 var opList = [];
                 var list = vm.edit_field.options;
                 for (var o in list) {
@@ -147,18 +146,19 @@
         }
 
         function okEdit(field) {
+            console.log(field);
             vm.edit_field = field;
 
             var isOption;
-            if(vm.edit_field.type == 'TEXT' || vm.edit_field.type == 'TEXTAREA'){
-                isOption = true;
+            if(field.type == 'TEXT' || field.type == 'TEXTAREA'){
+                isOption = false;
             }
             else{
-                isOption = false;
+                isOption = true;
             }
 
             var optionArray = [];
-            if (!isOption) {
+            if (isOption) {
                 var op = vm.opText;
                 for (var o in op) {
                     var a = op[o].split(":");

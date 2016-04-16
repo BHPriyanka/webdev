@@ -12,7 +12,7 @@
             findAllFormsForUser: findAllFormsForUser,
             deleteFormById: deleteFormById,
             updateFormById: updateFormById,
-            findFormbyId: findFormById
+            findFormById: findFormById
         };
 
         return api;

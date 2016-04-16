@@ -24,7 +24,7 @@
                                 <a ng-click="model.removeField(field)" type="button"class="btn btn-default" >
                                     <span class="glyphicon glyphicon-remove hover"></span>
                                 </a>
-                                <a type="button" class="btn btn-default" >
+                                <a type="button" ng-click="model.reorder()" class="btn btn-default" >
                                     <span class="glyphicon glyphicon-align-justify hover"></span>
                                 </a>
                             </div>
@@ -44,7 +44,7 @@
                                 <a ng-click="model.removeField(field)" type="button"class="btn btn-default" >
                                     <span class="glyphicon glyphicon-remove hover"></span>
                                 </a>
-                                <a type="button" class="btn btn-default" >
+                                <a type="button" ng-click="model.reorder()" class="btn btn-default" >
                                     <span class="glyphicon glyphicon-align-justify hover"></span>
                                 </a>
                             </div>
@@ -61,7 +61,7 @@
                                 <a ng-click="model.removeField(field)" type="button"class="btn btn-default" >
                                     <span class="glyphicon glyphicon-remove hover"></span>
                                 </a>
-                                <a type="button" class="btn btn-default" >
+                                <a type="button" ng-click="model.reorder()" class="btn btn-default" >
                                     <span class="glyphicon glyphicon-align-justify hover"></span>
                                 </a>
                             </div>
@@ -85,7 +85,7 @@
                                 <a ng-click="model.removeField(field)" type="button"class="btn btn-default" >
                                     <span class="glyphicon glyphicon-remove hover"></span>
                                 </a>
-                                <a type="button" class="btn btn-default" >
+                                <a type="button" ng-click="model.reorder()" class="btn btn-default" >
                                     <span class="glyphicon glyphicon-align-justify hover"></span>
                                 </a>
                             </div>
@@ -111,7 +111,7 @@
                                 <a ng-click="model.removeField(field)" type="button"class="btn btn-default" >
                                     <span class="glyphicon glyphicon-remove hover"></span>
                                 </a>
-                                <a type="button" class="btn btn-default" >
+                                <a type="button" ng-click="model.reorder()" class="btn btn-default" >
                                     <span class="glyphicon glyphicon-align-justify hover"></span>
                                 </a>
                             </div>
@@ -121,7 +121,7 @@
                             <form>
                                 <label>Date</label>
                                 <div class="input-group">
-                                    <input ng-model="model.edit_field.label" class="form-control" type="date"
+                                    <input ng-model="model.edit_field.label" class="form-control" type="text"
                                            placeholder="{{field.label}}">
                                     <div class="input-group-btn">
                                         <a ng-click="model.editField(field)" type="button" data-toggle="modal"
@@ -131,7 +131,7 @@
                                         <a ng-click="model.removeField(field)" type="button"class="btn btn-default" >
                                             <span class="glyphicon glyphicon-remove hover"></span>
                                         </a>
-                                        <a type="button" class="btn btn-default" >
+                                        <a type="button" ng-click="model.reorder()" class="btn btn-default" >
                                             <span class="glyphicon glyphicon-align-justify hover"></span>
                                         </a>
                                     </div>
@@ -227,7 +227,7 @@
                                 <h3>Date Field</h3>
                                 <form>
                                     <label>Label</label>
-                                    <input ng-model="model.edit_field.label" class="form-control" type="date">
+                                    <input ng-model="model.edit_field.label" class="form-control" type="text">
                                     <br>
                                 </form>
                             </div>
