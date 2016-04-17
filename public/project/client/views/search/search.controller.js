@@ -27,7 +27,6 @@
                             response.response.results[i].id = id;
                         }
                         $rootScope.data = response;
-                        console.log($rootScope.data);
                         if($rootScope.data != null) {
                             $location.url('/search/');
                     }});

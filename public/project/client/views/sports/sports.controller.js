@@ -14,11 +14,14 @@
         init();
 
         function sports() {
-            console.log("Inside sports method");
             $location.url("/sports/");
             SportsService.findSportsNews("sports", function (response) {
+                for(var i in response.response.results) {
+                    var id = response.response.results[i].id;
+                    id = id.replace(/\//g,'_');
+                    response.response.results[i].id = id;
+                }
                 $rootScope.data = response;
-                console.log($rootScope.data);
                 if ($rootScope.data != null) {
                     $location.url('/sports/');
                 }

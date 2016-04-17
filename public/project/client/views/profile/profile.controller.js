@@ -1,27 +1,28 @@
+/*jslint node: true */
+"use strict";
+
 (function () {
     angular
         .module("NetNewsApp")
-        .controller("ProfileController", profileController);
+        .controller("ProfileController", ProfileController);
 
-    function profileController(UserService, $location, $rootScope) {
+    function ProfileController(UserService, $location, $rootScope) {
         var vm = this;
         vm.error = null;
         vm.message = null;
         vm.update = update;
 
-        function init() {
-            vm.currentUser = {
-                firstName: $rootScope.currentUser.firstName,
-                lastName: $rootScope.currentUser.lastName,
-                userName: $rootScope.currentUser.userName,
-                password: $rootScope.currentUser.password,
-                roles: $rootScope.currentUser.roles,
-                email: $rootScope.currentUser.email,
-                _id: $rootScope.currentUser._id
-            };
-            if (!vm.currentUser) {
-                $location.url("/home");
-            }
+        function init(){
+            UserService
+                .getProfile()
+                .then(function (response) {
+                    vm.profile = response.data;
+                    if(vm.profile.likesArticles) {
+                        for (var article in vm.profile.likesArticles) {
+                            vm.profile.likesArticles[article].newsId = vm.profile.likesArticles[article].newsId.replace(/\//g, '_');
+                        }
+                    }
+                });
         }
         init();
 
@@ -49,25 +50,44 @@
                 return;
             }
 
-            if (!user.password) {
+            if (!user.password){
                 vm.message = "Please provide a password";
                 return;
             }
 
-            if (!user.email) {
+            if(!user.emails) {
                 vm.message = "Please provide Email ID";
                 return;
             }
 
-            UserService.updateUser($rootScope.currentUser._id, user)
+            if(!user.phones) {
+                vm.message = "Please provide Phone";
+                return;
+            }
+
+            var user_without_id = {
+                userName: user.userName,
+                lastName: user.lastName,
+                firstName: user.firstName,
+                password:  user.password,
+                emails: user.emails,
+                phones: user.phones
+            }
+            UserService.updateUser($rootScope.currentUser._id, user_without_id)
                 .then(function (response) {
                     if (response) {
                         UserService.findUserByUserId($rootScope.currentUser._id)
-                            .then(function(updatedUser){
+                            .then (function (updatedUser) {
+                                vm.currentUser.password = updatedUser.data.password;
                                 vm.currentUser.userName = updatedUser.data.userName;
                                 vm.currentUser.firstName = updatedUser.data.firstName;
                                 vm.currentUser.lastName = updatedUser.data.lastName;
-                                vm.currentUser.email = updatedUser.data.email;
+                                vm.currentUser.emails = updatedUser.data.emails.join(",");
+                                vm.currentUser.phones = updatedUser.data.phones.join(",");
+                                vm.currentUser.likes = updatedUser.data.likes;
+                                vm.currentUser.likesArticles = updatedUser.data.likesArticles;
+                                vm.currentUser.thumbnail = updatedUser.data.thumbnail;
+
                                 UserService.setCurrentUser(updatedUser.data);
 
                                 vm.message = "User updated successfully";

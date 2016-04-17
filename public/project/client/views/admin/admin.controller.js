@@ -1,98 +1,105 @@
+/*jslint node: true */
+"use strict";
+
 (function(){
     angular
         .module("NetNewsApp")
-        .controller("AdminController", adminController);
+        .controller("AdminController", AdminController);
 
-    function adminController($scope, $location, UserService, $rootScope) {
+    function AdminController(UserService, $location){
+        var vm = this;
+        vm.remove = remove;
+        vm.update = update;
+        vm.add = add;
+        vm.select = select;
+        vm.selected =null;
+        vm.index =0;
 
-        $scope.message = null;
-        $scope.updateUser = updateUser;
-        $scope.deleteUser = deleteUser;
-        $scope.selectUser = selectUser;
-        $scope.index = -1;
-
-        if ($rootScope.currentUser == null) {
-            $location.url('/home');
-        }
-        else {
-            UserService.findAllUsers(function (response) {
-                users = response;
-                if (users) {
-                    $scope.users = users;
-                }
+        function init(){
+            $(function(){
+                $('#adminTable').tablesorter();
             });
+
+            vm.users = UserService.findAllUsers()
+                .then(handleSuccess, handleError);
         }
+        init();
 
+        function add (user){
+            vm.message = null;
 
-        function setCurrentUser(new_user) {
-            $rootScope.user = null;
-            $scope.users.push(new_user);
-        }
-
-
-        /*function findIndexByTitle(formTitle){
-         var index=0;
-         for (var i=0; i < $scope.userForms.length;i++) {
-         if ($scope.userForms[i].title == formTitle) {
-         index=i;
-         break;
-         }
-         }
-         return index;
-         }*/
-
-        function updateUser(user) {
-            var success = null;
-            //  var index = findIndexByTitle(form);
-            //$scope.index = index;
-
-            if ($scope.index != -1 && user != null) {
-                var selected = $scope.user[$scope.index];
-                selected.userName = user.userName;
-                UserService.updateUser(selected.userName, selected, function (response) {
-                    success = response;
-                    if (success) {
-                        UserService.findAllUsers(function (response) {
-                            users = response;
-                            if (users) {
-                                $scope.users = users;
-                                $rootScope.user = null;
-                            }
+            if (user == null) {
+                vm.message = "Please fill in the required fields";
+            }
+            else {
+                if (vm.index !== 1) {
+                    UserService.createUser(user)
+                        .then(function (response) {
+                            vm.selected = null;
+                            vm.userForms = UserService.findAllUsers()
+                                .then(handleSuccess, handleError);
+                            $location.url("/admin");
                         });
-                    }
-                });
-            }
-            else{
-                $scope.message = "User Name cannot be empty";
-            }
-        }
-
-        function selectUser(index) {
-            $scope.index = index;
-            var selected = $scope.users[$scope.index];
-            console.log(selected.userName);
-            $scope.userName = selected.userName;
-            $rootScope.userName = selected.userName;
-            console.log($rootScope.userName);
-            //$scope.user.roles = selected.roles;
-            //$scope.user.password = selected.password;
-
-        }
-
-
-        function deleteUser(index) {
-            UserService.deleteUserById($scope.users[index]._id, function (response) {
-                success = response;
-                if (success) {
-                    UserService.findAllUsers(function (response) {
-                        users = response;
-                        if (users) {
-                            $scope.users = users;
-                        }
-                    });
-
                 }
-            });
+            }
+        }
+
+        function remove(index){
+            UserService.deleteUser(vm.users[index]._id)
+                .then(function (response) {
+                        vm.users = response.data;
+                        vm.selected = null;
+                        $location.url("/admin");
+                    }
+                );
+        }
+
+        function update(user){
+            if (vm.selected) {
+                if (user) {
+                    var user_without_id = {
+                        userName : user.userName,
+                        password: user.password,
+                        firstName: user.firstName,
+                        lastName: user.lastName,
+                        emails: user.emails,
+                        phones: user.phones,
+                        roles: user.roles
+                    };
+                    UserService.updateUser(vm.selected._id, user_without_id)
+                        .then(function (response) {
+                                vm.selected = null;
+                                vm.users = UserService.findAllUsers()
+                                    .then(handleSuccess, handleError);
+                                $location.url("/admin");
+                            }
+                        );
+                }
+                else {
+                    vm.message = "Form Name cannot be empty";
+                    vm.selected = null;
+                }
+            }
+        }
+
+        function select(index){
+            vm.index = 1;
+            vm.selected =  {_id: vm.users[index]._id,
+                userName: vm.users[index].userName,
+                password: vm.users[index].password,
+                firstName: vm.users[index].firstName,
+                lastName:vm.users[index].lastName,
+                roles:vm.users[index].roles
+            };
+
+        }
+
+        function handleSuccess(response){
+            vm.users = response.data;
+        }
+
+        function handleError(){
+            vm.error = error;
         }
 
     }

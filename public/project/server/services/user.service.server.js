@@ -1,59 +1,132 @@
-"use strict"
+"use strict";
 
-module.exports = function(app, userModel){
-    app.post("/api/project/user", createUser);
-    app.get("/api/project/user", findUser);
-    app.get("/api/project/user/:id", findUserById);
-    app.put("/api/project/user/:id", updateUser);
-    app.delete("/api/project/user/:id", deleteUser);
+module.exports = function(app, newsModel, NewsUserModel){
+    app.post("/api/project/admin/user", createUser);
+    app.post("/api/project/register", register);
+    app.get("/api/project/user", findUserByUsername);
+    app.get("/api/project/admin/user", findUsers);
+    app.get("/api/project/user/:userId", findUserById);
+    app.put("/api/project/admin/user/:userId", updateUser);
+    app.delete("/api/project/admin/user/:userId", deleteUser);
     app.post("/api/project/logout", logout);
     app.get("/api/project/loggedin", loggedin);
+    app.get("/api/project/login", login);
+    app.get("/api/project/profile/:userId", profile);
 
-    function findUser(req, res){
-        console.log(req.query.username);
-        console.log(req.query.password);
-        if(req.query.username){
-            if(req.query.password){
-                console.log("finduserbycredentials");
-                var user = userModel.findUserByCredentials(req.query.username, req.query.password);
-                console.log(user);
-                req.session.currentUser = user;
-                res.json(user);
-            }
-            else {
-                var user1 = userModel.findUserByUsername(req.query.username);
-                req.session.currentUser = user1;
-                res.json(user1);
-            }
-        }
-        else {
-            var users = userModel.findAllUsers();
-            res.json(users);
-        }
+
+    function profile(req, res) {
+        var userId = req.params.userId;
+        var user = null;
+
+        NewsUserModel.findUserById(userId)
+            .then(
+                function (doc) {
+                    user = doc;
+                    return newsModel.findNewsByNewsIds(user.likes);
+                },
+
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function (articles) {
+                    user.likesArticles = articles;
+                    res.json(user);
+                },
+
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
     }
 
+
     function createUser(req, res) {
-        var user = userModel.createUser(req.body);
+        var user = NewsUserModel.createUser(req.body);
         req.session.currentUser = user;
         res.json(user);
     }
 
+    function register(req, res) {
+        var newUser = req.body;
+        newUser.roles = ['student'];
+        NewsUserModel
+            .findUserByUsername(newUser.userName)
+            .then(
+                function(user){
+                    if(user) {
+                        res.json(null);
+                    } else {
+                        return NewsUserModel.createUser(newUser);
+                    }
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(user) {
+                    if (user) {
+                        res.json(user);
+                    }
+                },
+                function(err){
+                   res.status(400).send(err);
+              }
+            );
+    }
+
+    function login(req, res) {
+        NewsUserModel.findUserByCredentials(req.query.username, req.query.password)
+            .then(
+                function (doc) {
+                    req.session.currentUser = doc;
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function findUserByUsername(req,res){
+        var user1 = NewsUserModel.findUserByUsername(req.query.username);
+        req.session.currentUser = user1;
+        res.json(user1);
+    }
+
+    function findUsers(req, res) {
+        if (isAdmin(req.user)) {
+            NewsUserModel.findAllUsers()
+                .then(
+                    function (users) {
+                        res.json(users);
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    });
+        } else {
+            res.status(403);
+        }
+    }
+
     function deleteUser(req, res) {
-        var mock = userModel.deleteUser(req.params._id);
+        var mock = NewsUserModel.deleteUser(req.params._id);
         res.json(mock);
 
     }
 
     function findUserById(req, res){
         var userId = req.params.id;
-        var user = userModel.findUserById(userId);
+        var user = NewsUserModel.findUserById(userId);
         res.json(user);
     }
 
     function updateUser(req, res){
         var userId = req.params.id;
         var user = req.body;
-        userModel.updateUser(userId, user);
+        NewsUserModel.updateUser(userId, user);
         res.json(200);
     }
 

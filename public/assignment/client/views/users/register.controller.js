@@ -68,7 +68,7 @@
                         $location.url('/profile');
                     }
                     else{
-                        vm.message = "User Alreadyexists";
+                        vm.message = "User Already exists";
                         vm.currentUser = null;
                         $location.url('/register');
                     }

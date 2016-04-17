@@ -42,7 +42,6 @@ module.exports = function(db, mongoose) {
 
     //return the corresponding collection
     function findAllUsers() {
-        //return mock;
         var deferred = q.defer();
         userModel.find(function (err, doc){
             if(err){

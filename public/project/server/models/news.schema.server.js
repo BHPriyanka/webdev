@@ -1,0 +1,20 @@
+module.exports = function(mongoose) {
+
+    // use mongoose to declare a movie schema
+    var NewsSchema = mongoose.Schema({
+        newsId: String,
+        webTitle: String,
+        webUrl: String,
+        thumbnail: String,
+        // ids of users that like this movie
+        likes: [String],
+        // list of users that like this movie
+        userLikes: [
+            {userName: String}
+        ],
+        // store movie documents in this collection
+    }, {collection: 'project.news.article'});
+
+    return NewsSchema;
+
+};

@@ -17,7 +17,6 @@
             $location.url("/home/");
             NewsService.findWorldNews("home", function (response) {
                 $rootScope.data = response;
-                console.log($rootScope.data);
                 if ($rootScope.data != null) {
                     $location.url('/home/');
                 }

@@ -5,16 +5,16 @@
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <div class="table-responsive">
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" id="adminTable">
                 <thead>
                 <tr>
-                    <th>User Name</th>
-                    <th>Password</th>
-                    <th>FirstName</th>
-                    <th>LastName</th>
-                    <th>Roles</th>
-                    <th>Actions</th>
-                    <th>&nbsp;</th>
+                    <th><span>User Name</span></th>
+                    <th><span>Password</span></th>
+                    <th><span>FirstName</span></th>
+                    <th><span>LastName</span></th>
+                    <th><span>Roles</span></th>
+                    <th><span>Actions</span></th>
+                    <th><span>&nbsp;</span></th>
                 </tr>
 
                 <tr>
@@ -30,10 +30,10 @@
 
                 <tbody>
                 <tr ng-repeat="user in model.users">
-                    <td>{{user.userName}}</td>
+                    <td class="lalign">{{user.userName}}</td>
                     <td></td>
-                    <td>{{user.firstName}}</td>
-                    <td>{{user.lastName}}</td>
+                    <td class="lalign">{{user.firstName}}</td>
+                    <td class="lalign">{{user.lastName}}</td>
                     <td>{{user.roles}}</td>
                     <td><button ng-click="model.select($index)" class="btn btn-success">...</button></td>
                     <td><button ng-click="model.remove($index)" class="btn btn-danger">X</button></td>

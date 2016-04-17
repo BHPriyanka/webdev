@@ -3,9 +3,11 @@
         .module("NetNewsApp")
         .controller("MainController", MainController);
 
-    function MainController($scope, $location)
+    function MainController($location)
     {
         var vm = this;
+        vm.location;
+
         function init() {
             vm.location = $location;
         }

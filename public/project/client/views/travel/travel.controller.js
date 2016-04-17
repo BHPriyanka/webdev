@@ -14,14 +14,18 @@
         init();
 
         function travel() {
-            //$location.url("/travel/");
             TravelService.findTravelNews("travel")
                 .then(function (response) {
-                $rootScope.data = response.data;
-                    console.log($rootScope.data);
-                if ($rootScope.data != null) {
-                    $location.url('/travel');
-                }
+                    for(var i in response.data.response.results) {
+                        var id = response.data.response.results[i].id;
+                        id = id.replace(/\//g,'_');
+                        response.data.response.results[i].id = id;
+                    }
+
+                    $rootScope.data = response.data;
+                    if ($rootScope.data != null) {
+                        $location.url('/travel');
+                    }
             });
         }
     }

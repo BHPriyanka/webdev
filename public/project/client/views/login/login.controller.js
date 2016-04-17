@@ -1,28 +1,31 @@
-(function(){
+/*jslint node: true */
+"use strict";
+
+(function () {
     angular
         .module("NetNewsApp")
-        .controller("LoginController", loginController);
+        .controller("LoginController", LoginController);
 
-    function loginController(UserService, $location, $rootScope) {
+    function LoginController(UserService, $location, $rootScope) {
         var vm = this;
         vm.login = login;
         vm.isadmin = false;
-
-        function init(){
+        function init() {
 
         }
+
         init();
 
-        function login (user) {
+        function login(user) {
             if(!user) {
                 return;
             }
 
             UserService
-                .findUserByCredentials(
-                    user.userName,
-                    user.password
-                )
+                .login({
+                    userName: user.userName,
+                    password: user.password
+                })
                 .then(function (response) {
                     if (response.data != null) {
                         var user = response.data;
@@ -32,6 +35,7 @@
                                 break;
                             }
                         }
+                        console.log("login: user");
                         UserService.setCurrentUser(user);
                         $location.url('/profile');
                     }

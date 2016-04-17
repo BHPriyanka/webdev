@@ -17,6 +17,18 @@
    float: right;
 }
 
+.jga-movie-panel {
+    float: left;
+    width: 150px;
+    margin-right: 15px;
+}
+
+.jga-movie-panel .panel-heading {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
     color:#eea236;
     background-color:black;
@@ -26,4 +38,115 @@
     color: black;
 }
 
+a.newsTitle{
+    color: #c7254e;
+    text-transform: capitalize;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: oblique;
+    margin :0 auto;
+    width: 800px;
+}
 
+
+p.trail{
+    font-style: italic;
+    font-size: 20px;
+    width: 800px;
+    align-content: auto;
+    margin: 0 auto;
+    color: black;
+
+}
+
+div.my-col-50{
+    float:left;width:50%;
+}
+
+h4.headLine{
+    margin-top: 40px;
+    margin-bottom : 20px;
+    width: auto;
+    font-size: 19px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: capitalize;
+    color: #0b58a2;
+}
+
+h4.sportsheadLine{
+    margin-top: 40px;
+    margin-bottom : 20px;
+    width: auto;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: capitalize;
+    color: black;
+}
+
+h4.filmLine{
+    margin-top: 40px;
+    margin-bottom : 20px;
+    width: auto;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: capitalize;
+}
+
+a.filmColor{
+    color: #1b6d85;
+}
+a.headColor{
+    color: tomato;
+}
+
+a.sportColor{
+    color: black;
+}
+
+img.travelImage{
+    width: 350px;
+    height: 350px;
+    margin-bottom: 30px;
+}
+
+p.travelText{
+    font-style: italic;
+    font-size: 20px;
+    color: #734d99;
+    width: auto;
+    align-content: auto;
+    margin-left: 30px;
+    margin-top: 30px;
+}
+
+p.filmText{
+    font-style: italic;
+    font-size: 20px;
+    color: #052f57;
+    width: auto;
+    align-content: auto;
+    margin-left: 50px;
+    margin-top: 10px;
+}
+
+h4.techLine{
+    margin-top: 40px;
+    margin-bottom : 20px;
+    width: auto;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: capitalize;
+    font-style: italic;
+}
+
+a.techColor{
+    color: #0b93d5;
+}
+
+p.techText{
+    font-size: 20px;
+    color: #994d53;
+    width: auto;
+    align-content: auto;
+    margin-left: 50px;
+    margin-top: 10px;
+}

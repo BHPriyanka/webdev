@@ -16,6 +16,10 @@
         vm.index =0;
 
         function init(){
+            $(function(){
+                $('#adminTable').tablesorter();
+            });
+
             vm.users = UserService.findAllUsers()
                 .then(handleSuccess, handleError);
         }

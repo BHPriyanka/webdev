@@ -14,13 +14,16 @@
             createUser: createUser,
             deleteUserById: deleteUserById,
             findAllUsers: findAllUsers,
-            logout: logout
+            logout: logout,
+            login: login,
+            register: register,
+            getProfile: getProfile
 
         };
         return api;
 
         function createUser(user) {
-            return $http.post("/api/project/user", user);
+            return $http.post("/api/project/admin/user", user);
         }
 
         function setCurrentUser(user) {
@@ -36,7 +39,7 @@
         }
 
         function updateUser(userId, user) {
-            return $http.put("/api/project/user/" + userId, user);
+            return $http.put("/api/project/admin/user/" + userId, user);
         }
 
         function findUserByUserId(userId) {
@@ -47,16 +50,36 @@
             return $http.get("/api/project/user?username=" + username);
         }
 
-        function deleteUserById(userId, callback) {
-            return $http.delete("/api/project/user/" + userId);
+        function deleteUserById(userId) {
+            return $http.delete("/api/project/admin/user/" + userId);
         }
 
         function findAllUsers() {
-            return $http.get("/api/project/user");
+            return $http.get("/api/project/admin/user");
+        }
+
+        function register(user) {
+            return $http.post("/api/project/register", user);
         }
 
         function logout(){
-            return $http.post("/api/assignment/logout");
+            return $http.post("/api/project/logout");
+        }
+
+        function login(credentials) {
+            return $http.get("/api/project/login",
+                {
+                    params: {
+                        'username': credentials.userName,
+                        'password': credentials.password
+                    }
+                });
+        }
+
+
+        function getProfile() {
+            return $http.get("/api/project/profile/"+$rootScope.currentUser._id);
         }
     }
+
 })();

@@ -9,6 +9,9 @@
                 templateUrl: "views/home/home.view.html",
                 controller: "HomeController",
                 controllerAs: "model"
+                /*resolve: {
+                    loggedin: checkCurrentUser
+                }*/
             })
             .when("/register",{
                 templateUrl: "views/register/register.view.html",
@@ -24,6 +27,10 @@
                 templateUrl: "views/profile/profile.view.html",
                 controller: "ProfileController",
                 controllerAs: "model"
+                /*resolve:
+                {
+                    loggedin: checkLoggedin
+                }*/
             })
             .when("/admin",{
                 templateUrl: "views/admin/admin.view.html",
@@ -39,9 +46,10 @@
                 templateUrl: "views/details/details.view.html",
                 controller: "DetailsController",
                 controllerAs: "model"
-                //resolve: {
-                    //getLoggedIn: getLoggedIn
-                //}
+                /*resolve:
+                {
+                    loggedin: checkLoggedin
+                }*/
             })
             .when("/sports",{
                 templateUrl: "views/sports/sports.view.html",
@@ -63,25 +71,52 @@
                 controller: "TechController",
                 controllerAs: "model"
             })
-            .when("/regional/uk",{
-                templateUrl: "views/regional/uk/uk.view.html",
-                controller: "UKController",
-                controllerAs: "model"
-            })
             .otherwise({
-                redirectTo: "/home"
+                redirectTo: "/index1.html"
             });
     }
 
-    function getLoggedIn(UserService, $q) {
+    var checkLoggedin = function($q, $timeout, $http, $location, $rootScope)
+    {
         var deferred = $q.defer();
 
-        UserService.getCurrentUser()
-            .then(function(response){
-                var currentUser = response.data;
-                UserService.setCurrentUser(currentUser);
+        $http.get('/api/project/loggedin').success(function(user)
+        {
+            $rootScope.errorMessage = null;
+            // User is Authenticated
+            if (user !== '0')
+            {
+                $rootScope.currentUser = user;
                 deferred.resolve();
-            });
+            }
+            // User is Not Authenticated
+            else
+            {
+                $rootScope.errorMessage = 'You need to log in.';
+                deferred.reject();
+                $location.url('/login');
+            }
+        });
+
         return deferred.promise;
-     }
+    };
+
+    var checkCurrentUser = function($q, $timeout, $http, $location, $rootScope)
+    {
+        var deferred = $q.defer();
+
+        $http.get('/api/project/loggedin').success(function(user)
+        {
+            $rootScope.errorMessage = null;
+            // User is Authenticated
+            if (user !== '0')
+            {
+                $rootScope.currentUser = user;
+            }
+            deferred.resolve();
+        });
+
+        return deferred.promise;
+    };
+
 })();

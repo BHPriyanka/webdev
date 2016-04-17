@@ -8,26 +8,21 @@
 
 <div ng-controller="SearchController as model">
     <br>
-    <br>
-    <div ng-repeat="entry in data.response.results" class="text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col col-md-2 col-lg-offset-2">
-                    <img ng-src="{{entry.fields.thumbnail}}" width="200px" height="200px"/>
-                </div>
-                <div class="col col-md-1"></div>
-                <div class="col col-md-7">
-                    <p style="font-size: medium">
-                        <p> <a href="{{entry.webUrl}}" target="_blank">{{entry.webTitle}}</a></p>
-                        <p> <a href="#/details/{{entry.id}}" target="_blank">{{entry.webTitle}}</a></p>
-                    </h4>
-                    <p style="column-width: 100">
-                        {{entry.fields.trailText}}
-                    </p>
-                </div>
-            </div>
-        </div>
-        <br>
+    <div>
+        <h3>Search Results</h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="entry in data.response.results" class="text-center">
+                <td><img ng-src="{{entry.fields.thumbnail}}" width="200px" height="200px"/></td>
+                <td> <h3><a class="newsTitle" href="#/details/{{entry.id}}">{{entry.webTitle}}</a></h3>
+                    <p class="trail">{{entry.fields.trailText}}</p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-</div>
 </div>
