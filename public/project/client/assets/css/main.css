@@ -2971,8 +2971,9 @@ img.world {
 
 h2.worldh2 {
 	position: absolute;
-	bottom: 150px;
+	bottom: 50px;
 	font-style: italic;
 	left: 0;
 	width: 100%;
+	color: #ff3853;
 }
