@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 app.use(multer());
 
 app.use(session({
-    secret: 'NETWORK123SECURITY',
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true
 }));
