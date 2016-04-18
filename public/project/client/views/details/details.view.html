@@ -18,8 +18,8 @@
 </form>
 
 <div class="review">
-<div ng-if="model.userLikes">
-    <h3><strong>Users who Like this Article</strong></h3>
+<div ng-if="model.userLikes.length">
+    <h4><strong>Users who Like this Article</strong></h4>
     <ul>
         <li ng-repeat="user in model.userLikes">
             <a href="#/profile/{{user.username}}">
@@ -29,8 +29,8 @@
     </ul>
 </div>
 
-    <div ng-if="model.userComments">
-        <h3><strong>Users who have commented on this Article</strong></h3>
+    <div ng-if="model.userComments.length">
+        <h4><strong>Users who have commented on this Article</strong></h4>
         <ul>
             <li ng-repeat="user in model.userComments">
                 <a href="#/profile/{{user.username}}">

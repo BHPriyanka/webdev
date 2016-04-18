@@ -22,9 +22,11 @@
                             vm.profile.likesArticles[article].newsId = vm.profile.likesArticles[article].newsId.replace(/\//g, '_');
                         }
                     }
-
+                    console.log(vm.profile.comments);
+                    console.log(vm.profile.commentsArticles);
                     if(vm.profile.commentsArticles) {
                         for (var article in vm.profile.commentsArticles) {
+                            console.log(vm.profile.commentsArticles[article]);
                             vm.profile.commentsArticles[article].newsId = vm.profile.commentsArticles[article].newsId.replace(/\//g, '_');
                         }
                     }

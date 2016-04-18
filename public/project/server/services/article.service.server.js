@@ -63,11 +63,13 @@ module.exports = function(app, newsModel, NewsUserModel) {
         var userId = req.params.userId;
         var newsId = req.params.newsId;
         var article;
-
+        console.log("---------userCommentsArticle---");
         newsModel
             .userCommentsArticle(userId, news)
             .then(
                 function (article) {
+                    console.log("----MODEL results-----");
+                    console.log(article);
                     return NewsUserModel.userCommentsArticle(userId, article);
                 },
                 function (err) {
@@ -76,6 +78,8 @@ module.exports = function(app, newsModel, NewsUserModel) {
             )
             .then(
                 function (user) {
+                    console.log("second then");
+                    console.log(user);
                     res.json(user);
                 },
                 function (err) {
@@ -92,6 +96,7 @@ module.exports = function(app, newsModel, NewsUserModel) {
             .then(function (doc) {
                     news = doc;
                     if(doc){
+                        console.log("----findUserComments---");
                         return NewsUserModel.findUsersByIds(news.comments);
                     } else {
                         res.json ({});
@@ -103,6 +108,8 @@ module.exports = function(app, newsModel, NewsUserModel) {
             )
             .then (
                 function (users) {
+                    console.log("before insitializing userComments");
+                    console.log(users);
                     news.userComments = users;
                     res.json(news);
                 },

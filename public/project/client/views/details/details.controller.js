@@ -67,12 +67,14 @@
                 console.log([currentUser.userName, newsId]);
                 ArticleService.userCommentsArticle(currentUser._id, newsId, news)
                     .then(function (response) {
-                            var article = response.data;
+                        var article = response.data;
+                        console.log("DETAILS CONTROLLER FIRST CALL RESULTS");
                             if (article != null) {
-                                    ArticleService.findUserComments(newsId)
-                                 .then(function (response) {
-                                 vm.article = response.data;
-                                 })
+                                console.log(article);
+                                ArticleService.findUserComments(newsId)
+                                    .then(function (response) {
+                                        vm.article = response.data;
+                                    })
                                 $location.url('#/details');
                             }
                             else {

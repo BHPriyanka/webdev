@@ -13,7 +13,7 @@ module.exports = function(mongoose){
         roles :  [String],
         likes: [String],
         likesArticles: [NewsSchema],
-        commentsArticles: [CommentSchema],
+        commentsArticles: [NewsSchema],
         comments: [String]
     }, {collection: 'project.news.user'});
 

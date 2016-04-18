@@ -22,9 +22,37 @@ module.exports = function(app, newsModel, NewsUserModel){
             .then(
                 function (doc) {
                     user = doc;
-                    newsModel.findNewsByNewsIds(user.likes)
+                    return newsModel.findNewsByNewsIds(user.likes);
+                },
+
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function (articles) {
+                    user.likesArticles = articles;
+                    return newsModel.findNewsByNewsIds(user.comments);
+             //       res.json(user);
+                },
+
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(articles){
+                    user.commentsArticles = articles;
+                    res.json(user);
+                },
+                function(err){
+                    res.status(400).sedn(err);
+                }
+            )
+                    /*newsModel.findNewsByNewsIds(user.likes)
                         .then(
                             function (articles) {
+                                console.log("user.likes THEN");
                                 user.likesArticles = articles;
                                 res.json(user);
                             },
@@ -35,8 +63,10 @@ module.exports = function(app, newsModel, NewsUserModel){
                         );
                     newsModel.findNewsByNewsIds(user.comments)
                         .then(
-                            function (articles) {
-                                user.commentsArticles = articles;
+                            function (result) {
+                                console.log("user.comments THEN");
+                                console.log(result);
+                                user.commentsArticles = result;
                                 res.json(user);
                             },
                             function(err){
@@ -48,7 +78,7 @@ module.exports = function(app, newsModel, NewsUserModel){
                 function (err) {
                     res.status(400).send(err);
                 }
-            );
+            );*/
     }
 
 

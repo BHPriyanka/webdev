@@ -19,7 +19,7 @@ module.exports = function(db, mongoose) {
         findUserById : findUserById,
         findUsersByIds :findUsersByIds,
         userLikesArticle: userLikesArticle,
-        userCommentsArticles: userCommentsArticles
+        userCommentsArticle: userCommentsArticle
     };
     return api;
 
@@ -135,7 +135,8 @@ module.exports = function(db, mongoose) {
 
     function findUsersByIds (userIds) {
         var deferred = q.defer();
-
+        console.log("findUserByIds");
+        console.log(userIds);
         // find all users in array of user IDs
          NewsUserModel.find({
          _id: {$in: userIds}
@@ -175,16 +176,15 @@ module.exports = function(db, mongoose) {
         return deferred;
     }
 
-    function userCommentsArticles(userId, news) {
+    function userCommentsArticle(userId, news) {
         var deferred = q.defer();
-
+        console.log("userCommentsArticle in USER MODEL");
         NewsUserModel.findById(userId, function (err, doc) {
 
             if (err) {
                 deferred.reject(err);
             } else {
-                doc.likes.push(news._id);
-
+                doc.comments.push(news._id);
                 doc.save (function (err, doc) {
                     if (err) {
                         deferred.reject(err);
