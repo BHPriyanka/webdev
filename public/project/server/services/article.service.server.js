@@ -108,7 +108,7 @@ module.exports = function(app, newsModel, NewsUserModel) {
             )
             .then (
                 function (users) {
-                    console.log("before insitializing userComments");
+                    console.log("before insitializing userComments")
                     console.log(users);
                     news.userComments = users;
                     res.json(news);

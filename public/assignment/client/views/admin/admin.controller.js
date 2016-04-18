@@ -6,7 +6,7 @@
         .module("FormBuilderApp")
         .controller("AdminController", AdminController);
 
-    function AdminController(UserService, $location){
+    function AdminController(UserService, $location, $scope){
         var vm = this;
         vm.remove = remove;
         vm.update = update;
@@ -14,12 +14,10 @@
         vm.select = select;
         vm.selected =null;
         vm.index =0;
+        $scope.sortType = 'model.user.userName';
+        $scope.sortReverse  = true;
 
         function init(){
-            $(function(){
-                $('#adminTable').tablesorter();
-            });
-
             vm.users = UserService.findAllUsers()
                 .then(handleSuccess, handleError);
         }
@@ -44,14 +42,19 @@
             }
         }
 
-        function remove(index){
-            UserService.deleteUser(vm.users[index]._id)
-                .then(function (response) {
-                        vm.users = response.data;
-                        vm.selected = null;
-                        $location.url("/admin");
-                    }
-                );
+        function remove(user){
+            for(var i in vm.users){
+                if(vm.users[i]._id == user._id){
+                    UserService.deleteUser(vm.users[i]._id)
+                        .then(function (response) {
+                                vm.users = response.data;
+                                vm.selected = null;
+                                $location.url("/admin");
+                            }
+                        );
+                    break;
+                }
+            }
         }
 
         function update(user){
@@ -82,16 +85,21 @@
             }
         }
 
-        function select(index){
+        function select(user){
             vm.index = 1;
-            vm.selected =  {_id: vm.users[index]._id,
-                userName: vm.users[index].userName,
-                password: vm.users[index].password,
-                firstName: vm.users[index].firstName,
-                lastName:vm.users[index].lastName,
-                roles:vm.users[index].roles
-            };
-
+            for(var i in vm.users){
+                if(vm.users[i]._id == user._id){
+                    vm.selected =  {
+                        _id: vm.users[i]._id,
+                        userName: vm.users[i].userName,
+                        password: vm.users[i].password,
+                        firstName: vm.users[i].firstName,
+                        lastName:vm.users[i].lastName,
+                        roles:vm.users[i].roles
+                    };
+                    break;
+                }
+            }
         }
 
         function handleSuccess(response){

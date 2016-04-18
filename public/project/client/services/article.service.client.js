@@ -25,7 +25,7 @@
         function userCommentsArticle(userId, newsId, news){
             console.log("-----userCommentsArticle in ArticleService----");
             newsId = newsId.replace(/\//g,'_');
-            return $http.post("/api/user/" + userId + "/news/" + newsId, news);
+            return $http.post("api/user/" + userId + "/news/" + newsId, news);
         }
 
         function findUserComments (newsId) {
