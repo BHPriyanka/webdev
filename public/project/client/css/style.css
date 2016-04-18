@@ -119,7 +119,7 @@ p.travelText{
 
 p.filmText{
     font-style: italic;
-    font-size: 20px;
+    font-size: 15px;
     color: #052f57;
     width: auto;
     align-content: auto;
@@ -142,7 +142,7 @@ a.techColor{
 }
 
 p.techText{
-    font-size: 20px;
+    font-size: 15px;
     color: #994d53;
     width: auto;
     align-content: auto;
