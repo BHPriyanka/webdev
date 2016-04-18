@@ -3,6 +3,7 @@
 
 /*var mock = require("./user.mock.json");*/
 var q = require("q");
+var bcrypt = require("bcrypt-nodejs");
 
 module.exports = function(db, mongoose) {
     //create User Schema
@@ -26,6 +27,7 @@ module.exports = function(db, mongoose) {
     function createUser(user) {
         // use q to defer the response
         var deferred = q.defer();
+        user.password = bcrypt.hashSync(user.password);
 
         //create user using mongoose model
         userModel.create(user, function(err, doc){
