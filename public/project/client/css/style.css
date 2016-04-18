@@ -44,14 +44,15 @@ a.newsTitle{
     font-family: Arial, Helvetica, sans-serif;
     font-style: oblique;
     margin :0 auto;
-    width: 800px;
+    width: 700px;
+    font-size: 20px;
 }
 
 
 p.trail{
     font-style: italic;
-    font-size: 20px;
-    width: 800px;
+    font-size: 15px;
+    width: 700px;
     align-content: auto;
     margin: 0 auto;
     color: black;
