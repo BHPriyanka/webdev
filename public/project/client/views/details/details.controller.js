@@ -19,8 +19,14 @@
                 });
             ArticleService.findUserLikes(vm.id)
                 .then(function (response) {
-                    vm.article = response.data;
-                })
+                    var article = response.data;
+                    vm.userLikes = article.userLikes;
+                });
+            ArticleService.findUserComments(vm.id)
+                .then(function (response) {
+                    var article = response.data;
+                    vm.userComments = article.userComments;
+                });
         }
 
         init();
@@ -59,17 +65,15 @@
             if (currentUser) {
                 console.log("INSIDE addReview");
                 console.log([currentUser.userName, newsId]);
-                ArticleService.userCommentsArticle(currentUser._id, newsId, news);
-                    //.then(function (response) {
-                      //      var article = response.data;
-                        //    if (article != null) {
-                                /*    ArticleService.findUserLikes(newsId)
+                ArticleService.userCommentsArticle(currentUser._id, newsId, news)
+                    .then(function (response) {
+                            var article = response.data;
+                            if (article != null) {
+                                    ArticleService.findUserComments(newsId)
                                  .then(function (response) {
-                                 console.log("RESPONSE FROM findUserLikes:");
-                                 console.log(response.data);
                                  vm.article = response.data;
-                                 })*/
-                          /*      $location.url('#/details');
+                                 })
+                                $location.url('#/details');
                             }
                             else {
                                 $location.url('/login');
@@ -78,7 +82,7 @@
                         function (err) {
                             vm.error = err;
                         }
-                    );*/
+                    );
             }
         }
     }

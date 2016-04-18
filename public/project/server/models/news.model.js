@@ -13,7 +13,8 @@ module.exports = function(db, mongoose) {
         findNewsByNewsIds: findNewsByNewsIds,
         createNews: createNews,
         findNewsByNewsId: findNewsByNewsId,
-        userLikesArticle: userLikesArticle
+        userLikesArticle: userLikesArticle,
+        userCommentsArticle : userCommentsArticle
     };
     return api;
 
@@ -24,7 +25,8 @@ module.exports = function(db, mongoose) {
              webTitle: news.response.content.webTitle,
              webUrl: news.response.content.webUrl,
              thumbnail: news.response.content.fields.thumbnail,
-             likes: []
+             likes: [],
+             comments: []
         };
 
         var deferred = q.defer();
@@ -104,6 +106,55 @@ module.exports = function(db, mongoose) {
                     });
                     // add user to likes
                     article.likes.push (userId);
+                    // save new instance
+                    article.save(function(err, doc) {
+                        if (err) {
+                            deferred.reject(err);
+                        } else {
+                            deferred.resolve(doc);
+                        }
+                    });
+                }
+            });
+
+        return deferred.promise;
+    }
+
+    function userCommentsArticle(userId, article) {
+        var deferred = q.defer();
+
+        Article.findOne({newsId: article.response.content.id},
+
+            function (err, doc) {
+
+                // reject promise if error
+                if (err) {
+                    deferred.reject(err);
+                }
+
+                if (doc) {
+                    doc.comments.push (userId);
+                    // save changes
+                    doc.save(function(err, doc){
+                        if (err) {
+                            deferred.reject(err);
+                        } else {
+                            deferred.resolve(doc);
+                        }
+                    });
+                } else {
+                    // if there's no article
+                    // create a new instance
+                    article = new Article({
+                        newsId: article.response.content.id,
+                        webTitle: article.response.content.webTitle,
+                        webUrl: article.response.content.webUrl,
+                        thumbnail: article.response.content.fields.thumbnail,
+                        likes: [],
+                        comments: []
+                    });
+                    // add user to likes
+                    article.comments.push (userId);
                     // save new instance
                     article.save(function(err, doc) {
                         if (err) {

@@ -12,6 +12,10 @@ module.exports = function(mongoose) {
         userLikes: [
             {userName: String}
         ],
+        comments: [String],
+        userComments: [
+            {userName: String}
+        ]
         // store movie documents in this collection
     }, {collection: 'project.news.article'});
 

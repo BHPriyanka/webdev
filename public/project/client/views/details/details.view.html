@@ -18,16 +18,27 @@
 </form>
 
 <div class="review">
-<div ng-if="model.article.userLikes">
+<div ng-if="model.userLikes">
     <h3><strong>Users who Like this Article</strong></h3>
     <ul>
-        <li ng-repeat="user in model.article.userLikes">
+        <li ng-repeat="user in model.userLikes">
             <a href="#/profile/{{user.username}}">
                 {{user.userName}}
             </a>
         </li>
     </ul>
 </div>
+
+    <div ng-if="model.userComments">
+        <h3><strong>Users who have commented on this Article</strong></h3>
+        <ul>
+            <li ng-repeat="user in model.userComments">
+                <a href="#/profile/{{user.username}}">
+                    {{user.userName}}
+                </a>
+            </li>
+        </ul>
+    </div>
 
 <div>
     <button ng-click="model.addReview(model.id, model.data)"

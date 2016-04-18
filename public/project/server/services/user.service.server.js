@@ -22,23 +22,33 @@ module.exports = function(app, newsModel, NewsUserModel){
             .then(
                 function (doc) {
                     user = doc;
-                    return newsModel.findNewsByNewsIds(user.likes);
+                    newsModel.findNewsByNewsIds(user.likes)
+                        .then(
+                            function (articles) {
+                                user.likesArticles = articles;
+                                res.json(user);
+                            },
+
+                            function (err) {
+                                res.status(400).send(err);
+                            }
+                        );
+                    newsModel.findNewsByNewsIds(user.comments)
+                        .then(
+                            function (articles) {
+                                user.commentsArticles = articles;
+                                res.json(user);
+                            },
+                            function(err){
+                                res.status(400).send(err);
+                            }
+                        );
                 },
 
                 function (err) {
                     res.status(400).send(err);
                 }
-            )
-            .then(
-                function (articles) {
-                    user.likesArticles = articles;
-                    res.json(user);
-                },
-
-                function (err) {
-                    res.status(400).send(err);
-                }
-            )
+            );
     }
 
 

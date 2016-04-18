@@ -76,7 +76,7 @@ h4.sportsheadLine{
     margin-top: 40px;
     margin-bottom : 20px;
     width: auto;
-    font-size: 16px;
+    font-size: 12px;
     font-family: Arial, Helvetica, sans-serif;
     text-transform: capitalize;
     color: black;
@@ -110,7 +110,7 @@ img.travelImage{
 
 p.travelText{
     font-style: italic;
-    font-size: 20px;
+    font-size: 10px;
     color: #734d99;
     width: auto;
     align-content: auto;

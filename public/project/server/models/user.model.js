@@ -18,7 +18,8 @@ module.exports = function(db, mongoose) {
         findUserByCredentials: findUserByCredentials,
         findUserById : findUserById,
         findUsersByIds :findUsersByIds,
-        userLikesArticle: userLikesArticle
+        userLikesArticle: userLikesArticle,
+        userCommentsArticles: userCommentsArticles
     };
     return api;
 
@@ -173,4 +174,29 @@ module.exports = function(db, mongoose) {
 
         return deferred;
     }
+
+    function userCommentsArticles(userId, news) {
+        var deferred = q.defer();
+
+        NewsUserModel.findById(userId, function (err, doc) {
+
+            if (err) {
+                deferred.reject(err);
+            } else {
+                doc.likes.push(news._id);
+
+                doc.save (function (err, doc) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        // resolve promise with user
+                        deferred.resolve (doc);
+                    }
+                });
+            }
+        });
+
+        return deferred;
+    }
+
 }

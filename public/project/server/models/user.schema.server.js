@@ -1,6 +1,7 @@
 
 module.exports = function(mongoose){
     var NewsSchema = require("./news.schema.server.js")(mongoose);
+    var CommentSchema = require("./comment.schema.server.js")(mongoose);
 
     var NewsUserSchema = mongoose.Schema({
         userName: String,
@@ -11,7 +12,9 @@ module.exports = function(mongoose){
         phones : [String],
         roles :  [String],
         likes: [String],
-        likesArticles: [NewsSchema]
+        likesArticles: [NewsSchema],
+        commentsArticles: [CommentSchema],
+        comments: [String]
     }, {collection: 'project.news.user'});
 
     return NewsUserSchema;

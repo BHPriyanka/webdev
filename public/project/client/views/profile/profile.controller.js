@@ -22,6 +22,12 @@
                             vm.profile.likesArticles[article].newsId = vm.profile.likesArticles[article].newsId.replace(/\//g, '_');
                         }
                     }
+
+                    if(vm.profile.commentsArticles) {
+                        for (var article in vm.profile.commentsArticles) {
+                            vm.profile.commentsArticles[article].newsId = vm.profile.commentsArticles[article].newsId.replace(/\//g, '_');
+                        }
+                    }
                 });
         }
         init();
@@ -87,6 +93,8 @@
                                 vm.currentUser.likes = updatedUser.data.likes;
                                 vm.currentUser.likesArticles = updatedUser.data.likesArticles;
                                 vm.currentUser.thumbnail = updatedUser.data.thumbnail;
+                                vm.currentUser.comments = updatedUser.data.comments;
+                                vm.currentUser.commentsArticles = updatedUser.data.commentsArticles;
 
                                 UserService.setCurrentUser(updatedUser.data);
 
