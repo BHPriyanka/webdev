@@ -8,10 +8,10 @@
             .when("/home",{
                 templateUrl: "views/home/home.view.html",
                 controller: "HomeController",
-                controllerAs: "model"
-                /*resolve: {
+                controllerAs: "model",
+                resolve: {
                     loggedin: checkCurrentUser
-                }*/
+                }
             })
             .when("/register",{
                 templateUrl: "views/register/register.view.html",
@@ -26,16 +26,19 @@
             .when("/profile",{
                 templateUrl: "views/profile/profile.view.html",
                 controller: "ProfileController",
-                controllerAs: "model"
-                /*resolve:
+                controllerAs: "model",
+                resolve:
                 {
                     loggedin: checkLoggedin
-                }*/
+                }
             })
             .when("/admin",{
                 templateUrl: "views/admin/admin.view.html",
                 controller: "AdminController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve:{
+                    loggedin: checkAdmin
+                }
             })
             .when("/search",{
                 templateUrl: "views/search/search.view.html",
@@ -45,11 +48,11 @@
             .when("/details/:id",{
                 templateUrl: "views/details/details.view.html",
                 controller: "DetailsController",
-                controllerAs: "model"
-                /*resolve:
+                controllerAs: "model",
+                resolve:
                 {
-                    loggedin: checkLoggedin
-                }*/
+                    loggedin: checkCurrentUser
+                }
             })
             .when("/sports",{
                 templateUrl: "views/sports/sports.view.html",
@@ -72,9 +75,34 @@
                 controllerAs: "model"
             })
             .otherwise({
-                redirectTo: "/index1.html"
+                redirectTo: "/home"
             });
     }
+
+
+    var checkAdmin = function($q, $timeout, $http, $location, $rootScope)
+    {
+        var deferred = $q.defer();
+
+        $http.get('/api/assignment/loggedin').success(function(user)
+        {
+            $rootScope.errorMessage = null;
+            // User is Authenticated
+            if (user !== '0' && user.roles.indexOf('admin') != -1)
+            {
+                $rootScope.currentUser = user;
+                deferred.resolve();
+            }
+            else
+            {
+                $rootScope.errorMessage = 'You need to log in.';
+                deferred.reject();
+                $location.url('/login');
+            }
+        });
+
+        return deferred.promise;
+    };
 
     var checkLoggedin = function($q, $timeout, $http, $location, $rootScope)
     {

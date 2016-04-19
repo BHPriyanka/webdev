@@ -86,17 +86,17 @@
                     if (response) {
                         UserService.findUserByUserId($rootScope.currentUser._id)
                             .then (function (updatedUser) {
-                                vm.currentUser.password = updatedUser.data.password;
-                                vm.currentUser.userName = updatedUser.data.userName;
-                                vm.currentUser.firstName = updatedUser.data.firstName;
-                                vm.currentUser.lastName = updatedUser.data.lastName;
-                                vm.currentUser.emails = updatedUser.data.emails.join(",");
-                                vm.currentUser.phones = updatedUser.data.phones.join(",");
-                                vm.currentUser.likes = updatedUser.data.likes;
-                                vm.currentUser.likesArticles = updatedUser.data.likesArticles;
-                                vm.currentUser.thumbnail = updatedUser.data.thumbnail;
-                                vm.currentUser.comments = updatedUser.data.comments;
-                                vm.currentUser.commentsArticles = updatedUser.data.commentsArticles;
+                                vm.profile.password = updatedUser.data.password;
+                                vm.profile.userName = updatedUser.data.userName;
+                                vm.profile.firstName = updatedUser.data.firstName;
+                                vm.profile.lastName = updatedUser.data.lastName;
+                                vm.profile.emails = updatedUser.data.emails.join(",");
+                                vm.profile.phones = updatedUser.data.phones.join(",");
+                                vm.profile.likes = updatedUser.data.likes;
+                                vm.profile.likesArticles = updatedUser.data.likesArticles;
+                                vm.profile.thumbnail = updatedUser.data.thumbnail;
+                                vm.profile.comments = updatedUser.data.comments;
+                                vm.profile.commentsArticles = updatedUser.data.commentsArticles;
 
                                 UserService.setCurrentUser(updatedUser.data);
 

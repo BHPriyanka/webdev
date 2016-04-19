@@ -1,7 +1,7 @@
 <div ng-controller="DetailsController as model">
 <br/>
-    <h2 align="center">{{model.data.response.content.fields.headline}}</h2>
-    <h4 align="center">{{model.data.response.content.fields.standfirst}}</h4>
+    <h2 align="center" ng-bind-html="model.customHead">{{model.data.response.content.fields.headline}}</h2>
+    <h4 align="center" ng-bind-html="model.customstandFirst">{{model.data.response.content.fields.standfirst}}</h4>
     <br/>
     <button class="btn btn-primary pull-right" ng-click="model.favorite(model.id, model.data)">
         <span class="glyphicon glyphicon-star-empty"></span>
@@ -12,7 +12,7 @@
         <img ng-src="{{model.data.response.content.fields.thumbnail}}"/>
     </div>
     <br/>
-    <div class="container">
+    <div class="container" ng-bind-html="model.customBody">
         {{model.data.response.content.fields.body}}
     </div>
 </form>

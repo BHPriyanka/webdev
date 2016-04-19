@@ -71,10 +71,6 @@
             return $http.get("/api/assignment/loggedin");
         }
 
-        function logout() {
-            return $http.post("/api/assignment/logout");
-        }
-
         function findUserByUserId(userId) {
             return $http.get("/api/assignment/user/" + userId);
         }

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-route.js"></script>
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -42,35 +42,13 @@
     <script src="views/travel/travel.controller.js"></script>
     <script src="views/technology/technology.controller.js"></script>
     <script src="views/details/details.controller.js"></script>
-    <script src="views/main/main.controller.js"></script>
 
     <title>NetNews Project</title>
 </head>
 <body>
-<div class="container" ng-controller="MainController as model">
-    <div ng-include="'views/header/header.view.html'"></div>
+<div class="container">
+    <div ng-include src="'views/header/header.view.html'"></div>
     <div ng-view></div>
-    <div ng-show="model.location.url() == '/index1.html'" ng-controller="HomeController">
-        <div ng-repeat="entry in data.response.results" class="text-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col col-md-2 col-lg-offset-2">
-                        <img ng-src="{{entry.fields.thumbnail}}" width="200px" height="200px"/>
-                    </div>
-                    <div class="col col-md-1"></div>
-                    <div class="col col-md-7">
-                        <h4 style="font-size: medium">
-                            <p> <a href="{{entry.webUrl}}" target="_blank">{{entry.fields.headline}}</a></p>
-                        </h4>
-                        <p style="column-width: 100">
-                            {{entry.fields.trailText}}
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <br>
-        </div>
-    </div>
 </div>
 </div>
 </body>

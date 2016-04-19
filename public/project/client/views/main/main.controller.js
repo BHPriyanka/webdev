@@ -9,7 +9,8 @@
         vm.location;
 
         function init() {
-            vm.location = $location;
+            vm.location = $location.url();
+            console.log(vm.location);
         }
         init();
 

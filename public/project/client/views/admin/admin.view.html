@@ -5,13 +5,25 @@
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <div class="table-responsive">
-            <table class="table table-bordered table-striped" id="adminTable">
+            <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th><span>User Name</span></th>
+                    <th>
+                        <span ng-click="sortType = 'userName'; sortReverse = !sortReverse" ng-show="!sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                        <span ng-click="sortType = 'userName'; sortReverse = !sortReverse" ng-show="sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                        User Name
+                    </th>
                     <th><span>Password</span></th>
-                    <th><span>FirstName</span></th>
-                    <th><span>LastName</span></th>
+                    <th>
+                        <span ng-click="sortType = 'firstName'; sortReverse = !sortReverse" ng-show="!sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                        <span ng-click="sortType = 'firstName'; sortReverse = !sortReverse" ng-show="sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                        FirstName
+                    </th>
+                    <th>
+                        <span ng-click="sortType = 'lastName'; sortReverse = !sortReverse"  ng-show="!sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                        <span ng-click="sortType = 'lastName'; sortReverse = !sortReverse"  ng-show="sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                        LastName
+                    </th>
                     <th><span>Roles</span></th>
                     <th><span>Actions</span></th>
                     <th><span>&nbsp;</span></th>
@@ -29,14 +41,14 @@
                 </thead>
 
                 <tbody>
-                <tr ng-repeat="user in model.users">
+                <tr ng-repeat="user in model.users| orderBy:sortType:sortReverse">
                     <td class="lalign">{{user.userName}}</td>
                     <td></td>
                     <td class="lalign">{{user.firstName}}</td>
                     <td class="lalign">{{user.lastName}}</td>
                     <td>{{user.roles}}</td>
-                    <td><button ng-click="model.select($index)" class="btn btn-success">...</button></td>
-                    <td><button ng-click="model.remove($index)" class="btn btn-danger">X</button></td>
+                    <td><button ng-click="model.select(user)" class="btn btn-success">...</button></td>
+                    <td><button ng-click="model.remove(user)" class="btn btn-danger">X</button></td>
                 </tr>
             </table>
         </div>

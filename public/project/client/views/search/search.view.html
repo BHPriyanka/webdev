@@ -18,11 +18,12 @@
             <tbody>
             <tr ng-repeat="entry in data.response.results" class="text-center">
                 <td><img ng-src="{{entry.fields.thumbnail}}" width="200px" height="200px"/></td>
-                <td> <h3><a class="newsTitle" href="#/details/{{entry.id}}">{{entry.webTitle}}</a></h3>
-                    <p class="trail">{{entry.fields.trailText}}</p>
+                <td> <h3><a class="newsTitle" href="#/details/{{entry.id}}" ng-bind-html="model.trustAsHtml(entry.webTitle)">{{entry.webTitle}}</a></h3>
+                    <p class="trail" ng-bind-html="model.trustAsHtml(entry.fields.trailText)">{{entry.fields.trailText}}</p>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
+

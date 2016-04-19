@@ -8,7 +8,7 @@
         vm.logout = logout;
 
         function init(){
-            vm.$location = $location;
+            $location.url('/home');
         }
         init();
 

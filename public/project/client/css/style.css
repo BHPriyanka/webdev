@@ -51,45 +51,29 @@ a.newsTitle{
 
 p.trail{
     font-style: italic;
-    font-size: 15px;
-    width: 800px;
-    align-content: auto;
-    margin: 0 auto;
     color: black;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
 
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
-div.my-col-50{
-    float:left;width:50%;
-}
 
 h4.headLine{
-    margin-top: 40px;
-    margin-bottom : 20px;
-    width: auto;
-    font-size: 19px;
     font-family: Arial, Helvetica, sans-serif;
     text-transform: capitalize;
     color: #0b58a2;
-}
-
-h4.sportsheadLine{
-    margin-top: 40px;
-    margin-bottom : 20px;
-    width: auto;
-    font-size: 15px;
-    font-family: Arial, Helvetica, sans-serif;
-    text-transform: capitalize;
-    color: black;
+    align-content: center;
 }
 
 h4.filmLine{
-    margin-top: 40px;
-    margin-bottom : 20px;
-    width: auto;
-    font-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
     text-transform: capitalize;
+    align-content: center;
+
 }
 
 a.filmColor{
@@ -103,36 +87,51 @@ a.sportColor{
     color: black;
 }
 
-img.Image{
-    width: 300px;
-    height: 200px;
-    margin-bottom: 30px;
+div.my-col{
+    position:relative;
+}
+
+div.thumbnail{
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    list-style: none;
+}
+
+img.full-width{
+    width: 100%;
 }
 
 p.travelText{
-    font-style: italic;
-    font-size: 14px;
     color: #734d99;
-    width: 300px;
-    align-content: auto;
-    margin-left: 140px;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    align-content: center;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 p.filmText{
     font-style: italic;
-    font-size: 15px;
     color: #052f57;
-    width: auto;
-    align-content: auto;
-    margin-left: 50px;
-    margin-top: 10px;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 h4.techLine{
-    margin-top: 40px;
-    margin-bottom : 20px;
-    width: auto;
-    font-size: 18px;
+    align-content: center;
     font-family: Arial, Helvetica, sans-serif;
     text-transform: capitalize;
     font-style: italic;
@@ -143,10 +142,14 @@ a.techColor{
 }
 
 p.techText{
-    font-size: 15px;
     color: #994d53;
-    width: auto;
-    align-content: auto;
-    margin-left: 50px;
-    margin-top: 10px;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
+
+

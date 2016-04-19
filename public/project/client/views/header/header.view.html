@@ -1,6 +1,4 @@
 <nav ng-controller="HeaderController as model">
-    <!-- The justified navigation menu is meant for single line per list item.
-          Multiple lines will require custom code not provided by Bootstrap. -->
     <div class="masthead">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
@@ -11,7 +9,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/project/client/index.html">Home</a>
+                    <a class="navbar-brand" href="/project/client/index.html">Main</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -53,10 +51,11 @@
         <h3 class="text-muted text-center"></h3>
         <nav>
             <ul class="nav nav-justified nav-pills">
-                <li role="presentation" ng-class="{'active': model.$location.url().indexOf('sports') != -1}" ng-click="model.sports()" ng-controller="SportsController as model"><a href="#/sports">Sports</a></li>
-                <li role="presentation" ng-class="{'active': model.$location.url().indexOf('entertainment') != -1}" ng-click="model.entertainment()" ng-controller="EntertainmentController as model"><a href="#/entertainment">Entertainment</a></li>
-                <li role="presentation" ng-class="{'active': model.$location.url().indexOf('travel') != -1}" ng-click="model.travel()" ng-controller="TravelController as model"><a href="#/travel">Travel</a></li>
-                <li role="presentation" ng-class="{'active': model.$location.url().indexOf('technology') != -1}" ng-click="model.technology()" ng-controller="TechController as model"><a href="#/technology">Technology</a></li>
+                <li role="presentation" ng-class="{'active': model.$location.url().indexOf('home') != -1}"><a href="#/home">Home</a></li>
+                <li role="presentation" ng-class="{'active': model.$location.url().indexOf('sports') != -1}"><a href="#/sports">Sports</a></li>
+                <li role="presentation" ng-class="{'active': model.$location.url().indexOf('entertainment') != -1}" ><a href="#/entertainment">Entertainment</a></li>
+                <li role="presentation" ng-class="{'active': model.$location.url().indexOf('travel') != -1}"><a href="#/travel">Travel</a></li>
+                <li role="presentation" ng-class="{'active': model.$location.url().indexOf('technology') != -1}"><a href="#/technology">Technology</a></li>
             </ul>
         </nav>
     </div>

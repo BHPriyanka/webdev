@@ -7,12 +7,11 @@
         var api = {
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
-            findUserByCredentials: findUserByCredentials,
             updateUser: updateUser,
             findUserByUserId: findUserByUserId,
             findUserByUsername: findUserByUsername,
             createUser: createUser,
-            deleteUserById: deleteUserById,
+            deleteUser: deleteUser,
             findAllUsers: findAllUsers,
             logout: logout,
             login: login,
@@ -34,10 +33,6 @@
             return $http.get("/api/project/loggedin");
         }
 
-        function findUserByCredentials(username, password) {
-            return $http.get("/api/project/user?username=" + username + "&password=" + password);
-        }
-
         function updateUser(userId, user) {
             return $http.put("/api/project/admin/user/" + userId, user);
         }
@@ -50,7 +45,7 @@
             return $http.get("/api/project/user?username=" + username);
         }
 
-        function deleteUserById(userId) {
+        function deleteUser(userId) {
             return $http.delete("/api/project/admin/user/" + userId);
         }
 

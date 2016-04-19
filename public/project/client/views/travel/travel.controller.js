@@ -3,30 +3,25 @@
         .module("NetNewsApp")
         .controller("TravelController", travelController);
 
-    function travelController($location, $routeParams, TravelService, $rootScope) {
+    function travelController($location, TravelService, $sce) {
         var vm =this;
-        vm.travel = travel;
+        vm.trustAsHtml = $sce.trustAsHtml;
 
         function init() {
-            vm.location = $location;
+            $location.url('/travel');
+            TravelService.findTravelNews("travel")
+                .then(function (response) {
+                    for (var i in response.data.response.results) {
+                        var id = response.data.response.results[i].id;
+                        id = id.replace(/\//g, '_');
+                        response.data.response.results[i].id = id;
+                    }
+
+                    vm.data = response.data;
+                });
         }
 
         init();
 
-        function travel() {
-            TravelService.findTravelNews("travel")
-                .then(function (response) {
-                    for(var i in response.data.response.results) {
-                        var id = response.data.response.results[i].id;
-                        id = id.replace(/\//g,'_');
-                        response.data.response.results[i].id = id;
-                    }
-
-                    $rootScope.data = response.data;
-                    if ($rootScope.data != null) {
-                        $location.url('/travel');
-                    }
-            });
-        }
     }
 })();

@@ -3,24 +3,22 @@
         .module("NetNewsApp")
         .controller("HomeController", homeController);
 
-    function homeController($location, $routeParams, NewsService, $rootScope) {
+    function homeController($location, NewsService, $sce) {
         var vm = this;
-        vm.home = home;
+        vm.trustAsHtml = $sce.trustAsHtml;
 
         function init() {
-
+            $location.url('/home');
+            NewsService.findWorldNews("world", function (response) {
+                for (var i in response.response.results) {
+                    var id = response.response.results[i].id;
+                    id = id.replace(/\//g, '_');
+                    response.response.results[i].id = id;
+                }
+                vm.data = response;
+            });
         }
 
         init();
-
-        function home() {
-            $location.url("/home/");
-            NewsService.findWorldNews("home", function (response) {
-                $rootScope.data = response;
-                if ($rootScope.data != null) {
-                    $location.url('/home/');
-                }
-            });
-        }
     }
 })();

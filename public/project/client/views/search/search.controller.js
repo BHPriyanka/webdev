@@ -3,8 +3,11 @@
         .module("NetNewsApp")
         .controller("SearchController", searchController);
 
-        function searchController($location, $routeParams, NewsService, $rootScope){
+        function searchController($location, $routeParams, NewsService, $rootScope, $sce){
             var vm = this;
+            vm.url = "http://content.guardianapis.com/search?show-fields=all&show-refinements=all&api-key=617dcc89-35bf-4ae2-bf4d-c4c968ceb7a0&callback=JSON_CALLBACK&q="+$routeParams.title+"&page=";
+
+            vm.trustAsHtml = $sce.trustAsHtml;
 
             function init(){
                 vm.location = $location;
@@ -12,7 +15,6 @@
             init();
             vm.search = search;
             vm.title = $routeParams.title;
-
 
             if(vm.title){
                 search(vm.title);
@@ -26,9 +28,16 @@
                             id = id.replace(/\//g,'_');
                             response.response.results[i].id = id;
                         }
-                        $rootScope.data = response;
-                        if($rootScope.data != null) {
-                            $location.url('/search/');
+                    /*console.log(response.response);
+                    console.log(response.response.pages);
+                    for (var page in response.response.pages){
+                        NewsService.findNewsByPage(news.title, page, function(respon){
+                            console.log(respon);
+                        });
+                    }*/
+                    $rootScope.data = response;
+                    if($rootScope.data != null) {
+                        $location.url('/search/');
                     }});
             }
         }

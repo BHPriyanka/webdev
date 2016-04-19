@@ -1,24 +1,36 @@
 <div ng-controller="HomeController as model">
     <br>
-    <br>
-    <div ng-repeat="entry in data.response.results" class="text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col col-md-2 col-lg-offset-2">
-                    <img src="{{entry.fields.thumbnail}}" width="200px" height="200px"/>
-                </div>
-                <div class="col col-md-1"></div>
-                <div class="col col-md-7">
-                    <h4 style="font-size: medium">
-                        <p> <a href="{{entry.webUrl}}" target="_blank">{{entry.fields.headline}}</a></p>
-                    </h4>
-                    <p style="column-width: 100">
-                        {{entry.fields.trailText}}
-                    </p>
+    <div ng-repeat="entry in model.data.response.results" class="text-center">
+        <div class="my-col">
+            <div ng-if="$even" class="col-sm-6 col-md-6 col-lg-6">
+                <div class="thumbnail">
+                    <img class="full-width img-responsive img-rounded" ng-src="{{entry.fields.thumbnail}}"/>
+                    <div class="caption">
+                        <h4 class="headLine">
+                            <a href="#/details/{{entry.id}}" ng-bind-html="model.trustAsHtml(entry.fields.headline)">{{entry.fields.headline}}</a>
+                        </h4>
+                        <p clas="trail" ng-bind-html="model.trustAsHtml(entry.fields.trailText)">
+                            {{entry.fields.trailText}}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-        <br>
+
+        <div class="my-col">
+            <div ng-if="$odd" class="col-sm-6 col-md-6 col-lg-6">
+                <div class="thumbnail">
+                    <img class="full-width img-responsive img-rounded" ng-src="{{entry.fields.thumbnail}}"/>
+                    <div class="caption">
+                        <h4 class="headLine">
+                            <a href="#/details/{{entry.id}}" ng-bind-html="model.trustAsHtml(entry.fields.headline)">{{entry.fields.headline}}</a>
+                        </h4>
+                        <p class="trail" ng-bind-html="model.trustAsHtml(entry.fields.trailText)">
+                            {{entry.fields.trailText}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 </div>

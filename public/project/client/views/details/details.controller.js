@@ -3,7 +3,7 @@
         .module("NetNewsApp")
         .controller("DetailsController",detailsController);
 
-    function detailsController($location, $routeParams, ArticleService, NewsService, $rootScope) {
+    function detailsController($location, $routeParams, ArticleService, NewsService, $rootScope, $sce) {
         var vm = this;
         vm.id = $routeParams.id;
         vm.favorite = favorite;
@@ -11,11 +11,14 @@
         var currentUser = $rootScope.currentUser;
 
         function init() {
-            vm.location = $location;
+            $location.url('#/details/');
             vm.id = vm.id.replace(/_/g, '/');
             NewsService.findNewsById(vm.id)
                 .then(function (response) {
                     vm.data = response.data;
+                    vm.customBody = $sce.trustAsHtml(vm.data.response.content.fields.body);
+                    vm.customHead = $sce.trustAsHtml(vm.data.response.content.fields.headline);
+                    vm.customstandFirst = $sce.trustAsHtml(vm.data.response.content.fields.standfirst);
                 });
             ArticleService.findUserLikes(vm.id)
                 .then(function (response) {
