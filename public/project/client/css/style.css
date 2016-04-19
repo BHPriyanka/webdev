@@ -96,7 +96,8 @@ div.thumbnail{
     list-style: none;
     display: inline-block;
     width: 80%;
-    height:80%;
+    height:400px;
+    overflow: hidden;
 }
 
 div.caption{

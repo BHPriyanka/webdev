@@ -1,9 +1,8 @@
 <div ng-controller="SportsController as model">
     <br>
     <div ng-repeat="entry in data.response.results" class="text-center">
-        <div class="my-col">
-            <div ng-if="$even" class="col-sm-6 col-md-6 col-lg-6">
-                <div class="thumbnail">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div ng-if="$even" class="thumbnail">
                     <img class="full-width img-responsive img-rounded" ng-src="{{entry.fields.thumbnail}}"/>
                     <div class="caption">
                         <h4 class="headLine">
@@ -14,12 +13,7 @@
                         </p>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="my-col">
-            <div ng-if="$odd" class="col-sm-6 col-md-6 col-lg-6">
-                <div class="thumbnail">
+                <div ng-if="$odd" class="thumbnail">
                     <img class="full-width img-responsive img-rounded" ng-src="{{entry.fields.thumbnail}}"/>
                     <div class="caption">
                         <h4 class="headLine">
@@ -33,4 +27,3 @@
             </div>
         </div>
     </div>
-</div>

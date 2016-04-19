@@ -1,10 +1,19 @@
 <div ng-controller="HomeController as model">
     <br>
-    <table class="table table-striped">
-    <tr ng-repeat="entry in data.response.results" class="text-center">
-        <td >
-            <div class="col-sm-6 col-md-6 col-lg-6">
-                <div class="thumbnail">
+    <div ng-repeat="entry in data.response.results" class="text-center">
+            <div class="col-sm-6 col-xs-12 col-md-6 col-lg-6">
+                <div ng-if="$even" class="thumbnail">
+                    <img class="full-width img-responsive img-rounded" ng-src="{{entry.fields.thumbnail}}"/>
+                    <div class="caption">
+                        <h4 class="headLine">
+                            <a href="#/details/{{entry.id}}" ng-bind-html="model.trustAsHtml(entry.fields.headline)">{{entry.fields.headline}}</a>
+                        </h4>
+                        <p clas="trail" ng-bind-html="model.trustAsHtml(entry.fields.trailText)">
+                            {{entry.fields.trailText}}
+                        </p>
+                    </div>
+                </div>
+                <div ng-if="$odd" class="thumbnail">
                     <img class="full-width img-responsive img-rounded" ng-src="{{entry.fields.thumbnail}}"/>
                     <div class="caption">
                         <h4 class="headLine">
@@ -16,20 +25,5 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-                <div class="thumbnail">
-                    <img class="full-width img-responsive img-rounded" ng-src="{{entry.fields.thumbnail}}"/>
-                    <div class="caption">
-                        <h4 class="headLine">
-                            <a href="#/details/{{entry.id}}" ng-bind-html="model.trustAsHtml(entry.fields.headline)">{{entry.fields.headline}}</a>
-                        </h4>
-                        <p clas="trail" ng-bind-html="model.trustAsHtml(entry.fields.trailText)">
-                            {{entry.fields.trailText}}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </td>
-    </tr>
-        </table>
+    </div>
 </div>
