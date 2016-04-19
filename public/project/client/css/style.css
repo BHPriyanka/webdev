@@ -86,8 +86,10 @@ a.sportColor{
     color: black;
 }
 
-div.my-col{
+td.my-col{
    position: relative;
+    width:50%;
+    float: left;
 }
 
 div.thumbnail{
