@@ -3,12 +3,11 @@
         .module("NetNewsApp")
         .controller("TravelController", travelController);
 
-    function travelController($location, TravelService, $sce) {
-        var vm =this;
+    function travelController($location, TravelService, $sce, $rootScope) {
+        var vm = this;
         vm.trustAsHtml = $sce.trustAsHtml;
 
         function init() {
-            $location.url('/travel');
             TravelService.findTravelNews("travel")
                 .then(function (response) {
                     for (var i in response.data.response.results) {
@@ -16,8 +15,8 @@
                         id = id.replace(/\//g, '_');
                         response.data.response.results[i].id = id;
                     }
-
-                    vm.data = response.data;
+                    $rootScope.data = response.data;
+                    $location.url('/travel');
                 });
         }
 

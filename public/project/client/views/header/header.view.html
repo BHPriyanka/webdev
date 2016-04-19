@@ -13,6 +13,17 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
+                        <li class="visible-xs" ng-class="{'active': model.$location.url().indexOf('home') != -1}">
+                            <a href="#/home">Home</a></li>
+                        <li class="visible-xs" ng-class="{'active': model.$location.url().indexOf('sports') != -1}">
+                            <a href="#/sports">Sports</a></li>
+                        <li class="visible-xs" ng-class="{'active': model.$location.url().indexOf('entertainment') != -1}" >
+                            <a href="#/entertainment">Entertainment</a></li>
+                        <li class="visible-xs" ng-class="{'active': model.$location.url().indexOf('travel') != -1}">
+                            <a href="#/travel">Travel</a></li>
+                        <li class="visible-xs" ng-class="{'active': model.$location.url().indexOf('technology') != -1}">
+                            <a href="#/technology">Technology</a></li>
+
                         <li ng-class="{'active': model.$location.url() == '/search'}">
                             <a href="#/search">
                                 <scan class="glyphicon glyphicon-search" id="glyphi"></scan>
@@ -20,7 +31,9 @@
                         </li>
                         <li ng-class="{'active': model.$location.url() == '/register'}"
                             ng-hide="currentUser">
-                            <a href="#/register">Register</a>
+                            <a href="#/register">
+                                <scan class="glyphicon glyphicon-star" id="glyphi"></scan>
+                                Register</a>
                         </li>
                         <li ng-class="{'active': model.$location.url() == '/profile'}"
                             ng-show="currentUser">
@@ -30,11 +43,15 @@
                             </a>
                         </li>
                         <li ng-show="currentUser.roles.indexOf('admin') >= 0">
-                            <a href="#/admin"> Admin </a>
+                            <a href="#/admin">
+                                <scan class="glyphicon glyphicon-king" id="glyphi"></scan>
+                            Admin </a>
                         </li>
                         <li ng-class="{'active': model.$location.url() == '/login'}"
                             ng-hide="currentUser">
-                            <a href="#/login">Login</a>
+                            <a href="#/login">
+                                <scan class="glyphicon glyphicon-eye-open" id="glyphi"></scan>
+                                Login</a>
                         </li>
                         <li ng-show="currentUser">
                             <a ng-click="model.logout()">
@@ -49,14 +66,14 @@
         <br>
         <span id="spanDate" class="top-left"></span>
         <h3 class="text-muted text-center"></h3>
-        <nav>
+        <div class="container-fluid hidden-xs">
             <ul class="nav nav-justified nav-pills">
-                <li role="presentation" ng-class="{'active': model.$location.url().indexOf('home') != -1}"><a href="#/home">Home</a></li>
-                <li role="presentation" ng-class="{'active': model.$location.url().indexOf('sports') != -1}"><a href="#/sports">Sports</a></li>
-                <li role="presentation" ng-class="{'active': model.$location.url().indexOf('entertainment') != -1}" ><a href="#/entertainment">Entertainment</a></li>
-                <li role="presentation" ng-class="{'active': model.$location.url().indexOf('travel') != -1}"><a href="#/travel">Travel</a></li>
-                <li role="presentation" ng-class="{'active': model.$location.url().indexOf('technology') != -1}"><a href="#/technology">Technology</a></li>
+                <li ng-class="{'active': model.$location.url().indexOf('home') != -1}"><a href="#/home">Home</a></li>
+                <li ng-class="{'active': model.$location.url().indexOf('sports') != -1}"><a href="#/sports">Sports</a></li>
+                <li ng-class="{'active': model.$location.url().indexOf('entertainment') != -1}" ><a href="#/entertainment">Entertainment</a></li>
+                <li ng-class="{'active': model.$location.url().indexOf('travel') != -1}"><a href="#/travel">Travel</a></li>
+                <li ng-class="{'active': model.$location.url().indexOf('technology') != -1}"><a href="#/technology">Technology</a></li>
             </ul>
-        </nav>
+        </div>
     </div>
 </nav>

@@ -21,20 +21,12 @@
             }
 
             function search(news){
-                $location.url("/search/");
                 NewsService.findNewsByTitle(news.title, function(response){
                         for(var i in response.response.results) {
                             var id = response.response.results[i].id;
-                            id = id.replace(/\//g,'_');
+                            id = id.replace(/\//g, '_');
                             response.response.results[i].id = id;
                         }
-                    /*console.log(response.response);
-                    console.log(response.response.pages);
-                    for (var page in response.response.pages){
-                        NewsService.findNewsByPage(news.title, page, function(respon){
-                            console.log(respon);
-                        });
-                    }*/
                     $rootScope.data = response;
                     if($rootScope.data != null) {
                         $location.url('/search/');

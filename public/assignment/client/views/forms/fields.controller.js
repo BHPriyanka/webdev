@@ -6,7 +6,7 @@
         .module("FormBuilderApp")
         .controller("FieldsController", FieldsController);
 
-    function FieldsController(FieldsService, FormService, $routeParams, $route, $location, $scope) {
+    function FieldsController(FieldsService, FormService, $routeParams) {
         var vm = this;
         vm.ok_field = null;
         vm.edit_field = null;

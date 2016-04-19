@@ -240,7 +240,7 @@ module.exports = function(app, newsModel, NewsUserModel){
         res.send(200);
     }
 
-       function loggedin(req, res) {
+    function loggedin(req, res) {
         res.send(req.isAuthenticated() ? req.user : '0');
     }
 
