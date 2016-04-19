@@ -38,20 +38,22 @@
     color: black;
 }
 
-a.newsTitle{
+h3.newsTitle{
     color: #c7254e;
     text-transform: capitalize;
-    font-family: Arial, Helvetica, sans-serif;
-    font-style: oblique;
-    margin :0 auto;
-    width: 800px;
-    font-size: 20px;
 }
 
 
 p.trail{
     font-style: italic;
     color: black;
+}
+
+h4.headLine{
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: capitalize;
+    color: #0b58a2;
+    align-content: center;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
@@ -61,19 +63,16 @@ p.trail{
     flex-wrap: wrap;
 }
 
-
-h4.headLine{
-    font-family: Arial, Helvetica, sans-serif;
-    text-transform: capitalize;
-    color: #0b58a2;
-    align-content: center;
-}
-
 h4.filmLine{
     font-family: Arial, Helvetica, sans-serif;
     text-transform: capitalize;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
     align-content: center;
-
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 a.filmColor{
@@ -88,24 +87,25 @@ a.sportColor{
 }
 
 div.my-col{
-    position:relative;
+   position: relative;
 }
 
 div.thumbnail{
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-
     list-style: none;
+    display: inline-block;
+    width: 80%;
+    height:80%;
+}
+
+div.caption{
+    max-width: 100%;
+    max-height: 100%;
 }
 
 img.full-width{
     width: 100%;
 }
+
 
 p.travelText{
     color: #734d99;
@@ -131,7 +131,14 @@ p.filmText{
 }
 
 h4.techLine{
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
     align-content: center;
+
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
     font-family: Arial, Helvetica, sans-serif;
     text-transform: capitalize;
     font-style: italic;
@@ -153,3 +160,17 @@ p.techText{
 }
 
 
+img.searchImage{
+    width: 200px;
+    height:200px;
+    float: right;
+    margin: 0 0 10px 10px;
+}
+
+table.searchTable{
+    border: none;
+}
+
+table.searchTable td{
+    border: none;
+}

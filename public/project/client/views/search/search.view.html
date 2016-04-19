@@ -8,18 +8,22 @@
 
 <div ng-controller="SearchController as model">
     <br>
-    <div>
+    <div class="table-responsive">
         <h3>Search Results</h3>
-        <table class="table table-striped">
+        <table id="searchTable" class="table table-hover" cellspacing="0" cellpadding="0">
             <thead>
             <tr>
             </tr>
             </thead>
-            <tbody>
+            <tbody width="1px">
             <tr ng-repeat="entry in data.response.results" class="text-center">
-                <td><img ng-src="{{entry.fields.thumbnail}}" width="200px" height="200px"/></td>
-                <td> <h3><a class="newsTitle" href="#/details/{{entry.id}}" ng-bind-html="model.trustAsHtml(entry.webTitle)">{{entry.webTitle}}</a></h3>
-                    <p class="trail" ng-bind-html="model.trustAsHtml(entry.fields.trailText)">{{entry.fields.trailText}}</p>
+                <td <span style="max-width:150px;">
+                    <img class="searchImage" ng-src="{{entry.fields.thumbnail}}"/></span>
+                </td>
+                <td <span style="max-width:200px;">
+                    <h3><a class="newsTitle" href="#/details/{{entry.id}}" ng-bing-html="model.trustAsHtml(entry.webTitle)">{{entry.webTitle}}</a></h3>
+                    <h4 ng-bind-html="model.trustAsHtml(entry.fields.trailText)">{{entry.fields.trailText}}</h4>
+                </span>
                 </td>
             </tr>
             </tbody>

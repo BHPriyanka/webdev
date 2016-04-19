@@ -21,16 +21,14 @@
             }
 
             function search(news){
-                NewsService.findNewsByTitle(news.title, function(response){
-                        for(var i in response.response.results) {
-                            var id = response.response.results[i].id;
-                            id = id.replace(/\//g, '_');
-                            response.response.results[i].id = id;
-                        }
+                NewsService.findNewsByTitle(news.title, function(response) {
+                    for (var i in response.response.results) {
+                        var id = response.response.results[i].id;
+                        id = id.replace(/\//g, '_');
+                        response.response.results[i].id = id;
+                    }
                     $rootScope.data = response;
-                    if($rootScope.data != null) {
-                        $location.url('/search/');
-                    }});
+                });
             }
         }
 
