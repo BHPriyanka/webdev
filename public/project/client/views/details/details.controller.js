@@ -55,6 +55,9 @@
                         }
                     );
             }
+            else{
+                $location.url('/login');
+            }
         }
 
         function addReview(newsId, news) {
@@ -88,6 +91,8 @@
                             vm.error = err;
                         }
                     );
+            }else{
+                $location.url('/login');
             }
         }
     }
