@@ -19,8 +19,9 @@
 
 .jga-movie-panel {
     float: left;
-    width: 150px;
+    height: 150px;
     margin-right: 15px;
+    width: 150px;
 }
 
 .jga-movie-panel .panel-heading {
@@ -42,6 +43,7 @@
 #div.searchThumbnail{
     height: 350px;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 h3.newsTitle{
     color: #c7254e;
@@ -103,6 +105,7 @@ div.thumbnail{
     width: 80%;
     height:400px;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 div.caption{
