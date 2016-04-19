@@ -28,6 +28,7 @@
                         response.response.results[i].id = id;
                     }
                     $rootScope.data = response;
+                    $location.url('/search');
                 });
             }
         }

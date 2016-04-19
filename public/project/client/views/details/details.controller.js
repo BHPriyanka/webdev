@@ -11,6 +11,7 @@
         var currentUser = $rootScope.currentUser;
 
         function init() {
+            $location.url('/details');
             vm.id = vm.id.replace(/_/g, '/');
             NewsService.findNewsById(vm.id)
                 .then(function (response) {

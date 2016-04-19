@@ -38,6 +38,11 @@
     color: black;
 }
 
+
+#div.searchThumbnail{
+    height: 350px;
+    overflow: hidden;
+}
 h3.newsTitle{
     color: #c7254e;
     text-transform: capitalize;
