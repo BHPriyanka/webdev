@@ -1,34 +1,36 @@
 <div ng-controller="DetailsController as model">
-<br/>
-    <h2 align="center" ng-bind-html="model.customHead">{{model.data.response.content.fields.headline}}</h2>
-    <h4 align="center" ng-bind-html="model.customstandFirst">{{model.data.response.content.fields.standfirst}}</h4>
-    <br/>
-    <button class="btn btn-primary pull-right" ng-click="model.favorite(model.id, model.data)">
-        <span class="glyphicon glyphicon-star-empty"></span>
-    </button>
-</div>
-<form>
+    <div class="container col-sm-12 col-md-12 col-lg-12">
+        <h3 align="center" ng-bind-html="model.customHead">
+            {{model.data.response.content.fields.headline}}
+        </h3>
+        <h4 align="center" ng-bind-html="model.customstandFirst">
+            {{model.data.response.content.fields.standfirst}}</h4>
+        <button class="btn btn-primary pull-right" ng-click="model.favorite(model.id, model.data)">
+            <span class="glyphicon glyphicon-star-empty"></span>
+        </button>
+    </div>
     <div align="center">
-        <img ng-src="{{model.data.response.content.fields.thumbnail}}"/>
+        <img class="img img-responsive img-rounded" ng-src="{{model.data.response.content.fields.thumbnail}}"/>
     </div>
-    <br/>
-    <div class="container" ng-bind-html="model.customBody">
-        {{model.data.response.content.fields.body}}
-    </div>
-</form>
+        <div ng-bind-html="model.customBody">
+            {{model.data.response.content.fields.body}}
+        </div>
 
-<div class="review">
-<div ng-if="model.userLikes.length">
-    <h4><strong>Users who Like this Article</strong></h4>
-    <ul>
-        <li ng-repeat="user in model.userLikes">
-            <a href="#/profile/{{user.username}}">
-                {{user.userName}}
-            </a>
-        </li>
-    </ul>
+    <div class="container col-sm-6 col-md-12 col-lg-12">
+    <div class="review">
+        <div ng-if="model.userLikes.length">
+            <h4><strong>Users who Like this Article</strong></h4>
+            <ul>
+                <li ng-repeat="user in model.userLikes">
+                    <a href="#/profile/{{user.username}}">
+                        {{user.userName}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
-
+    <div class="container col-sm-6 col-md-12 col-lg-12">
     <div ng-if="model.userComments.length">
         <h4><strong>Users who have commented on this Article</strong></h4>
         <ul>
@@ -39,6 +41,7 @@
             </li>
         </ul>
     </div>
+</div>
 
 <div>
     <button ng-click="model.addReview(model.id, model.data)"

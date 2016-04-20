@@ -17,6 +17,11 @@
    float: right;
 }
 
+.div.detailsthumbnail{
+    height: 100%;
+    width: 100%;
+    align-content: center;
+}
 .jga-movie-panel {
     float: left;
     height: 150px;
