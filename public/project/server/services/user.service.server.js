@@ -105,7 +105,7 @@ module.exports = function(app, newsModel, NewsUserModel){
 
     function register(req, res) {
         var newUser = req.body;
-        newUser.roles = ['student'];
+        newUser.roles = ['viewer'];
         NewsUserModel
             .findUserByUsername(newUser.userName)
             .then(
@@ -251,7 +251,7 @@ module.exports = function(app, newsModel, NewsUserModel){
         if (newUser.roles && newUser.roles.length > 1) {
             newUser.roles = newUser.roles.split(",");
         } else {
-            newUser.roles = ["student"];
+            newUser.roles = ["viewer"];
         }
         // first check if a user already exists with the username
         NewsUserModel

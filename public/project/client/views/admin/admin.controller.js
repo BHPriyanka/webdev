@@ -19,8 +19,13 @@
 
         function init(){
             $location.url('/admin');
-            vm.users = UserService.findAllUsers()
-                .then(handleSuccess, handleError);
+            UserService.findAllUsers()
+                .then(function(response){
+                        for(var i in response.data){
+                            response.data[i].roles = response.data[i].roles.toString();
+                        }
+                    vm.users = response.data;
+                });
         }
         init();
 
@@ -35,9 +40,14 @@
                     UserService.createUser(user)
                         .then(function (response) {
                             vm.selected = null;
-                            vm.userForms = UserService.findAllUsers()
-                                .then(handleSuccess, handleError);
-                            $location.url("/admin");
+                            UserService.findAllUsers()
+                                .then(function(response){
+                                    for(var i in response.data){
+                                        response.data[i].roles = response.data[i].roles.toString();
+                                    }
+                                    vm.users = response.data;
+                                    $location.url("/admin");
+                                });
                         });
                 }
             }
@@ -48,9 +58,12 @@
                 if(vm.users[i]._id == user._id){
                     UserService.deleteUser(vm.users[i]._id)
                         .then(function (response) {
-                                vm.users = response.data;
-                                vm.selected = null;
-                                $location.url("/admin");
+                            for(var i in response.data){
+                                response.data[i].roles = response.data[i].roles.toString();
+                            }
+                            vm.users = response.data;
+                            vm.selected = null;
+                            $location.url("/admin");
                             }
                         );
                     break;
@@ -73,9 +86,14 @@
                     UserService.updateUser(vm.selected._id, user_without_id)
                         .then(function (response) {
                                 vm.selected = null;
-                                vm.users = UserService.findAllUsers()
-                                    .then(handleSuccess, handleError);
-                                $location.url("/admin");
+                                UserService.findAllUsers()
+                                    .then(function(response){
+                                        for(var i in response.data){
+                                            response.data[i].roles = response.data[i].roles.toString();
+                                        }
+                                        vm.users = response.data;
+                                        $location.url("/admin");
+                                    });
                             }
                         );
                 }
@@ -101,14 +119,6 @@
                     break;
                 }
             }
-        }
-
-        function handleSuccess(response){
-            vm.users = response.data;
-        }
-
-        function handleError(){
-            vm.error = error;
         }
 
     }
