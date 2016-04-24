@@ -37,7 +37,7 @@
                         </li>
                         <li ng-class="{'active': model.$location.url() == '/profile'}"
                             ng-show="currentUser">
-                            <a href="#/profile">
+                            <a href="#/profile/{{currentUser._id}}">
                                 <scan class="glyphicon glyphicon-user" id="glyphi"></scan>
                                 <span ng-bind="currentUser.userName"></span>
                             </a>

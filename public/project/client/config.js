@@ -23,7 +23,7 @@
                 controller: "LoginController",
                 controllerAs: "model"
             })
-            .when("/profile",{
+            .when("/profile/:id",{
                 templateUrl: "views/profile/profile.view.html",
                 controller: "ProfileController",
                 controllerAs: "model",

@@ -10,9 +10,11 @@
         return api;
 
         function findEntertainmentNews(title, callback){
+            var URL = "http://content.guardianapis.com/search?page=PAGE&format=json&tag=culture/culture,fashion/fashion&use-date=published&show-tags=contributor&show-fields=all&show-refinements=all&order-by=newest&api-key=617dcc89-35bf-4ae2-bf4d-c4c968ceb7a0&callback=JSON_CALLBACK&q=";
+            var url = URL.replace("PAGE", 2);
             $http({
                 method: 'JSONP',
-                url: "http://content.guardianapis.com/search?format=json&tag=culture/culture,fashion/fashion&use-date=published&show-tags=contributor&show-fields=all&show-refinements=all&order-by=newest&api-key=617dcc89-35bf-4ae2-bf4d-c4c968ceb7a0&callback=JSON_CALLBACK&q=".concat(title),
+                url: url.concat(title),
                 cache: $templateCache,
             })
                 .success(callback);

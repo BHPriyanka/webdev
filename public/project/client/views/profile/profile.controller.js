@@ -6,31 +6,28 @@
         .module("NetNewsApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController(UserService, $location, $rootScope) {
+    function ProfileController(UserService, $location, $rootScope, $routeParams) {
         var vm = this;
         vm.error = null;
         vm.message = null;
         vm.update = update;
 
         function init(){
-            UserService
-                .getProfile()
-                .then(function (response) {
-                    vm.profile = response.data;
-                    if(vm.profile.likesArticles) {
-                        for (var article in vm.profile.likesArticles) {
-                            vm.profile.likesArticles[article].newsId = vm.profile.likesArticles[article].newsId.replace(/\//g, '_');
+                UserService
+                    .getUserProfile($routeParams.id)
+                    .then(function (response) {
+                        vm.profile = response.data;
+                        if (vm.profile.likesArticles) {
+                            for (var article in vm.profile.likesArticles) {
+                                vm.profile.likesArticles[article].newsId = vm.profile.likesArticles[article].newsId.replace(/\//g, '_');
+                            }
                         }
-                    }
-                    console.log(vm.profile.comments);
-                    console.log(vm.profile.commentsArticles);
-                    if(vm.profile.commentsArticles) {
-                        for (var article in vm.profile.commentsArticles) {
-                            console.log(vm.profile.commentsArticles[article]);
-                            vm.profile.commentsArticles[article].newsId = vm.profile.commentsArticles[article].newsId.replace(/\//g, '_');
+                        if (vm.profile.commentsArticles) {
+                            for (var article in vm.profile.commentsArticles) {
+                                vm.profile.commentsArticles[article].newsId = vm.profile.commentsArticles[article].newsId.replace(/\//g, '_');
+                            }
                         }
-                    }
-                });
+                    });
         }
         init();
 

@@ -123,7 +123,6 @@ module.exports = function(db, mongoose) {
 
     function userCommentsArticle(userId, article) {
         var deferred = q.defer();
-        console.log("<<<<<<<userCommentsArticle>>>>");
         Article.findOne({newsId: article.response.content.id},
 
             function (err, doc) {
@@ -134,7 +133,6 @@ module.exports = function(db, mongoose) {
                 }
 
                 if (doc) {
-                    console.log(doc);
                     doc.comments.push (userId);
                     // save changes
                     doc.save(function(err, doc){
@@ -155,7 +153,6 @@ module.exports = function(db, mongoose) {
                         likes: [],
                         comments: []
                     });
-                    console.log(article);
                     article.comments.push (userId);
                     // save new instance
                     article.save(function(err, doc) {

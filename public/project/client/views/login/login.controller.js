@@ -35,9 +35,8 @@
                                 break;
                             }
                         }
-                        console.log("login: user");
                         UserService.setCurrentUser(user);
-                        $location.url('/profile');
+                        $location.url('/profile/'+user._id);
                     }
                     else{
                         $location.url('/login');

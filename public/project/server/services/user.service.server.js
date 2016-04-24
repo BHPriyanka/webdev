@@ -48,7 +48,6 @@ module.exports = function(app, newsModel, NewsUserModel){
                 function (articles) {
                     user.likesArticles = articles;
                     return newsModel.findNewsByNewsIds(user.comments);
-             //       res.json(user);
                 },
 
                 function (err) {

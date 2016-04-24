@@ -3,12 +3,13 @@
         .module("NetNewsApp")
         .controller("DetailsController",detailsController);
 
-    function detailsController($location, $routeParams, ArticleService, NewsService, $rootScope, $sce) {
+    function detailsController($location, $routeParams, ArticleService, NewsService, $rootScope, $sce, UserService) {
         var vm = this;
         vm.id = $routeParams.id;
         vm.favorite = favorite;
         vm.addReview = addReview;
         var currentUser = $rootScope.currentUser;
+        vm.getUserProfile = getUserProfile;
 
         function init() {
             vm.id = vm.id.replace(/_/g, '/');
@@ -32,6 +33,14 @@
         }
 
         init();
+
+        function getUserProfile(userId){
+            UserService.getUserProfile(userId)
+                .then( function(response){
+                    $location.url('/profile/'+ userId);
+                });
+
+        }
 
         function favorite(newsId, news) {
             if (currentUser) {

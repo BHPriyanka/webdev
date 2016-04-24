@@ -16,8 +16,7 @@
             logout: logout,
             login: login,
             register: register,
-            getProfile: getProfile
-
+            getUserProfile: getUserProfile
         };
         return api;
 
@@ -72,8 +71,8 @@
         }
 
 
-        function getProfile() {
-            return $http.get("/api/project/profile/"+$rootScope.currentUser._id);
+        function getUserProfile(id){
+            return $http.get("/api/project/profile/"+id);
         }
     }
 
