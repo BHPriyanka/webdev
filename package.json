@@ -26,6 +26,7 @@
     "angular-ui-sortable": "^0.14.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.0",
+    "bootpag": "^1.0.7",
     "cookie-parser": "^1.4.1",
     "express": "^3.21.2",
     "express-session": "^1.13.0",

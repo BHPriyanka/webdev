@@ -9,11 +9,14 @@
         };
         return api;
 
-        function findTechNews(title, callback){
+        function findTechNews(title, page, callback){
+            var URL=  "http://content.guardianapis.com/search?format=json&tag=technology/technology,science/science&use-date=published&show-tags=contributor&show-fields=all&show-refinements=all&order-by=newest&api-key=617dcc89-35bf-4ae2-bf4d-c4c968ceb7a0&callback=JSON_CALLBACK&page=PAGE&q=";
+            var url = URL.replace("PAGE", page);
+
             $http({
                 method: 'JSONP',
-                url: "http://content.guardianapis.com/search?format=json&tag=technology/technology,science/science&use-date=published&show-tags=contributor&show-fields=all&show-refinements=all&order-by=newest&api-key=617dcc89-35bf-4ae2-bf4d-c4c968ceb7a0&callback=JSON_CALLBACK&q=".concat(title),
-                cache: $templateCache,
+                url: url.concat(title),
+                cache: $templateCache
             })
                 .success(callback);
         }

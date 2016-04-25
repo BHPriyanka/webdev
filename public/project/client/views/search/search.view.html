@@ -8,26 +8,8 @@
 
 <div ng-controller="SearchController as model">
     <br>
-    <!--div class="table-responsive"-->
         <h3>Search Results</h3>
-        <!--table id="searchTable" class="table table-hover" cellspacing="0" cellpadding="0">
-            <thead>
-            <tr>
-            </tr>
-            </thead>
-            <tbody width="1px">
-            <tr ng-repeat="entry in data.response.results" class="text-center">
-                <td <span style="max-width:150px;">
-                    <img class="searchImage" ng-src="{{entry.fields.thumbnail}}"/></span>
-                </td>
-                <td <span style="max-width:200px;">
-                    <h3><a class="newsTitle" href="#/details/{{entry.id}}" ng-bing-html="model.trustAsHtml(entry.webTitle)">{{entry.webTitle}}</a></h3>
-                    <h4 ng-bind-html="model.trustAsHtml(entry.fields.trailText)">{{entry.fields.trailText}}</h4>
-                </span>
-                </td>
-            </tr>
-            </tbody>
-        </table-->
+
         <div ng-repeat="entry in data.response.results" class="text-center">
         <div class="col-sm-6 col-xs-12 col-md-4 col-lg-4">
             <div ng-if="($index%3==0)" class="thumbnail" id="searchThumbnail">
@@ -65,5 +47,11 @@
             </div>
         </div>
     </div>
-</div>
 
+<div ng-if="data.response.results" class="pull-right">
+    <ul class="pagination">
+        <li class="{'disabled': currentPage == 1}"><a ng-click="model.prev(title, currentPage)">Prev</a></li>
+        <li><a ng-click="model.next(title, currentPage)">Next</a></li>
+    </ul>
+</div>
+</div>
