@@ -284,7 +284,7 @@ div.is-mobile.landing .wrapper.style4 {
     -ms-justify-content: center;
     justify-content: center;
     cursor: default;
-    height: 0vh;
+    height: 30vh;
     min-height: 3em;
     text-align: left;
     padding-top: 0px;
@@ -305,7 +305,7 @@ div.is-mobile.landing .wrapper.style4 {
     justify-content: center;
     cursor: default;
     height: 100vh;
-    min-height: 35em;
+    min-height: 3em;
     overflow: hidden;
     position: relative;
     text-align: left;
