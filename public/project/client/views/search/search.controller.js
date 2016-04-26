@@ -11,7 +11,6 @@
             vm.prev = prev;
             vm.next = next;
             vm.message;
-            vm.isPage=isPage;
 
             function init(){
                 vm.location = $location;

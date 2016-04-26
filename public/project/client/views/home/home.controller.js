@@ -8,9 +8,9 @@
         vm.trustAsHtml = $sce.trustAsHtml;
         vm.prev = prev;
         vm.next = next;
-
+        $rootScope.currentPage = 1;
         function init() {
-            NewsService.findWorldNews("world", 1, function (response) {
+            NewsService.findWorldNews("world", $rootScope.currentPage, function (response) {
                 for (var i in response.response.results) {
                     var id = response.response.results[i].id;
                     id = id.replace(/\//g, '_');
