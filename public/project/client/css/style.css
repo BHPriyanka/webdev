@@ -284,7 +284,7 @@ div.is-mobile.landing .wrapper.style4 {
     -ms-justify-content: center;
     justify-content: center;
     cursor: default;
-    height: 30vh;
+    height: 0vh;
     min-height: 35em;
     text-align: left;
     padding-top: 0px;
