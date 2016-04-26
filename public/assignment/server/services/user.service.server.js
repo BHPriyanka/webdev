@@ -30,9 +30,17 @@ module.exports = function (app, userModel) {
     };
 
     function localStrategy(userName, password, done){
+        console.log("inside localstrategy");
         userModel.findUserByCredentials(userName, password)
             .then(
                 function (user) {
+                    console.log("inside true condition");
+                    /*if(user && bcrypt.compareSync(password, user.password)){
+                            return done(null, user);
+                    }
+                    else{
+                        return done(null, false);
+                    }*/
                     if(!user){
                         return done(null, false);
                     }
@@ -45,6 +53,7 @@ module.exports = function (app, userModel) {
     }
 
     function login(req, res){
+        console.log("inside login");
         var user = req.user;
         res.json(user);
     }
@@ -76,6 +85,7 @@ module.exports = function (app, userModel) {
                     if(user) {
                         res.json(null);
                     } else {
+
                         return userModel.createUser(newUser);
                     }
                 },
