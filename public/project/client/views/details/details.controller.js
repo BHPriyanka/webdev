@@ -7,7 +7,7 @@
         var vm = this;
         vm.id = $routeParams.id;
         vm.favorite = favorite;
-        vm.addReview = addReview;
+        vm.submitReview = submitReview;
         var currentUser = $rootScope.currentUser;
         vm.getUserProfile = getUserProfile;
 
@@ -29,15 +29,16 @@
                 .then(function (response) {
                     var article = response.data;
                     vm.userComments = article.userComments;
+                    console.log(vm.userComments);
                 });
         }
 
         init();
 
-        function getUserProfile(userId){
+        function getUserProfile(userId) {
             UserService.getUserProfile(userId)
-                .then( function(response){
-                    $location.url('/profile/'+ userId);
+                .then(function (response) {
+                    $location.url('/profile/' + userId);
                 });
 
         }
@@ -63,31 +64,19 @@
                         }
                     );
             }
-            else{
+            else {
                 $location.url('/login');
             }
         }
 
-        function addReview(newsId, news) {
-            var placeholder = "New Field";
-            var ops = [];
-
-            var comment = {
-                "label": "New Comment", "type": "text", "value": "TEXTAREA",
-                "placeholder": placeholder, "options": ops
-            };
+        function submitReview(userReview, newsId, news) {
             if (currentUser) {
-                console.log("INSIDE addReview");
-                console.log([currentUser.userName, newsId]);
-                ArticleService.userCommentsArticle(currentUser._id, newsId, news)
+                ArticleService.userCommentsArticle(currentUser._id, userReview, newsId, news)
                     .then(function (response) {
-                        var article = response.data;
-                        console.log("DETAILS CONTROLLER FIRST CALL RESULTS");
-                            if (article != null) {
-                                console.log(article);
+                            if (response != null) {
                                 ArticleService.findUserComments(newsId)
                                     .then(function (response) {
-                                        vm.article = response.data;
+                                        vm.article = response;
                                     })
                                 $location.url('#/details');
                             }
@@ -99,9 +88,10 @@
                             vm.error = err;
                         }
                     );
-            }else{
+            } else {
                 $location.url('/login');
             }
+
         }
     }
 })();

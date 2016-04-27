@@ -22,10 +22,9 @@
             return $http.get("/api/project/news/"+newsId+"/user");
         }
 
-        function userCommentsArticle(userId, newsId, news){
-            console.log("-----userCommentsArticle in ArticleService----");
+        function userCommentsArticle(userId, userReview, newsId, news){
             newsId = newsId.replace(/\//g,'_');
-            return $http.post("/api/user/" + userId + "/news/" + newsId, news);
+            return $http.post("/api/user/" + userId + "/news/" + newsId +"/review/"+ userReview, news);
         }
 
         function findUserComments (newsId) {

@@ -1,14 +1,11 @@
-module.exports = function(mongoose){
-
-    var CommentSchema = mongoose.Schema({
-        label: String,
-        type: {
-            type: String,
-            default: 'TEXTAREA'
+module.exports = function(mongoose) {
+    var articleReviewSchema =  mongoose.Schema({
+            newsId          : String,
+            userId          : String,
+            reviewDesc      : String,
+            reviewDate      : {type : Date,  default: Date.now}
         },
-        placeholder: String,
-        options: []
-    }, {collection: 'comment'});
+        {collection: "project.article.review"});
 
-    return CommentSchema;
-}
+    return articleReviewSchema;
+};

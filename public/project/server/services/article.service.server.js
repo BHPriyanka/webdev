@@ -1,7 +1,7 @@
 module.exports = function(app, newsModel, NewsUserModel) {
     app.post("/api/project/user/:userId/news/:newsId", userLikesArticle);
     app.get("/api/project/news/:newsId/user", findUserLikes);
-    app.post("/api/user/:userId/news/:newsId", userCommentsArticle);
+    app.post("/api/user/:userId/news/:newsId/review/:userReview", userCommentsArticle);
     app.get("/api/news/:newsId/user", findUserComments);
 
     function userLikesArticle(req, res) {
@@ -59,15 +59,19 @@ module.exports = function(app, newsModel, NewsUserModel) {
     }
 
     function userCommentsArticle(req, res){
-        var news  = req.body;
         var userId = req.params.userId;
         var newsId = req.params.newsId;
-        var article;
+        var userReview  = req.params.userReview;
+        var news = req.body;
+
+        console.log("userCommentsArticle");
         newsModel
-            .userCommentsArticle(userId, news)
+            .userCommentsArticle(userId, newsId, userReview, news)
             .then(
                 function (article) {
-                    return NewsUserModel.userCommentsArticle(userId, article);
+                    console.log("NEWSMODEL returns article");
+                    console.log(article);
+                    return NewsUserModel.userCommentsArticle(userId, article, userReview);
                 },
                 function (err) {
                     res.status(400).send(err);
@@ -75,6 +79,8 @@ module.exports = function(app, newsModel, NewsUserModel) {
             )
             .then(
                 function (user) {
+                    console.log("USER");
+                    console.log(user);
                     res.json(user);
                 },
                 function (err) {

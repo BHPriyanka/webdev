@@ -136,6 +136,8 @@ module.exports = function(db, mongoose) {
     function findUsersByIds (userIds) {
         var deferred = q.defer();
         // find all users in array of user IDs
+        console.log("findUsersByIds");
+        console.log(userIds);
          NewsUserModel.find({
          _id: {$in: userIds}
          }, function (err, users) {
@@ -174,14 +176,19 @@ module.exports = function(db, mongoose) {
         return deferred;
     }
 
-    function userCommentsArticle(userId, news) {
+    function userCommentsArticle(userId, news, userReview) {
         var deferred = q.defer();
+        var reviewObj = {
+            newsId          : newsId,
+            userId          : userId,
+            reviewDesc      : userReview
+        };
         NewsUserModel.findById(userId, function (err, doc) {
-
             if (err) {
                 deferred.reject(err);
             } else {
                 doc.comments.push(news._id);
+                doc.commentsArticles.push(reviewObj);
                 doc.save (function (err, doc) {
                     if (err) {
                         deferred.reject(err);

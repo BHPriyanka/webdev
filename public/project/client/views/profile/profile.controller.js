@@ -17,6 +17,7 @@
                     .getUserProfile($routeParams.id)
                     .then(function (response) {
                         vm.profile = response.data;
+                        console.log(vm.profile);
                         if (vm.profile.likesArticles) {
                             for (var article in vm.profile.likesArticles) {
                                 vm.profile.likesArticles[article].newsId = vm.profile.likesArticles[article].newsId.replace(/\//g, '_');

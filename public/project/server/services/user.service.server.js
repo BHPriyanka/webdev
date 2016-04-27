@@ -32,7 +32,6 @@ module.exports = function(app, newsModel, NewsUserModel){
     function profile(req, res) {
         var userId = req.params.userId;
         var user = null;
-
         NewsUserModel.findUserById(userId)
             .then(
                 function (doc) {
@@ -46,6 +45,7 @@ module.exports = function(app, newsModel, NewsUserModel){
             )
             .then(
                 function (articles) {
+                    console.log(articles);
                     user.likesArticles = articles;
                     return newsModel.findNewsByNewsIds(user.comments);
                 },
@@ -60,7 +60,7 @@ module.exports = function(app, newsModel, NewsUserModel){
                     res.json(user);
                 },
                 function(err){
-                    res.status(400).sedn(err);
+                    res.status(400).send(err);
                 }
             )
     }

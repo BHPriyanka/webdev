@@ -45,7 +45,7 @@ module.exports = function(db, mongoose) {
 
     function findNewsByNewsIds(newsIds) {
         var deferred = q.defer();
-
+        console.log("findNewsByNewsIds: " +newsIds);
         Article.find({
             _id: {$in: newsIds}
         }, function (err, articles) {
@@ -121,10 +121,15 @@ module.exports = function(db, mongoose) {
         return deferred.promise;
     }
 
-    function userCommentsArticle(userId, article) {
+    function userCommentsArticle(userId, newsId, userReview, article) {
         var deferred = q.defer();
-        Article.findOne({newsId: article.response.content.id},
+        var reviewObj = {
+            newsId          : newsId,
+            userId          : userId,
+            reviewDesc      : userReview
+        };
 
+        Article.findOne({newsId: article.response.content.id},
             function (err, doc) {
 
                 // reject promise if error
@@ -134,6 +139,7 @@ module.exports = function(db, mongoose) {
 
                 if (doc) {
                     doc.comments.push (userId);
+                    doc.userComments.push (reviewObj);
                     // save changes
                     doc.save(function(err, doc){
                         if (err) {
@@ -151,9 +157,11 @@ module.exports = function(db, mongoose) {
                         webUrl: article.response.content.webUrl,
                         thumbnail: article.response.content.fields.thumbnail,
                         likes: [],
-                        comments: []
+                        comments: [],
+                        userComments : []
                     });
                     article.comments.push (userId);
+                    article.userComments.push (reviewObj);
                     // save new instance
                     article.save(function(err, doc) {
                         if (err) {

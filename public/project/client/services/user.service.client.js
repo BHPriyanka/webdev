@@ -25,6 +25,7 @@
         }
 
         function setCurrentUser(user) {
+            console.log("setCurrentUser");
             $rootScope.currentUser = user;
         }
 

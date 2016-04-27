@@ -1,4 +1,5 @@
 module.exports = function(mongoose) {
+    var articleReviewSchema = require("./comment.schema.server.js")(mongoose);
 
     // use mongoose to declare a movie schema
     var NewsSchema = mongoose.Schema({
@@ -13,9 +14,7 @@ module.exports = function(mongoose) {
             {userName: String}
         ],
         comments: [String],
-        userComments: [
-            {userName: String}
-        ]
+        userComments: [articleReviewSchema]
         // store movie documents in this collection
     }, {collection: 'project.news.article'});
 

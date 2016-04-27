@@ -30,23 +30,36 @@
         </div>
     </div>
 </div>
+
+    {{model.article}}
     <div class="container col-sm-6 col-md-12 col-lg-12">
     <div ng-if="model.userComments.length">
-        <h4><strong>Users who have commented on this Article</strong></h4>
+        <h4><strong>Reviews on this Article</strong></h4>
         <ul>
             <li ng-repeat="user in model.userComments">
                 <a href="#/profile/{{user.username}}">
                     {{user.userName}}
                 </a>
+                {{user}}
             </li>
         </ul>
     </div>
 </div>
 
-<div>
-    <button ng-click="model.addReview(model.id, model.data)"
-            class="btn btn-primary btn-block">
-        Add a Review
-    </button>
+    <div class="row ng-scope">
+        <div class="col-md-16">
+            <h4>Add Your Review</h4>
+        </div>
+    </div>
+    <div class="row ng-scope">
+        <div class="col-md-16">
+            <textarea ng-model="model.userReview" class="form-control" maxlength="700" placeholder="Your Review for upto 700 characters"></textarea>
+        </div>
+    </div>
+    <div class="row ng-scope">
+        <div class="col-md-16 text-right">
+            <button ng-click="model.submitReview(model.userReview, model.id, model.data)" type="button" class="btn btn-primary btn-sm btn-block">Submit Review</button>
+        </div>
+    </div>
 </div>
-</div>
+

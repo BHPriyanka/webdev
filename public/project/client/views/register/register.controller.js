@@ -12,7 +12,7 @@
         vm.register = register;
 
         function init() {
-
+            vm.location = $location;
         }
 
         init();
@@ -64,8 +64,10 @@
                 .then(function (response) {
                         var currentUser = response.data;
                         if(currentUser!=null) {
+                            console.log(currentUser);
                             UserService.setCurrentUser(currentUser);
-                            $location.url('/profile');
+                            console.log($rootScope.currentUser);
+                            $location.url('/profile/');
                         }
                         else{
                             vm.message = "User Already exists";
