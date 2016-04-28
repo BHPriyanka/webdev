@@ -179,7 +179,7 @@ module.exports = function(db, mongoose) {
     function userCommentsArticle(userId, news, userReview) {
         var deferred = q.defer();
         var reviewObj = {
-            newsId          : newsId,
+            newsId          : news.newsId,
             userId          : userId,
             reviewDesc      : userReview
         };

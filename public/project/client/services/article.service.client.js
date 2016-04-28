@@ -24,7 +24,11 @@
 
         function userCommentsArticle(userId, userReview, newsId, news){
             newsId = newsId.replace(/\//g,'_');
-            return $http.post("/api/user/" + userId + "/news/" + newsId +"/review/"+ userReview, news);
+            var data = {
+                userReview: userReview,
+                news: news
+            };
+            return $http.post("/api/user/" + userId + "/news/" + newsId + "/review", data);
         }
 
         function findUserComments (newsId) {

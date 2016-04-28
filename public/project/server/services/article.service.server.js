@@ -1,7 +1,7 @@
 module.exports = function(app, newsModel, NewsUserModel) {
     app.post("/api/project/user/:userId/news/:newsId", userLikesArticle);
     app.get("/api/project/news/:newsId/user", findUserLikes);
-    app.post("/api/user/:userId/news/:newsId/review/:userReview", userCommentsArticle);
+    app.post("/api/user/:userId/news/:newsId/review", userCommentsArticle);
     app.get("/api/news/:newsId/user", findUserComments);
 
     function userLikesArticle(req, res) {
@@ -61,8 +61,9 @@ module.exports = function(app, newsModel, NewsUserModel) {
     function userCommentsArticle(req, res){
         var userId = req.params.userId;
         var newsId = req.params.newsId;
-        var userReview  = req.params.userReview;
         var news = req.body;
+        var userReview  = news.userReview;//req.params.userReview;
+        news = news.news;
 
         console.log("userCommentsArticle");
         newsModel
