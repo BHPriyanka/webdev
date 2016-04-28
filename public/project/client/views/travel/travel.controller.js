@@ -8,6 +8,7 @@
         vm.trustAsHtml = $sce.trustAsHtml;
         vm.prev = prev;
         vm.next = next;
+        vm.isCurrentPage = isCurrentPage;
 
         function init() {
             TravelService.findTravelNews("travel" ,1 , function (response) {
@@ -41,6 +42,7 @@
                     $rootScope.currentPage = response.response.currentPage;
                     $rootScope.data = response;
                     $location.url('/travel');
+                    window.scrollTo(0,0);
                 });
         }
 
@@ -57,7 +59,15 @@
                     $rootScope.currentPage = response.response.currentPage;
                     $rootScope.data = response;
                     $location.url('/travel');
+                    window.scrollTo(0,0);
                 });
+        }
+
+        function isCurrentPage(currentPage){
+            if(currentPage == 1){
+                return true;
+            }
+            else return false;
         }
 
     }

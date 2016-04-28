@@ -9,6 +9,8 @@
         vm.prev = prev;
         vm.next = next;
         $rootScope.currentPage = 1;
+        vm.isCurrentPage = isCurrentPage;
+
         function init() {
             NewsService.findWorldNews("world", $rootScope.currentPage, function (response) {
                 for (var i in response.response.results) {
@@ -43,9 +45,8 @@
                 $rootScope.countOfPages = response.response.pages;
                 $rootScope.currentPage = response.response.currentPage;
                 $rootScope.data = response;
-                if(!$rootScope.data){
-                    $location.url('/home');
-                }
+                $location.url('/home');
+                window.scrollTo(0,0);
             });
         }
 
@@ -61,10 +62,17 @@
                 $rootScope.countOfPages = response.response.pages;
                 $rootScope.currentPage = response.response.currentPage;
                 $rootScope.data = response;
-                if(!$rootScope.data){
-                    $location.url('/home');
-                }
+                $location.url('/home');
+                window.scrollTo(0,0);
             });
         }
+
+        function isCurrentPage(currentPage){
+            if(currentPage == 1){
+                return true;
+            }
+            else return false;
+        }
     }
+
 })();

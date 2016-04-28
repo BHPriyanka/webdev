@@ -8,6 +8,7 @@
         vm.trustAsHtml = $sce.trustAsHtml;
         vm.prev = prev;
         vm.next = next;
+        vm.isCurrentPage = isCurrentPage;
 
         function init() {
             TechService.findTechNews("technology%20and%20science", 1, function (response) {
@@ -42,9 +43,8 @@
                 $rootScope.countOfPages = response.response.pages;
                 $rootScope.currentPage = response.response.currentPage;
                 $rootScope.data = response;
-                if(!$rootScope.data){
-                    $location.url('/technology');
-                }
+                $location.url('/technology');
+                window.scrollTo(0,0);
             });
         }
 
@@ -60,10 +60,17 @@
                 $rootScope.countOfPages = response.response.pages;
                 $rootScope.currentPage = response.response.currentPage;
                 $rootScope.data = response;
-                if(!$rootScope.data){
-                    $location.url('/technology');
-                }
+                $location.url('/technology');
+                window.scrollTo(0,0);
             });
+        }
+
+
+        function isCurrentPage(currentPage){
+            if(currentPage == 1){
+                return true;
+            }
+            else return false;
         }
     }
 })();

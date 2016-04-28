@@ -3,11 +3,12 @@
         .module("NetNewsApp")
         .controller("EntertainmentController", entertainmentController);
 
-    function entertainmentController($location, $rootScope, EntertainmentService, $sce) {
+    function entertainmentController($location, $rootScope, EntertainmentService, $sce, $routeParams) {
         var vm = this;
         vm.trustAsHtml = $sce.trustAsHtml;
         vm.prev = prev;
         vm.next = next;
+        vm.isCurrentPage = isCurrentPage;
 
         function init() {
             EntertainmentService.findEntertainmentNews("culture%20and%20fashion", 1, function (response) {
@@ -19,7 +20,6 @@
                 $rootScope.countOfPages = response.response.pages;
                 $rootScope.currentPage = response.response.currentPage;
                 $rootScope.data = response;
-                console.log($rootScope.data);
                 if(!$rootScope.data){
                     $location.url('/entertainment');
                 }
@@ -45,9 +45,8 @@
                 $rootScope.currentPage = response.response.currentPage;
                 $rootScope.data = response;
                 console.log($rootScope.data);
-                if(!$rootScope.data){
-                    $location.url('/entertainment');
-                }
+                $location.url('/entertainment');
+                window.scrollTo(0,0);
             });
         }
 
@@ -63,11 +62,16 @@
                 $rootScope.countOfPages = response.response.pages;
                 $rootScope.currentPage = response.response.currentPage;
                 $rootScope.data = response;
-                console.log($rootScope.data);
-                if(!$rootScope.data){
-                    $location.url('/entertainment');
-                }
+                $location.url('/entertainment');
+                window.scrollTo(0,0);
             });
+        }
+
+        function isCurrentPage(currentPage){
+            if(currentPage == 1){
+                return true;
+            }
+            else return false;
         }
     }
 })();

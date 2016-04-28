@@ -11,6 +11,7 @@
             vm.prev = prev;
             vm.next = next;
             vm.message;
+            vm.isCurrentPage = isCurrentPage;
 
             function init(){
                 vm.location = $location;
@@ -36,9 +37,7 @@
                 }
 
 
-
             function prev(title, page){
-
                 if(page != 0){
                     page = page - 1;
                 }
@@ -53,6 +52,7 @@
                     $rootScope.currentPage = response.response.currentPage;
                     $rootScope.data = response;
                     $location.url('/search');
+                    window.scrollTo(0,0);
                 });
             }
 
@@ -68,9 +68,16 @@
                     $rootScope.countOfPages = response.response.pages;
                     $rootScope.currentPage = response.response.currentPage;
                     $rootScope.data = response;
-                    //console.log($rootScope.countOfPages + " " + $rootScope.currentPage);
                     $location.url('/search');
+                    window.scrollTo(0,0);
                 });
+            }
+
+            function isCurrentPage(currentPage){
+                if(currentPage == 1){
+                    return true;
+                }
+                else return false;
             }
 
         }
