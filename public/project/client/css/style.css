@@ -162,7 +162,7 @@ td.my-col{
 div.thumbnail{
     list-style: none;
     display: inline-block;
-    width: 50%;
+    width: 90%;
     height:380px;
     overflow: hidden;
     text-overflow: ellipsis;
