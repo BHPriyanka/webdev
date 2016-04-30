@@ -162,7 +162,7 @@ td.my-col{
 div.thumbnail{
     list-style: none;
     display: inline-block;
-    width: 80%;
+    width: 50%;
     height:380px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -174,7 +174,7 @@ div.caption{
 }
 
 img.full-width{
-    width: 80%;
+    width: 100%;
 }
 
 
