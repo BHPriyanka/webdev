@@ -98,7 +98,7 @@
                                 UserService.setCurrentUser(updatedUser.data);
                                 console.log(updatedUser.data);
                                 vm.message = "User updated successfully";
-                                $location.url('/profile/'+user._id);
+                                $location.url('/profile'+user._id);
                             });
                     }
                     else {

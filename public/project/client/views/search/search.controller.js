@@ -5,7 +5,6 @@
 
         function searchController($location, $routeParams, NewsService, $rootScope, $sce){
             var vm = this;
-            vm.url = "http://content.guardianapis.com/search?show-fields=all&show-refinements=all&api-key=617dcc89-35bf-4ae2-bf4d-c4c968ceb7a0&callback=JSON_CALLBACK&q="+$routeParams.title+"&page=";
             vm.countOfPages = 0;
             vm.trustAsHtml = $sce.trustAsHtml;
             vm.prev = prev;
@@ -14,6 +13,8 @@
             vm.isCurrentPage = isCurrentPage;
 
             function init(){
+
+               // $(".search-container").empty();
                 vm.location = $location;
             }
             init();
@@ -31,7 +32,6 @@
                         $rootScope.startIndex = response.response.startIndex;
                         $rootScope.data = response;
                         $rootScope.title = news.title;
-                        console.log($rootScope.countOfPages + " " + $rootScope.currentPage +" " + $rootScope.startIndex);
                         $location.url('/search');
                     });
                 }

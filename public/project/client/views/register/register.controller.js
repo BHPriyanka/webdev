@@ -6,7 +6,7 @@
         .module("NetNewsApp")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController($scope, $location, UserService, $rootScope) {
+    function RegisterController($location, UserService, $rootScope) {
         var vm = this;
         vm.message = null;
         vm.register = register;
