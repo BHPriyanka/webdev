@@ -96,9 +96,9 @@
                                 vm.profile.commentsArticles = updatedUser.data.commentsArticles;
 
                                 UserService.setCurrentUser(updatedUser.data);
-
+                                console.log(updatedUser.data);
                                 vm.message = "User updated successfully";
-                                $location.url('/profile');
+                                $location.url('/profile/'+user._id);
                             });
                     }
                     else {

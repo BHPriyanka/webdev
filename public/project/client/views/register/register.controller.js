@@ -67,7 +67,7 @@
                             console.log(currentUser);
                             UserService.setCurrentUser(currentUser);
                             console.log($rootScope.currentUser);
-                            $location.url('/profile/');
+                            $location.url('/profile/'+currentUser._id);
                         }
                         else{
                             vm.message = "User Already exists";
