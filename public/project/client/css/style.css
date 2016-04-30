@@ -163,7 +163,7 @@ div.thumbnail{
     list-style: none;
     display: inline-block;
     width: 80%;
-    height:350px;
+    height:380px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -174,7 +174,7 @@ div.caption{
 }
 
 img.full-width{
-    width: 100%;
+    width: 80%;
 }
 
 
