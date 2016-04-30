@@ -29,7 +29,6 @@
                 .then(function (response) {
                     var article = response.data;
                     vm.userComments = article.userComments;
-                    console.log(vm.userComments);
                 });
         }
 
@@ -71,7 +70,7 @@
 
         function submitReview(userReview, newsId, news) {
             if (currentUser) {
-                ArticleService.userCommentsArticle(currentUser._id, userReview, newsId, news)
+                ArticleService.userCommentsArticle(currentUser, userReview, newsId, news)
                     .then(function (response) {
                             if (response != null) {
                                 ArticleService.findUserComments(newsId)

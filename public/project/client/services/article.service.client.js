@@ -22,13 +22,14 @@
             return $http.get("/api/project/news/"+newsId+"/user");
         }
 
-        function userCommentsArticle(userId, userReview, newsId, news){
+        function userCommentsArticle(user, userReview, newsId, news){
             newsId = newsId.replace(/\//g,'_');
             var data = {
                 userReview: userReview,
-                news: news
+                news: news,
+                userName : user.userName,
             };
-            return $http.post("/api/user/" + userId + "/news/" + newsId + "/review", data);
+            return $http.post("/api/user/" + user._id + "/news/" + newsId + "/review", data);
         }
 
         function findUserComments (newsId) {

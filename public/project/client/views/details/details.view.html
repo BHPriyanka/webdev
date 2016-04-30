@@ -31,21 +31,25 @@
     </div>
 </div>
 
-    {{model.article}}
+
     <div class="container col-sm-6 col-md-12 col-lg-12">
-    <div ng-if="model.userComments.length">
+    <a ng-if="model.userComments.length">
         <h4><strong>Reviews on this Article</strong></h4>
         <ul>
             <li ng-repeat="user in model.userComments">
-                <a href="#/profile/{{user.username}}">
-                    {{user.userName}}
+                <a href="#" ng-click="model.getUserProfile(user.userId)">
+                    <h5>{{user.userName}}</h5>
                 </a>
-                {{user}}
+                <div class="pull-right">{{user.reviewDate}}</div>
+                <div>
+                    <h4>Review : {{user.reviewDesc}}<h4>
+                </div>
             </li>
         </ul>
     </div>
 </div>
 
+    &nbsp;
     <div class="row ng-scope">
         <div class="col-md-16">
             <h4>Add Your Review</h4>

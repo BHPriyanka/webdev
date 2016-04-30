@@ -61,18 +61,16 @@ module.exports = function(app, newsModel, NewsUserModel) {
     function userCommentsArticle(req, res){
         var userId = req.params.userId;
         var newsId = req.params.newsId;
-        var news = req.body;
+        var news = req.body
         var userReview  = news.userReview;//req.params.userReview;
+        var userName = news.userName;
         news = news.news;
 
-        console.log("userCommentsArticle");
         newsModel
-            .userCommentsArticle(userId, newsId, userReview, news)
+            .userCommentsArticle(userId, newsId, userReview, news, userName)
             .then(
                 function (article) {
-                    console.log("NEWSMODEL returns article");
-                    console.log(article);
-                    return NewsUserModel.userCommentsArticle(userId, article, userReview);
+                    return NewsUserModel.userCommentsArticle(userId, article, userReview, userName);
                 },
                 function (err) {
                     res.status(400).send(err);
@@ -80,8 +78,6 @@ module.exports = function(app, newsModel, NewsUserModel) {
             )
             .then(
                 function (user) {
-                    console.log("USER");
-                    console.log(user);
                     res.json(user);
                 },
                 function (err) {
@@ -109,7 +105,7 @@ module.exports = function(app, newsModel, NewsUserModel) {
             )
             .then (
                 function (users) {
-                    news.userComments = users;
+                    news.commentsArticles = users;
                     res.json(news);
                 },
                 function (err) {

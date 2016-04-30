@@ -45,7 +45,6 @@ module.exports = function(db, mongoose) {
 
     function findNewsByNewsIds(newsIds) {
         var deferred = q.defer();
-        console.log("findNewsByNewsIds: " +newsIds);
         Article.find({
             _id: {$in: newsIds}
         }, function (err, articles) {
@@ -121,12 +120,16 @@ module.exports = function(db, mongoose) {
         return deferred.promise;
     }
 
-    function userCommentsArticle(userId, newsId, userReview, article) {
+    function userCommentsArticle(userId, newsId, userReview, article, userName) {
         var deferred = q.defer();
+
         var reviewObj = {
             newsId          : newsId,
             userId          : userId,
-            reviewDesc      : userReview
+            reviewDesc      : userReview,
+            userName        : userName,
+            thumbnail       : article.thumbnail,
+            webTitle        : article.webTitle
         };
 
         Article.findOne({newsId: article.response.content.id},
