@@ -1,7 +1,7 @@
 <div ng-controller="TechController as model">
     <br>
     <div ng-repeat="entry in data.response.results" class="text-center">
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                 <div ng-if="$index%3==0" class="thumbnail">
                     <img class="full-width img-responsive img-rounded" ng-src="{{entry.fields.thumbnail}}"/>
                     <div class="caption">
