@@ -12,7 +12,7 @@
     <h3>Search Results</h3>
     <div class="search-container clearfix">
         <div ng-repeat="entry in data.response.results" class="text-center">
-        <div class="col-sm-6 col-xs-12 col-md-4 col-lg-4">
+        <div class="col-sm-6 col-xs-6 col-md-4 col-lg-4">
             <div ng-if="($index%3==0)" class="thumbnail" id="searchThumbnail">
                 <img class="full-width img-responsive img-rounded" ng-src="{{entry.fields.thumbnail}}"/>
                 <div class="caption">
